@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About Creator | Kush Neupane</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    color:white;
+    background-image:url("web back.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    position:relative;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:-1;
+}
+
+/* HEADER */
+
+header{
+    width:100%;
+    height:80px;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    padding:0 30px;
+    position:relative;
+    z-index:1000;
+}
+
+.menu-button{
+    width:54px;
+    height:54px;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:14px;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    transition:.3s;
+}
+
+.menu-button:hover{
+    background:rgba(255,255,255,.12);
+    transform:scale(1.05);
+}
+
+.menu-button span{
+    width:27px;
+    height:3px;
+    background:white;
+    border-radius:5px;
+    transition:.3s;
+}
+
+.menu-button.active span:nth-child(1){
+    transform:translateY(9px) rotate(45deg);
+}
+
+.menu-button.active span:nth-child(2){
+    opacity:0;
+}
+
+.menu-button.active span:nth-child(3){
+    transform:translateY(-9px) rotate(-45deg);
+}
+
+.menu{
+    position:absolute;
+    top:72px;
+    right:30px;
+    width:245px;
+    padding:10px;
+    background:rgba(10,10,10,.88);
+    border:1px solid rgba(255,255,255,.16);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(0,0,0,.55);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-10px) scale(.98);
+    transition:.25s;
+}
+
+.menu.active{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0) scale(1);
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    min-height:48px;
+    color:white;
+    text-decoration:none;
+    padding:12px 15px;
+    margin:3px 0;
+    border-radius:11px;
+    font-size:16px;
+    transition:.25s;
+}
+
+.menu a:hover{
+    background:rgba(255,255,255,.12);
+    padding-left:21px;
+}
+
+.menu .divider{
+    height:1px;
+    background:rgba(255,255,255,.12);
+    margin:8px 5px;
+}
+
+/* MAIN */
+
+main{
+    min-height:calc(100vh - 80px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px 25px 60px;
+}
+
+.content{
+    width:min(900px,100%);
+    padding:55px 45px;
+    background:rgba(0,0,0,.38);
+    border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-radius:24px;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+.content h1{
+    font-size:clamp(36px,6vw,58px);
+    margin-bottom:25px;
+}
+
+.creator-logo{
+    width:250px;
+    max-width:80%;
+    margin:10px auto 25px;
+    display:block;
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-drag:none;
+    touch-action:none;
+}
+
+.content > p{
+    font-size:19px;
+    line-height:1.7;
+    color:rgba(255,255,255,.9);
+}
+
+/* CREATOR DETAILS */
+
+.creator-details{
+    margin:30px auto 0;
+    max-width:650px;
+    padding:25px;
+    background:#241044;
+    border-radius:18px;
+    text-align:left;
+    box-shadow:0 15px 45px rgba(0,0,0,.4);
+}
+
+.creator-details p{
+    font-size:18px;
+    line-height:1.8;
+    color:white;
+    margin:7px 0;
+}
+
+.creator-details strong{
+    color:white;
+}
+
+.creator-details a{
+    color:white;
+    text-decoration:none;
+}
+
+.creator-details a:hover{
+    text-decoration:underline;
+}
+
+/* SECRET LOGIN */
+
+#adminLogin{
+    display:none;
+    margin:30px auto 0;
+    max-width:500px;
+    padding:25px;
+    background:rgba(20,8,40,.95);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(0,0,0,.45);
+}
+
+#adminLogin h2{
+    margin-bottom:18px;
+}
+
+#adminPassword{
+    width:100%;
+    min-height:50px;
+    padding:0 15px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.2);
+    outline:none;
+    background:rgba(0,0,0,.45);
+    color:white;
+    font-size:16px;
+    margin-bottom:12px;
+}
+
+.admin-button{
+    width:100%;
+    min-height:50px;
+    border:0;
+    border-radius:12px;
+    background:#241044;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.admin-button:hover{
+    background:#32155d;
+}
+
+#loginMessage{
+    margin-top:12px;
+    color:#ff8080;
+}
+
+/* ADMIN PANEL */
+
+#adminPanel{
+    display:none;
+    margin:30px auto 0;
+    max-width:650px;
+    padding:25px;
+    background:rgba(20,8,40,.95);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(0,0,0,.45);
+    text-align:left;
+}
+
+#adminPanel h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.admin-field{
+    margin-bottom:16px;
+}
+
+.admin-field label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+.admin-field input,
+.admin-field textarea,
+.admin-field select{
+    width:100%;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:12px;
+    outline:none;
+    background:rgba(0,0,0,.45);
+    color:white;
+    padding:13px;
+    font-size:16px;
+}
+
+.admin-field textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.admin-field select option{
+    background:#241044;
+    color:white;
+}
+
+.admin-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.admin-actions button{
+    flex:1;
+    min-width:140px;
+}
+
+#uploadStatus{
+    margin-top:15px;
+    text-align:center;
+    color:rgba(255,255,255,.85);
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    header{
+        padding:0 15px;
+    }
+
+    .menu{
+        right:15px;
+        width:min(245px,calc(100vw - 30px));
+    }
+
+    main{
+        padding:30px 15px 50px;
+    }
+
+    .content{
+        padding:40px 22px;
+    }
+
+    .content > p{
+        font-size:17px;
+    }
+
+    .creator-details{
+        padding:22px 18px;
+    }
+
+    .creator-details p{
+        font-size:17px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<button
+    class="menu-button"
+    id="menuButton"
+    onclick="toggleMenu()"
+    aria-label="Open menu"
+>
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<nav class="menu" id="menu">
+
+<a href="index.html" onclick="closeMenu()">Home</a>
+
+<div class="divider"></div>
+
+<a href="search.html" onclick="closeMenu()">Search</a>
+
+<a href="projects.html" onclick="closeMenu()">Projects</a>
+
+<a href="contact.html" onclick="closeMenu()">Contact</a>
+
+<div class="divider"></div>
+
+<a href="about-website.html" onclick="closeMenu()">About Website</a>
+
+<a href="about-creator.html" onclick="closeMenu()">About Creator</a>
+
+</nav>
+
+</header>
+
+<main>
+
+<div class="content">
+
+<h1>About Creator</h1>
+
+<img
+    src="kushneupane.png"
+    alt="Kush Neupane Logo"
+    class="creator-logo"
+    id="creatorLogo"
+>
+
+<p>
+This website was created and designed by Kush Neupane.
+</p>
+
+<div class="creator-details">
+
+<p>
+<strong>Name:</strong>
+Kush Neupane
+</p>
+
+<p>
+<strong>Age:</strong>
+15
+</p>
+
+<p>
+<strong>Gender:</strong>
+Male
+</p>
+
+<p>
+<strong>Date of Birth:</strong>
+9th October 2010
+</p>
+
+<p>
+<strong>Nationality:</strong>
+Nepali
+</p>
+
+<p>
+<strong>Profession:</strong>
+Student
+</p>
+
+<p>
+<strong>Phone:</strong>
+<a href="tel:9704728286">9704728286</a>
+</p>
+
+<p>
+<strong>E-mail:</strong>
+<a href="mailto:kushneupane015@gmail.com">
+kushneupane015@gmail.com
+</a>
+</p>
+
+</div>
+
+<!-- SECRET ADMIN LOGIN -->
+
+<div id="adminLogin">
+
+<h2>Admin Login</h2>
+
+<input
+    type="password"
+    id="adminPassword"
+    placeholder="Enter admin password"
+>
+
+<button
+    class="admin-button"
+    onclick="loginAdmin()"
+>
+    Login
+</button>
+
+<div id="loginMessage"></div>
+
+</div>
+
+<!-- ADMIN PANEL -->
+
+<div id="adminPanel">
+
+<h2>Admin Panel</h2>
+
+<div class="admin-field">
+
+<label for="postPage">
+Post To
+</label>
+
+<select id="postPage">
+
+<option value="home">Home</option>
+<option value="projects">Projects</option>
+
+</select>
+
+</div>
+
+<div class="admin-field">
+
+<label for="mediaType">
+Media Type
+</label>
+
+<select id="mediaType" onchange="updateMediaFields()">
+
+<option value="photo">Photo</option>
+<option value="video">Video</option>
+
+</select>
+
+</div>
+
+<div class="admin-field">
+
+<label for="mediaName">
+Name
+</label>
+
+<input
+    type="text"
+    id="mediaName"
+    placeholder="Enter media name"
+>
+
+</div>
+
+<div class="admin-field">
+
+<label for="mediaDescription">
+Description
+</label>
+
+<textarea
+    id="mediaDescription"
+    placeholder="Enter description"
+></textarea>
+
+</div>
+
+<div class="admin-field">
+
+<label for="mediaFile">
+Photo / Video
+</label>
+
+<input
+    type="file"
+    id="mediaFile"
+    accept="image/*,video/*"
+>
+
+</div>
+
+<div
+    class="admin-field"
+    id="thumbnailField"
+    style="display:none;"
+>
+
+<label for="thumbnailFile">
+Video Thumbnail
+</label>
+
+<input
+    type="file"
+    id="thumbnailFile"
+    accept="image/*"
+>
+
+</div>
+
+<div class="admin-actions">
+
+<button
+    class="admin-button"
+    onclick="uploadMedia()"
+>
+    Post
+</button>
+
+<button
+    class="admin-button"
+    onclick="logoutAdmin()"
+>
+    Logout
+</button>
+
+</div>
+
+<div id="uploadStatus"></div>
+
+</div>
+
+</div>
+
+</main>
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+
+<script>
+
+/* =========================
+   MENU
+========================= */
+
+const menuButton=document.getElementById("menuButton");
+const menu=document.getElementById("menu");
+
+function toggleMenu(){
+
+    menu.classList.toggle("active");
+    menuButton.classList.toggle("active");
+
+}
+
+function closeMenu(){
+
+    menu.classList.remove("active");
+    menuButton.classList.remove("active");
+
+}
+
+document.addEventListener("click",function(event){
+
+    if(
+        !menu.contains(event.target) &&
+        !menuButton.contains(event.target)
+    ){
+
+        closeMenu();
+
+    }
+
+});
+
+/* =========================
+   FIREBASE FIRESTORE
+========================= */
+
+let db=null;
+
+const firebaseReady =
+    window.firebaseConfig &&
+    !String(window.firebaseConfig.apiKey).startsWith("PASTE_");
+
+if(firebaseReady){
+
+    try{
+
+        if(!firebase.apps.length){
+
+            firebase.initializeApp(window.firebaseConfig);
+
+        }
+
+        db=firebase.firestore();
+
+        firebase
+            .auth()
+            .signInAnonymously()
+            .catch(function(error){
+
+                console.error(error);
+
+            });
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+/* =========================
+   SECRET GESTURE
+========================= */
+
+const creatorLogo=document.getElementById("creatorLogo");
+
+let logoDoubleClicked=false;
+let startY=null;
+
+creatorLogo.addEventListener("dblclick",function(){
+
+    logoDoubleClicked=true;
+
+    setTimeout(function(){
+
+        logoDoubleClicked=false;
+
+    },5000);
+
+});
+
+creatorLogo.addEventListener("mousedown",function(event){
+
+    if(!logoDoubleClicked){
+        return;
+    }
+
+    startY=event.clientY;
+
+});
+
+creatorLogo.addEventListener("mouseup",function(event){
+
+    if(!logoDoubleClicked || startY===null){
+        return;
+    }
+
+    const difference=event.clientY-startY;
+
+    if(difference>=80){
+
+        openAdminLogin();
+
+    }
+
+    startY=null;
+    logoDoubleClicked=false;
+
+});
+
+/* TOUCH */
+
+creatorLogo.addEventListener("touchstart",function(event){
+
+    if(!logoDoubleClicked){
+        return;
+    }
+
+    startY=event.touches[0].clientY;
+
+},{passive:true});
+
+creatorLogo.addEventListener("touchend",function(event){
+
+    if(!logoDoubleClicked || startY===null){
+        return;
+    }
+
+    const endY=event.changedTouches[0].clientY;
+
+    const difference=endY-startY;
+
+    if(difference>=80){
+
+        openAdminLogin();
+
+    }
+
+    startY=null;
+    logoDoubleClicked=false;
+
+},{passive:true});
+
+/* =========================
+   LOGIN
+========================= */
+
+function openAdminLogin(){
+
+    document.getElementById("adminLogin").style.display="block";
+
+    document
+        .getElementById("adminLogin")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+}
+
+function loginAdmin(){
+
+    const password=
+        document.getElementById("adminPassword").value;
+
+    const message=
+        document.getElementById("loginMessage");
+
+    if(password==="lol"){
+
+        document.getElementById("adminLogin").style.display="none";
+
+        document.getElementById("adminPanel").style.display="block";
+
+        message.textContent="";
+
+        document
+            .getElementById("adminPanel")
+            .scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+    }else{
+
+        message.textContent="Incorrect password.";
+
+    }
+
+}
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutAdmin(){
+
+    document.getElementById("adminPanel").style.display="none";
+
+    document.getElementById("adminPassword").value="";
+
+    document.getElementById("uploadStatus").textContent="";
+
+}
+
+/* =========================
+   MEDIA TYPE
+========================= */
+
+function updateMediaFields(){
+
+    const type=
+        document.getElementById("mediaType").value;
+
+    const thumbnailField=
+        document.getElementById("thumbnailField");
+
+    if(type==="video"){
+
+        thumbnailField.style.display="block";
+
+    }else{
+
+        thumbnailField.style.display="none";
+
+    }
+
+}
+
+/* =========================
+   CLOUDINARY UPLOAD
+========================= */
+
+async function uploadToCloudinary(file,resourceType){
+
+    const cloudName="mnsjr7lc";
+
+    const uploadPreset="Kush website upload";
+
+    const uploadUrl=
+        "https://api.cloudinary.com/v1_1/" +
+        cloudName +
+        "/" +
+        resourceType +
+        "/upload";
+
+    const formData=new FormData();
+
+    formData.append("file",file);
+
+    formData.append(
+        "upload_preset",
+        uploadPreset
+    );
+
+    const response=await fetch(
+        uploadUrl,
+        {
+            method:"POST",
+            body:formData
+        }
+    );
+
+    if(!response.ok){
+
+        const errorText=
+            await response.text();
+
+        throw new Error(
+            "Cloudinary upload failed: " +
+            errorText
+        );
+
+    }
+
+    const result=
+        await response.json();
+
+    if(!result.secure_url){
+
+        throw new Error(
+            "Cloudinary did not return a file URL."
+        );
+
+    }
+
+    return result.secure_url;
+
+}
+
+/* =========================
+   POST MEDIA
+========================= */
+
+async function uploadMedia(){
+
+    const status=
+        document.getElementById("uploadStatus");
+
+    if(!db){
+
+        status.textContent=
+            "Firebase Firestore is not configured.";
+
+        return;
+
+    }
+
+    const page=
+        document.getElementById("postPage").value;
+
+    const type=
+        document.getElementById("mediaType").value;
+
+    const name=
+        document
+            .getElementById("mediaName")
+            .value
+            .trim();
+
+    const description=
+        document
+            .getElementById("mediaDescription")
+            .value
+            .trim();
+
+    const mediaFile=
+        document
+            .getElementById("mediaFile")
+            .files[0];
+
+    const thumbnailFile=
+        document
+            .getElementById("thumbnailFile")
+            .files[0];
+
+    if(!name){
+
+        status.textContent=
+            "Please enter a name.";
+
+        return;
+
+    }
+
+    if(!mediaFile){
+
+        status.textContent=
+            "Please select a photo or video.";
+
+        return;
+
+    }
+
+    if(type==="video" && !thumbnailFile){
+
+        status.textContent=
+            "Please select a video thumbnail.";
+
+        return;
+
+    }
+
+    if(
+        type==="photo" &&
+        !mediaFile.type.startsWith("image/")
+    ){
+
+        status.textContent=
+            "Please select an image file.";
+
+        return;
+
+    }
+
+    if(
+        type==="video" &&
+        !mediaFile.type.startsWith("video/")
+    ){
+
+        status.textContent=
+            "Please select a video file.";
+
+        return;
+
+    }
+
+    try{
+
+        status.textContent=
+            "Uploading media...";
+
+        const resourceType=
+            type==="video"
+            ? "video"
+            : "image";
+
+        const url=
+            await uploadToCloudinary(
+                mediaFile,
+                resourceType
+            );
+
+        let thumbnailUrl="";
+
+        if(type==="video" && thumbnailFile){
+
+            status.textContent=
+                "Uploading video thumbnail...";
+
+            thumbnailUrl=
+                await uploadToCloudinary(
+                    thumbnailFile,
+                    "image"
+                );
+
+        }
+
+        status.textContent=
+            "Saving post information...";
+
+        await db.collection("media").add({
+
+            page:page,
+
+            type:type,
+
+            name:name,
+
+            description:description,
+
+            url:url,
+
+            thumbnailUrl:thumbnailUrl,
+
+            createdAt:
+                firebase.firestore.FieldValue.serverTimestamp()
+
+        });
+
+        status.textContent=
+            "Posted successfully.";
+
+        document
+            .getElementById("mediaName")
+            .value="";
+
+        document
+            .getElementById("mediaDescription")
+            .value="";
+
+        document
+            .getElementById("mediaFile")
+            .value="";
+
+        document
+            .getElementById("thumbnailFile")
+            .value="";
+
+    }catch(error){
+
+        console.error(error);
+
+        status.textContent=
+            "Upload failed: " +
+            error.message;
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>
