@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -456,7 +457,7 @@ Share Link
 <div class="qr-area">
 
 <img
-src="webqr.png"
+src="web qr.svg"
 alt="Website QR Code"
 class="qr-image"
 id="qrImage"
@@ -498,7 +499,7 @@ Scan this QR code to visit the website.
 </p>
 
 <img
-src="webqr.png"
+src="web qr.svg"
 alt="Website QR Code"
 class="qr-large"
 >
@@ -557,18 +558,7 @@ closeMenu();
 
 function getWebsiteLink(){
 
-/*
-This creates the link to the main Home page.
-*/
-
-const currentPath=window.location.pathname;
-
-const websitePath=currentPath.replace(
-/about-website\.html$/i,
-"index.html"
-);
-
-return window.location.origin+websitePath;
+return "https://kushneupane015-netizen.github.io/kush/";
 
 }
 
@@ -688,7 +678,7 @@ try{
 Fetch the QR image and turn it into a file.
 */
 
-const response=await fetch("webqr.png");
+const response=await fetch("web qr.svg");
 
 if(!response.ok){
 
@@ -700,9 +690,9 @@ const blob=await response.blob();
 
 const file=new File(
 [blob],
-"webqr.png",
+"web qr.svg",
 {
-type:blob.type||"image/png"
+type:blob.type||"image/svg+xml"
 }
 );
 
@@ -741,7 +731,7 @@ Open the QR image so the user can save/share it.
 */
 
 const imageWindow=window.open(
-"webqr.png",
+"web qr.svg",
 "_blank"
 );
 
