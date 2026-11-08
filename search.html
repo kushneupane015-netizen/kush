@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Search | Kush Neupane</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    color:white;
+    background-image:url("web back.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    position:relative;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:-1;
+}
+
+/* HEADER */
+
+header{
+    width:100%;
+    height:80px;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    padding:0 30px;
+    position:relative;
+    z-index:1000;
+}
+
+.menu-button{
+    width:54px;
+    height:54px;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:14px;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    transition:.3s;
+}
+
+.menu-button:hover{
+    background:rgba(255,255,255,.12);
+    transform:scale(1.05);
+}
+
+.menu-button span{
+    width:27px;
+    height:3px;
+    background:white;
+    border-radius:5px;
+    transition:.3s;
+}
+
+.menu-button.active span:nth-child(1){
+    transform:translateY(9px) rotate(45deg);
+}
+
+.menu-button.active span:nth-child(2){
+    opacity:0;
+}
+
+.menu-button.active span:nth-child(3){
+    transform:translateY(-9px) rotate(-45deg);
+}
+
+.menu{
+    position:absolute;
+    top:72px;
+    right:30px;
+    width:245px;
+    padding:10px;
+    background:rgba(10,10,10,.88);
+    border:1px solid rgba(255,255,255,.16);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(0,0,0,.55);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-10px) scale(.98);
+    transition:.25s;
+}
+
+.menu.active{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0) scale(1);
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    min-height:48px;
+    color:white;
+    text-decoration:none;
+    padding:12px 15px;
+    margin:3px 0;
+    border-radius:11px;
+    font-size:16px;
+    transition:.25s;
+}
+
+.menu a:hover{
+    background:rgba(255,255,255,.12);
+    padding-left:21px;
+}
+
+.menu .divider{
+    height:1px;
+    background:rgba(255,255,255,.12);
+    margin:8px 5px;
+}
+
+/* MAIN */
+
+main{
+    min-height:calc(100vh - 80px);
+    padding:40px 25px 60px;
+}
+
+.search-container{
+    width:min(900px,100%);
+    margin:0 auto 35px;
+    text-align:center;
+}
+
+.search-container h1{
+    font-size:clamp(36px,6vw,58px);
+    margin-bottom:25px;
+}
+
+.search-box{
+    display:flex;
+    gap:10px;
+    width:100%;
+}
+
+.search-box input{
+    flex:1;
+    min-height:54px;
+    padding:0 18px;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    background:rgba(0,0,0,.55);
+    border:1px solid rgba(255,255,255,.18);
+    color:white;
+    font-size:17px;
+    backdrop-filter:blur(10px);
+}
+
+.search-box input::placeholder{
+    color:rgba(255,255,255,.6);
+}
+
+.search-box button{
+    min-width:120px;
+    border:none;
+    border-radius:14px;
+    background:#241044;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.search-box button:hover{
+    transform:translateY(-2px);
+    background:#32155d;
+}
+
+#searchResults{
+    width:min(1100px,100%);
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.media-card{
+    overflow:hidden;
+    background:rgba(0,0,0,.38);
+    border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+.media-preview{
+    display:block;
+    width:100%;
+    max-height:350px;
+    object-fit:cover;
+    background:#000;
+    cursor:pointer;
+}
+
+.media-info{
+    padding:20px;
+}
+
+.media-info h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.media-info p{
+    color:rgba(255,255,255,.85);
+    line-height:1.6;
+}
+
+.empty-state{
+    grid-column:1/-1;
+    text-align:center;
+    padding:50px 20px;
+    background:rgba(0,0,0,.38);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:20px;
+    color:rgba(255,255,255,.8);
+}
+
+/* FULL SCREEN VIEWER */
+
+#mediaViewer{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:5000;
+    background:rgba(0,0,0,.94);
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+}
+
+#mediaViewer.active{
+    display:flex;
+}
+
+#viewerClose{
+    position:absolute;
+    top:20px;
+    right:25px;
+    width:50px;
+    height:50px;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:50%;
+    background:rgba(0,0,0,.6);
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+    z-index:5001;
+}
+
+#viewerContent{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+#viewerContent img,
+#viewerContent video{
+    max-width:95%;
+    max-height:90vh;
+    object-fit:contain;
+    border-radius:10px;
+}
+
+#viewerContent iframe{
+    width:min(1000px,95vw);
+    height:min(70vh,600px);
+    border:0;
+    border-radius:12px;
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:0 15px;
+    }
+
+    .menu{
+        right:15px;
+        width:min(245px,calc(100vw - 30px));
+    }
+
+    main{
+        padding:30px 15px 50px;
+    }
+
+    .search-box{
+        flex-direction:column;
+    }
+
+    .search-box button{
+        min-height:52px;
+    }
+
+    #searchResults{
+        grid-template-columns:1fr;
+    }
+
+    #mediaViewer{
+        padding:15px;
+    }
+
+    #viewerContent img,
+    #viewerContent video{
+        max-width:100%;
+        max-height:85vh;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<button
+    class="menu-button"
+    id="menuButton"
+    onclick="toggleMenu()"
+    aria-label="Open menu"
+>
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<nav class="menu" id="menu">
+
+<a href="index.html" onclick="closeMenu()">Home</a>
+
+<div class="divider"></div>
+
+<a href="search.html" onclick="closeMenu()">Search</a>
+
+<a href="projects.html" onclick="closeMenu()">Projects</a>
+
+<a href="contact.html" onclick="closeMenu()">Contact</a>
+
+<div class="divider"></div>
+
+<a href="about-website.html" onclick="closeMenu()">About Website</a>
+
+<a href="about-creator.html" onclick="closeMenu()">About Creator</a>
+
+</nav>
+
+</header>
+
+<main>
+
+<section class="search-container">
+
+<h1>Search</h1>
+
+<div class="search-box">
+
+<input
+    type="text"
+    id="searchInput"
+    placeholder="Search uploaded media..."
+    autocomplete="off"
+>
+
+<button onclick="performSearch()">Search</button>
+
+</div>
+
+</section>
+
+<div id="searchResults">
+
+<div class="empty-state">
+Enter something to search.
+</div>
+
+</div>
+
+</main>
+
+<!-- FULL SCREEN VIEWER -->
+
+<div id="mediaViewer">
+
+<button id="viewerClose" onclick="closeViewer()">×</button>
+
+<div id="viewerContent"></div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+
+<script>
+
+let db=null;
+
+const firebaseReady =
+    window.firebaseConfig &&
+    !String(window.firebaseConfig.apiKey).startsWith("PASTE_");
+
+if(firebaseReady){
+
+    try{
+
+        if(!firebase.apps.length){
+            firebase.initializeApp(window.firebaseConfig);
+        }
+
+        db=firebase.firestore();
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+}
+
+/* MENU */
+
+const menuButton=document.getElementById("menuButton");
+const menu=document.getElementById("menu");
+
+function toggleMenu(){
+
+    menu.classList.toggle("active");
+    menuButton.classList.toggle("active");
+
+}
+
+function closeMenu(){
+
+    menu.classList.remove("active");
+    menuButton.classList.remove("active");
+
+}
+
+document.addEventListener("click",function(event){
+
+    if(
+        !menu.contains(event.target) &&
+        !menuButton.contains(event.target)
+    ){
+
+        closeMenu();
+
+    }
+
+});
+
+/* ESCAPE HTML */
+
+function escapeHTML(value){
+
+    return String(value || "").replace(
+        /[&<>"']/g,
+        function(character){
+
+            return {
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#039;"
+            }[character];
+
+        }
+    );
+}
+
+/* YOUTUBE */
+
+function getYouTubeId(url){
+
+    if(!url){
+        return "";
+    }
+
+    const patterns=[
+        /youtube\.com\/watch\?v=([^&]+)/i,
+        /youtu\.be\/([^?&]+)/i,
+        /youtube\.com\/embed\/([^?&]+)/i,
+        /youtube\.com\/shorts\/([^?&]+)/i
+    ];
+
+    for(const pattern of patterns){
+
+        const match=url.match(pattern);
+
+        if(match){
+            return match[1];
+        }
+
+    }
+
+    return "";
+}
+
+/* VIEWER */
+
+function openViewer(type,url){
+
+    const viewer=document.getElementById("mediaViewer");
+    const content=document.getElementById("viewerContent");
+
+    content.innerHTML="";
+
+    const youtubeId=getYouTubeId(url);
+
+    if(youtubeId){
+
+        const iframe=document.createElement("iframe");
+
+        iframe.src=
+            "https://www.youtube.com/embed/" +
+            encodeURIComponent(youtubeId) +
+            "?autoplay=1";
+
+        iframe.allow=
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
+        iframe.allowFullscreen=true;
+
+        content.appendChild(iframe);
+
+    }else if(type==="photo"){
+
+        const image=document.createElement("img");
+
+        image.src=url;
+
+        content.appendChild(image);
+
+    }else{
+
+        const video=document.createElement("video");
+
+        video.src=url;
+        video.controls=true;
+        video.autoplay=true;
+
+        content.appendChild(video);
+
+    }
+
+    viewer.classList.add("active");
+    document.body.style.overflow="hidden";
+
+}
+
+function closeViewer(){
+
+    const viewer=document.getElementById("mediaViewer");
+    const content=document.getElementById("viewerContent");
+
+    viewer.classList.remove("active");
+    content.innerHTML="";
+    document.body.style.overflow="";
+
+}
+
+document
+    .getElementById("mediaViewer")
+    .addEventListener("click",function(event){
+
+        if(event.target===this){
+            closeViewer();
+        }
+
+    });
+
+document.addEventListener("keydown",function(event){
+
+    if(event.key==="Escape"){
+        closeViewer();
+    }
+
+});
+
+/* CREATE CARD */
+
+function createCard(data){
+
+    const url=escapeHTML(data.url);
+    const name=escapeHTML(data.name);
+    const description=escapeHTML(data.description);
+
+    const safeURL=String(data.url || "").replace(/'/g,"\\'");
+
+    if(data.type==="photo"){
+
+        return `
+        <article class="media-card">
+
+            <img
+                class="media-preview"
+                src="${url}"
+                alt="${name}"
+                onclick="openViewer('photo','${safeURL}')"
+            >
+
+            <div class="media-info">
+
+                <h3>${name}</h3>
+
+                <p>${description}</p>
+
+            </div>
+
+        </article>
+        `;
+
+    }
+
+    const thumbnail=data.thumbnailUrl
+        ? `
+        <img
+            class="media-preview"
+            src="${escapeHTML(data.thumbnailUrl)}"
+            alt="${name}"
+            onclick="openViewer('video','${safeURL}')"
+        >
+        `
+        : `
+        <video
+            class="media-preview"
+            src="${url}"
+            preload="metadata"
+            onclick="openViewer('video','${safeURL}')"
+        ></video>
+        `;
+
+    return `
+    <article class="media-card">
+
+        ${thumbnail}
+
+        <div class="media-info">
+
+            <h3>${name}</h3>
+
+            <p>${description}</p>
+
+        </div>
+
+    </article>
+    `;
+}
+
+/* SEARCH */
+
+async function performSearch(){
+
+    const input=document
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const results=document.getElementById("searchResults");
+
+    if(!input){
+
+        results.innerHTML=`
+            <div class="empty-state">
+                Enter something to search.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    if(!db){
+
+        results.innerHTML=`
+            <div class="empty-state">
+                Firebase is not configured.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    results.innerHTML=`
+        <div class="empty-state">
+            Searching...
+        </div>
+    `;
+
+    try{
+
+        const snapshot=
+            await db.collection("media").get();
+
+        const matches=snapshot.docs
+            .map(function(doc){
+
+                return {
+                    id:doc.id,
+                    ...doc.data()
+                };
+
+            })
+            .filter(function(data){
+
+                const name=
+                    String(data.name || "")
+                    .toLowerCase();
+
+                const description=
+                    String(data.description || "")
+                    .toLowerCase();
+
+                const page=
+                    String(data.page || "")
+                    .toLowerCase();
+
+                return(
+                    name.includes(input) ||
+                    description.includes(input) ||
+                    page.includes(input)
+                );
+
+            })
+            .sort(function(a,b){
+
+                const aTime=
+                    a.createdAt && a.createdAt.seconds
+                    ? a.createdAt.seconds
+                    : 0;
+
+                const bTime=
+                    b.createdAt && b.createdAt.seconds
+                    ? b.createdAt.seconds
+                    : 0;
+
+                return bTime-aTime;
+
+            });
+
+        if(!matches.length){
+
+            results.innerHTML=`
+                <div class="empty-state">
+                    No matching results found.
+                </div>
+            `;
+
+            return;
+
+        }
+
+        results.innerHTML=
+            matches
+            .map(createCard)
+            .join("");
+
+    }catch(error){
+
+        console.error(error);
+
+        results.innerHTML=`
+            <div class="empty-state">
+                Could not search uploads.
+                Check your Firebase setup.
+            </div>
+        `;
+
+    }
+
+}
+
+document
+    .getElementById("searchInput")
+    .addEventListener("keydown",function(event){
+
+        if(event.key==="Enter"){
+            performSearch();
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

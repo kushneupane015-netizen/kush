@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Kush Neupane </title>
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+html{scroll-behavior:smooth}
+body{min-height:100vh;color:white;background-image:url("web back.png");background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;position:relative}
+body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:-1}
+header{width:100%;height:80px;display:flex;justify-content:flex-end;align-items:center;padding:0 30px;position:relative;z-index:1000}
+.menu-button{width:54px;height:54px;border:1px solid rgba(255,255,255,.25);border-radius:14px;background:rgba(0,0,0,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;transition:.3s}
+.menu-button:hover{background:rgba(255,255,255,.12);transform:scale(1.05)}
+.menu-button span{width:27px;height:3px;background:white;border-radius:5px;transition:.3s}
+.menu-button.active span:nth-child(1){transform:translateY(9px) rotate(45deg)}
+.menu-button.active span:nth-child(2){opacity:0}
+.menu-button.active span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+.menu{position:absolute;top:72px;right:30px;width:245px;padding:10px;background:rgba(10,10,10,.88);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:18px;box-shadow:0 15px 45px rgba(0,0,0,.55);opacity:0;visibility:hidden;transform:translateY(-10px) scale(.98);transition:.25s}
+.menu.active{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.menu a{display:flex;align-items:center;min-height:48px;color:white;text-decoration:none;padding:12px 15px;margin:3px 0;border-radius:11px;font-size:16px;transition:.25s}
+.menu a:hover{background:rgba(255,255,255,.12);padding-left:21px}
+.menu .divider{height:1px;background:rgba(255,255,255,.12);margin:8px 5px}
+main{min-height:calc(100vh - 80px);display:flex;justify-content:center;align-items:center;text-align:center;padding:40px 25px}
+.content{width:min(850px,100%);padding:55px 45px;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.content h1{font-size:clamp(36px,6vw,58px);margin-bottom:18px}
+.content p{font-size:19px;line-height:1.7;color:rgba(255,255,255,.9)}
+
+/* CONTACT DETAILS */
+.contact-details{
+    margin:30px auto 0;
+    max-width:650px;
+    padding:25px;
+    background:#241044;
+    border-radius:18px;
+    text-align:left;
+    box-shadow:0 15px 45px rgba(0,0,0,.4);
+}
+
+.contact-details p{
+    font-size:19px;
+    line-height:1.8;
+    color:white;
+    margin:8px 0;
+}
+
+.contact-details strong{
+    color:white;
+}
+
+.contact-details a{
+    color:white;
+    text-decoration:none;
+}
+
+.contact-details a:hover{
+    text-decoration:underline;
+}
+
+@media(max-width:600px){header{padding:0 15px}.menu{right:15px;width:min(245px,calc(100vw - 30px))}.content{padding:40px 22px}.content p{font-size:17px}.contact-details{padding:22px 18px}.contact-details p{font-size:17px}}
+
+</style>
+</head>
+<body>
+
+<header>
+<button class="menu-button" id="menuButton" onclick="toggleMenu()" aria-label="Open menu">
+<span></span><span></span><span></span>
+</button>
+
+<nav class="menu" id="menu">
+<a href="index.html" onclick="closeMenu()">Home</a>
+<div class="divider"></div>
+<a href="search.html" onclick="closeMenu()">Search</a>
+<a href="projects.html" onclick="closeMenu()">Projects</a>
+<a href="contact.html" onclick="closeMenu()">Contact</a>
+<div class="divider"></div>
+<a href="about-website.html" onclick="closeMenu()">About Website</a>
+<a href="about-creator.html" onclick="closeMenu()">About Creator</a>
+</nav>
+</header>
+
+<main>
+<div class="content">
+
+<h1>Contact</h1>
+
+<p>This page can contain contact information or links that I choose to share.</p>
+
+<div class="contact-details">
+
+<p>
+<strong>Phone:</strong>
+<a href="tel:9704728286">9704728286</a>
+</p>
+
+<p>
+<strong>E-mail:</strong>
+<a href="mailto:kushneupane015@gmail.com">
+kushneupane015@gmail.com
+</a>
+</p>
+
+</div>
+
+</div>
+</main>
+
+<script>
+const menuButton=document.getElementById("menuButton");
+const menu=document.getElementById("menu");
+function toggleMenu(){menu.classList.toggle("active");menuButton.classList.toggle("active")}
+function closeMenu(){menu.classList.remove("active");menuButton.classList.remove("active")}
+document.addEventListener("click",function(event){if(!menu.contains(event.target)&&!menuButton.contains(event.target))closeMenu()});
+</script>
+
+</body>
+</html>

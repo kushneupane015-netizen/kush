@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Website | Kush Neupane </title>
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+html{scroll-behavior:smooth}
+
+body{
+min-height:100vh;
+color:white;
+background-image:url("web back.png");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:fixed;
+position:relative
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+z-index:-1
+}
+
+header{
+width:100%;
+height:80px;
+display:flex;
+justify-content:flex-end;
+align-items:center;
+padding:0 30px;
+position:relative;
+z-index:1000
+}
+
+.menu-button{
+width:54px;
+height:54px;
+border:1px solid rgba(255,255,255,.25);
+border-radius:14px;
+background:rgba(0,0,0,.55);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+cursor:pointer;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:6px;
+transition:.3s
+}
+
+.menu-button:hover{
+background:rgba(255,255,255,.12);
+transform:scale(1.05)
+}
+
+.menu-button span{
+width:27px;
+height:3px;
+background:white;
+border-radius:5px;
+transition:.3s
+}
+
+.menu-button.active span:nth-child(1){
+transform:translateY(9px) rotate(45deg)
+}
+
+.menu-button.active span:nth-child(2){
+opacity:0
+}
+
+.menu-button.active span:nth-child(3){
+transform:translateY(-9px) rotate(-45deg)
+}
+
+.menu{
+position:absolute;
+top:72px;
+right:30px;
+width:245px;
+padding:10px;
+background:rgba(10,10,10,.88);
+border:1px solid rgba(255,255,255,.16);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+border-radius:18px;
+box-shadow:0 15px 45px rgba(0,0,0,.55);
+opacity:0;
+visibility:hidden;
+transform:translateY(-10px) scale(.98);
+transition:.25s
+}
+
+.menu.active{
+opacity:1;
+visibility:visible;
+transform:translateY(0) scale(1)
+}
+
+.menu a{
+display:flex;
+align-items:center;
+min-height:48px;
+color:white;
+text-decoration:none;
+padding:12px 15px;
+margin:3px 0;
+border-radius:11px;
+font-size:16px;
+transition:.25s
+}
+
+.menu a:hover{
+background:rgba(255,255,255,.12);
+padding-left:21px
+}
+
+.menu .divider{
+height:1px;
+background:rgba(255,255,255,.12);
+margin:8px 5px
+}
+
+main{
+min-height:calc(100vh - 80px);
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px 25px
+}
+
+.content{
+width:min(850px,100%);
+padding:55px 45px;
+background:rgba(0,0,0,.38);
+border:1px solid rgba(255,255,255,.14);
+backdrop-filter:blur(8px);
+-webkit-backdrop-filter:blur(8px);
+border-radius:24px;
+box-shadow:0 20px 60px rgba(0,0,0,.35)
+}
+
+.content h1{
+font-size:clamp(36px,6vw,58px);
+margin-bottom:18px
+}
+
+.content h2{
+font-size:22px;
+line-height:1.7;
+font-weight:normal;
+color:rgba(255,255,255,.9)
+}
+
+
+/* SHARE SECTION */
+
+.share-section{
+margin-top:40px;
+padding:30px 25px;
+background:rgba(0,0,0,.35);
+border:1px solid rgba(255,255,255,.16);
+border-radius:20px
+}
+
+.share-section h2{
+font-size:28px;
+font-weight:bold;
+margin-bottom:10px
+}
+
+.share-section p{
+font-size:17px;
+line-height:1.6;
+color:rgba(255,255,255,.85);
+margin-bottom:20px
+}
+
+
+/* LINK AREA */
+
+.share-link-box{
+display:flex;
+gap:10px;
+max-width:650px;
+margin:0 auto 28px
+}
+
+.share-link{
+flex:1;
+padding:14px 16px;
+border:1px solid rgba(255,255,255,.2);
+border-radius:12px;
+background:rgba(0,0,0,.45);
+color:white;
+font-size:15px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+text-align:left
+}
+
+.share-button{
+padding:13px 20px;
+border:1px solid rgba(255,255,255,.2);
+border-radius:12px;
+background:rgba(255,255,255,.08);
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:.25s
+}
+
+.share-button:hover{
+background:rgba(255,255,255,.16);
+transform:translateY(-2px)
+}
+
+
+/* QR AREA */
+
+.qr-area{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:15px
+}
+
+.qr-image{
+width:170px;
+height:170px;
+object-fit:contain;
+padding:8px;
+background:white;
+border-radius:14px;
+cursor:pointer;
+box-shadow:0 0 20px rgba(255,255,255,.18);
+transition:.3s
+}
+
+.qr-image:hover{
+transform:scale(1.04);
+box-shadow:0 0 30px rgba(120,100,255,.6)
+}
+
+.qr-share-button{
+min-width:190px
+}
+
+
+/* QR MODAL */
+
+.qr-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.92);
+backdrop-filter:blur(15px);
+-webkit-backdrop-filter:blur(15px);
+display:flex;
+justify-content:center;
+align-items:center;
+padding:25px;
+opacity:0;
+visibility:hidden;
+transition:.3s;
+z-index:2000
+}
+
+.qr-modal.active{
+opacity:1;
+visibility:visible
+}
+
+.qr-modal-content{
+width:min(500px,100%);
+padding:35px 25px;
+background:rgba(10,10,25,.94);
+border:1px solid rgba(255,255,255,.25);
+border-radius:24px;
+box-shadow:0 0 70px rgba(80,60,255,.45);
+text-align:center;
+position:relative
+}
+
+.qr-modal-content h2{
+font-size:30px;
+margin-bottom:10px
+}
+
+.qr-modal-content p{
+font-size:16px;
+color:rgba(255,255,255,.85);
+margin-bottom:22px
+}
+
+.qr-large{
+width:min(330px,80vw);
+height:min(330px,80vw);
+object-fit:contain;
+background:white;
+padding:12px;
+border-radius:18px;
+box-shadow:0 0 45px rgba(255,255,255,.9)
+}
+
+.close-qr{
+position:absolute;
+top:15px;
+right:15px;
+width:42px;
+height:42px;
+border:1px solid rgba(255,255,255,.25);
+border-radius:12px;
+background:rgba(255,255,255,.08);
+color:white;
+font-size:25px;
+cursor:pointer
+}
+
+.close-qr:hover{
+background:rgba(255,255,255,.18)
+}
+
+.qr-modal-share{
+margin-top:25px
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+header{
+padding:0 15px
+}
+
+.menu{
+right:15px;
+width:min(245px,calc(100vw - 30px))
+}
+
+.content{
+padding:40px 22px
+}
+
+.content h2{
+font-size:19px
+}
+
+.share-section{
+padding:25px 15px
+}
+
+.share-link-box{
+flex-direction:column
+}
+
+.share-link{
+width:100%
+}
+
+.share-button{
+width:100%
+}
+
+.qr-image{
+width:160px;
+height:160px
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<button class="menu-button" id="menuButton" onclick="toggleMenu()" aria-label="Open menu">
+<span></span>
+<span></span>
+<span></span>
+</button>
+
+<nav class="menu" id="menu">
+
+<a href="index.html" onclick="closeMenu()">Home</a>
+
+<div class="divider"></div>
+
+<a href="search.html" onclick="closeMenu()">Search</a>
+
+<a href="settings.html" onclick="closeMenu()">Settings</a>
+
+<a href="contact.html" onclick="closeMenu()">Contact</a>
+
+<div class="divider"></div>
+
+<a href="about-website.html" onclick="closeMenu()">About Website</a>
+
+<a href="about-creator.html" onclick="closeMenu()">About Creator</a>
+
+</nav>
+
+</header>
+
+
+<main>
+
+<div class="content">
+
+<h1>About Website</h1>
+
+<h2>
+This is the website where you can find and share information, projects, and other things. So, explore this website and try to learn new things.
+</h2>
+
+
+<!-- SHARE WEBSITE SECTION -->
+
+<div class="share-section">
+
+<h2>Share This Website</h2>
+
+<p>
+You can share this website with others using the link or QR code below.
+</p>
+
+
+<!-- WEBSITE LINK -->
+
+<div class="share-link-box">
+
+<div class="share-link" id="websiteLink"></div>
+
+<button class="share-button" onclick="shareLink()">
+Share Link
+</button>
+
+</div>
+
+
+<!-- QR CODE -->
+
+<div class="qr-area">
+
+<img
+src="webqr.png"
+alt="Website QR Code"
+class="qr-image"
+id="qrImage"
+onclick="openQR()"
+>
+
+<button
+class="share-button qr-share-button"
+onclick="shareQRCode()">
+Share QR Code
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+
+<!-- QR CODE POPUP -->
+
+<div class="qr-modal" id="qrModal">
+
+<div class="qr-modal-content">
+
+<button
+class="close-qr"
+onclick="closeQR()"
+aria-label="Close QR Code">
+×
+</button>
+
+<h2>QR Code</h2>
+
+<p>
+Scan this QR code to visit the website.
+</p>
+
+<img
+src="webqr.png"
+alt="Website QR Code"
+class="qr-large"
+>
+
+<div class="qr-modal-share">
+
+<button
+class="share-button"
+onclick="shareQRCode()">
+Share QR Code
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* MENU */
+
+const menuButton=document.getElementById("menuButton");
+const menu=document.getElementById("menu");
+
+function toggleMenu(){
+
+menu.classList.toggle("active");
+menuButton.classList.toggle("active");
+
+}
+
+function closeMenu(){
+
+menu.classList.remove("active");
+menuButton.classList.remove("active");
+
+}
+
+document.addEventListener("click",function(event){
+
+if(
+!menu.contains(event.target)&&
+!menuButton.contains(event.target)
+){
+
+closeMenu();
+
+}
+
+});
+
+
+/* WEBSITE LINK */
+
+function getWebsiteLink(){
+
+/*
+This creates the link to the main Home page.
+*/
+
+const currentPath=window.location.pathname;
+
+const websitePath=currentPath.replace(
+/about-website\.html$/i,
+"index.html"
+);
+
+return window.location.origin+websitePath;
+
+}
+
+const websiteLink=getWebsiteLink();
+
+document.getElementById("websiteLink").textContent=websiteLink;
+
+
+/* QR CODE POPUP */
+
+function openQR(){
+
+document.getElementById("qrModal").classList.add("active");
+
+document.body.style.overflow="hidden";
+
+}
+
+function closeQR(){
+
+document.getElementById("qrModal").classList.remove("active");
+
+document.body.style.overflow="";
+
+}
+
+
+/* CLOSE QR WHEN CLICKING OUTSIDE */
+
+document.getElementById("qrModal").addEventListener(
+"click",
+function(event){
+
+if(event.target===this){
+
+closeQR();
+
+}
+
+}
+);
+
+
+/* SHARE LINK */
+
+async function shareLink(){
+
+try{
+
+/*
+Use the device/browser's native sharing system
+when available.
+*/
+
+if(navigator.share){
+
+await navigator.share({
+
+title:"Kush Neupane Website",
+
+text:"Visit this website:",
+
+url:websiteLink
+
+});
+
+return;
+
+}
+
+
+/*
+Fallback for browsers that do not support
+the native sharing system.
+*/
+
+if(navigator.clipboard){
+
+await navigator.clipboard.writeText(websiteLink);
+
+alert("Website link copied to clipboard.");
+
+}else{
+
+window.prompt(
+"Copy this website link:",
+websiteLink
+);
+
+}
+
+}catch(error){
+
+/*
+Do nothing if the user simply closes
+the native share menu.
+*/
+
+if(error.name!=="AbortError"){
+
+console.error(error);
+
+}
+
+}
+
+}
+
+
+/* SHARE QR CODE */
+
+async function shareQRCode(){
+
+try{
+
+/*
+Fetch the QR image and turn it into a file.
+*/
+
+const response=await fetch("webqr.png");
+
+if(!response.ok){
+
+throw new Error("QR image could not be loaded.");
+
+}
+
+const blob=await response.blob();
+
+const file=new File(
+[blob],
+"webqr.png",
+{
+type:blob.type||"image/png"
+}
+);
+
+
+/*
+Use the device's native share menu when
+file sharing is supported.
+*/
+
+if(
+navigator.share&&
+navigator.canShare&&
+navigator.canShare({
+files:[file]
+})
+){
+
+await navigator.share({
+
+title:"Kush Neupane Website QR Code",
+
+text:"Scan this QR code to visit the website.",
+
+files:[file]
+
+});
+
+return;
+
+}
+
+
+/*
+Fallback if QR-file sharing is not supported.
+Open the QR image so the user can save/share it.
+*/
+
+const imageWindow=window.open(
+"webqr.png",
+"_blank"
+);
+
+if(!imageWindow){
+
+alert(
+"QR code sharing is not supported by this browser."
+);
+
+}
+
+}catch(error){
+
+if(error.name!=="AbortError"){
+
+console.error(error);
+
+alert(
+"QR code sharing is not supported by this browser."
+);
+
+}
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

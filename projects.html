@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Projects | Kush Neupane</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    color:white;
+    background-image:url("web back.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    position:relative;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:-1;
+}
+
+/* HEADER */
+
+header{
+    width:100%;
+    height:80px;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    padding:0 30px;
+    position:relative;
+    z-index:1000;
+}
+
+.menu-button{
+    width:54px;
+    height:54px;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:14px;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    transition:.3s;
+}
+
+.menu-button:hover{
+    background:rgba(255,255,255,.12);
+    transform:scale(1.05);
+}
+
+.menu-button span{
+    width:27px;
+    height:3px;
+    background:white;
+    border-radius:5px;
+    transition:.3s;
+}
+
+.menu-button.active span:nth-child(1){
+    transform:translateY(9px) rotate(45deg);
+}
+
+.menu-button.active span:nth-child(2){
+    opacity:0;
+}
+
+.menu-button.active span:nth-child(3){
+    transform:translateY(-9px) rotate(-45deg);
+}
+
+.menu{
+    position:absolute;
+    top:72px;
+    right:30px;
+    width:245px;
+    padding:10px;
+    background:rgba(10,10,10,.88);
+    border:1px solid rgba(255,255,255,.16);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(0,0,0,.55);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-10px) scale(.98);
+    transition:.25s;
+}
+
+.menu.active{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0) scale(1);
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    min-height:48px;
+    color:white;
+    text-decoration:none;
+    padding:12px 15px;
+    margin:3px 0;
+    border-radius:11px;
+    font-size:16px;
+    transition:.25s;
+}
+
+.menu a:hover{
+    background:rgba(255,255,255,.12);
+    padding-left:21px;
+}
+
+.menu .divider{
+    height:1px;
+    background:rgba(255,255,255,.12);
+    margin:8px 5px;
+}
+
+/* MAIN */
+
+main{
+    min-height:calc(100vh - 80px);
+    padding:40px 25px 60px;
+}
+
+.page-title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.page-title h1{
+    font-size:clamp(36px,6vw,58px);
+    margin-bottom:12px;
+}
+
+.page-title p{
+    font-size:18px;
+    color:rgba(255,255,255,.85);
+}
+
+#mediaGrid{
+    width:min(1100px,100%);
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.media-card{
+    overflow:hidden;
+    background:rgba(0,0,0,.38);
+    border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+.media-preview{
+    display:block;
+    width:100%;
+    max-height:350px;
+    object-fit:cover;
+    background:#000;
+}
+
+.media-info{
+    padding:20px;
+}
+
+.media-info h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.media-info p{
+    color:rgba(255,255,255,.85);
+    line-height:1.6;
+}
+
+.empty-state{
+    grid-column:1/-1;
+    text-align:center;
+    padding:50px 20px;
+    background:rgba(0,0,0,.38);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:20px;
+    color:rgba(255,255,255,.8);
+}
+
+/* VIDEO THUMBNAIL */
+
+.video-wrapper{
+    position:relative;
+    width:100%;
+    background:#000;
+    cursor:pointer;
+}
+
+.video-wrapper img{
+    display:block;
+    width:100%;
+    max-height:350px;
+    object-fit:cover;
+}
+
+.play-button{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:rgba(0,0,0,.7);
+    border:2px solid rgba(255,255,255,.8);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    color:white;
+}
+
+/* FULLSCREEN MODAL */
+
+#mediaModal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:20px;
+}
+
+#mediaModal.active{
+    display:flex;
+}
+
+#modalContent{
+    max-width:95vw;
+    max-height:90vh;
+}
+
+#modalContent img,
+#modalContent video,
+#modalContent iframe{
+    max-width:95vw;
+    max-height:90vh;
+    border:none;
+    border-radius:10px;
+}
+
+.modal-close{
+    position:absolute;
+    top:20px;
+    right:25px;
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.15);
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:0 15px;
+    }
+
+    .menu{
+        right:15px;
+        width:min(245px,calc(100vw - 30px));
+    }
+
+    main{
+        padding:30px 15px 50px;
+    }
+
+    #mediaGrid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<button
+    class="menu-button"
+    id="menuButton"
+    onclick="toggleMenu()"
+    aria-label="Open menu"
+>
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<nav class="menu" id="menu">
+
+<a href="index.html" onclick="closeMenu()">Home</a>
+
+<div class="divider"></div>
+
+<a href="search.html" onclick="closeMenu()">Search</a>
+
+<a href="projects.html" onclick="closeMenu()">Projects</a>
+
+<a href="contact.html" onclick="closeMenu()">Contact</a>
+
+<div class="divider"></div>
+
+<a href="about-website.html" onclick="closeMenu()">About Website</a>
+
+<a href="about-creator.html" onclick="closeMenu()">About Creator</a>
+
+</nav>
+
+</header>
+
+<main>
+
+<div class="page-title">
+
+<h1>Projects</h1>
+
+<p>Explore projects and uploaded work.</p>
+
+</div>
+
+<div id="mediaGrid"></div>
+
+</main>
+
+<!-- MEDIA MODAL -->
+
+<div id="mediaModal">
+
+<button class="modal-close" onclick="closeMediaModal()">×</button>
+
+<div id="modalContent"></div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+
+<script>
+
+const menuButton=document.getElementById("menuButton");
+const menu=document.getElementById("menu");
+
+function toggleMenu(){
+    menu.classList.toggle("active");
+    menuButton.classList.toggle("active");
+}
+
+function closeMenu(){
+    menu.classList.remove("active");
+    menuButton.classList.remove("active");
+}
+
+document.addEventListener("click",function(event){
+
+    if(
+        !menu.contains(event.target) &&
+        !menuButton.contains(event.target)
+    ){
+        closeMenu();
+    }
+
+});
+
+/* FIREBASE */
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(window.firebaseConfig);
+}
+
+const db = firebase.firestore();
+
+/* MODAL */
+
+const mediaModal=document.getElementById("mediaModal");
+const modalContent=document.getElementById("modalContent");
+
+function openMediaModal(type,url){
+
+    modalContent.innerHTML="";
+
+    if(type==="image"){
+
+        const img=document.createElement("img");
+        img.src=url;
+        img.alt="Project image";
+        modalContent.appendChild(img);
+
+    }else if(type==="video"){
+
+        const video=document.createElement("video");
+
+        video.src=url;
+        video.controls=true;
+        video.autoplay=true;
+
+        modalContent.appendChild(video);
+
+    }else if(type==="youtube"){
+
+        const iframe=document.createElement("iframe");
+
+        iframe.src=url;
+        iframe.width="900";
+        iframe.height="506";
+        iframe.allow="autoplay; encrypted-media; picture-in-picture";
+        iframe.allowFullscreen=true;
+
+        modalContent.appendChild(iframe);
+    }
+
+    mediaModal.classList.add("active");
+}
+
+function closeMediaModal(){
+
+    mediaModal.classList.remove("active");
+    modalContent.innerHTML="";
+
+}
+
+mediaModal.addEventListener("click",function(event){
+
+    if(event.target===mediaModal){
+        closeMediaModal();
+    }
+
+});
+
+/* YOUTUBE */
+
+function getYouTubeEmbed(url){
+
+    try{
+
+        const parsed=new URL(url);
+
+        let videoId="";
+
+        if(parsed.hostname.includes("youtube.com")){
+
+            videoId=parsed.searchParams.get("v");
+
+            if(!videoId && parsed.pathname.startsWith("/shorts/")){
+                videoId=parsed.pathname.split("/shorts/")[1].split("/")[0];
+            }
+
+        }
+
+        if(parsed.hostname==="youtu.be"){
+
+            videoId=parsed.pathname.substring(1).split("/")[0];
+
+        }
+
+        if(videoId){
+
+            return "https://www.youtube.com/embed/"+videoId;
+
+        }
+
+    }catch(error){
+
+    }
+
+    return null;
+}
+
+/* LOAD PROJECTS */
+
+async function loadProjects(){
+
+    const mediaGrid=document.getElementById("mediaGrid");
+
+    mediaGrid.innerHTML="";
+
+    try{
+
+        const snapshot=await db
+            .collection("media")
+            .where("page","==","projects")
+            .get();
+
+        if(snapshot.empty){
+
+            mediaGrid.innerHTML=`
+                <div class="empty-state">
+                    No projects have been uploaded yet.
+                </div>
+            `;
+
+            return;
+        }
+
+        const posts=[];
+
+        snapshot.forEach(doc=>{
+
+            const data=doc.data();
+
+            posts.push({
+                id:doc.id,
+                ...data
+            });
+
+        });
+
+        /* NEWEST FIRST */
+
+        posts.sort((a,b)=>{
+
+            const dateA=a.createdAt
+                ? (a.createdAt.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt).getTime())
+                : 0;
+
+            const dateB=b.createdAt
+                ? (b.createdAt.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt).getTime())
+                : 0;
+
+            return dateB-dateA;
+
+        });
+
+        posts.forEach(data=>{
+
+            const card=document.createElement("div");
+            card.className="media-card";
+
+            const type=data.type || data.mediaType || "image";
+            const url=data.url || data.mediaUrl || "";
+            const thumbnail=data.thumbnail || data.thumbnailUrl || "";
+
+            let preview="";
+
+            /* IMAGE */
+
+            if(type==="image"){
+
+                preview=`
+                    <img
+                        class="media-preview"
+                        src="${escapeHTML(url)}"
+                        alt="${escapeHTML(data.name || "Project image")}"
+                        onclick="openMediaModal('image','${escapeJS(url)}')"
+                        style="cursor:pointer;"
+                    >
+                `;
+
+            }
+
+            /* NORMAL VIDEO */
+
+            else if(type==="video"){
+
+                if(thumbnail){
+
+                    preview=`
+                        <div
+                            class="video-wrapper"
+                            onclick="openMediaModal('video','${escapeJS(url)}')"
+                        >
+                            <img
+                                src="${escapeHTML(thumbnail)}"
+                                alt="${escapeHTML(data.name || "Project video")}"
+                            >
+                            <div class="play-button">▶</div>
+                        </div>
+                    `;
+
+                }else{
+
+                    preview=`
+                        <div
+                            class="video-wrapper"
+                            onclick="openMediaModal('video','${escapeJS(url)}')"
+                        >
+                            <video
+                                class="media-preview"
+                                src="${escapeHTML(url)}"
+                                muted
+                                preload="metadata"
+                            ></video>
+                            <div class="play-button">▶</div>
+                        </div>
+                    `;
+
+                }
+
+            }
+
+            /* YOUTUBE */
+
+            else if(type==="youtube"){
+
+                const embedUrl=getYouTubeEmbed(url);
+
+                if(embedUrl){
+
+                    if(thumbnail){
+
+                        preview=`
+                            <div
+                                class="video-wrapper"
+                                onclick="openMediaModal('youtube','${escapeJS(embedUrl)}')"
+                            >
+                                <img
+                                    src="${escapeHTML(thumbnail)}"
+                                    alt="${escapeHTML(data.name || "YouTube video")}"
+                                >
+                                <div class="play-button">▶</div>
+                            </div>
+                        `;
+
+                    }else{
+
+                        preview=`
+                            <div
+                                class="video-wrapper"
+                                onclick="openMediaModal('youtube','${escapeJS(embedUrl)}')"
+                            >
+                                <div
+                                    style="
+                                        width:100%;
+                                        height:250px;
+                                        display:flex;
+                                        align-items:center;
+                                        justify-content:center;
+                                        background:#000;
+                                        font-size:50px;
+                                    "
+                                >
+                                    ▶
+                                </div>
+                            </div>
+                        `;
+
+                    }
+
+                }
+
+            }
+
+            /* FALLBACK */
+
+            if(!preview && url){
+
+                preview=`
+                    <img
+                        class="media-preview"
+                        src="${escapeHTML(url)}"
+                        alt="${escapeHTML(data.name || "Project")}"
+                    >
+                `;
+
+            }
+
+            card.innerHTML=`
+
+                ${preview}
+
+                <div class="media-info">
+
+                    <h3>
+                        ${escapeHTML(data.name || "Untitled Project")}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(data.description || "")}
+                    </p>
+
+                </div>
+
+            `;
+
+            mediaGrid.appendChild(card);
+
+        });
+
+    }catch(error){
+
+        console.error("Error loading projects:",error);
+
+        mediaGrid.innerHTML=`
+            <div class="empty-state">
+                Unable to load projects right now.
+            </div>
+        `;
+
+    }
+
+}
+
+/* SECURITY / TEXT HELPERS */
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+function escapeJS(value){
+
+    return String(value || "")
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'")
+        .replace(/"/g,'\\"')
+        .replace(/\n/g,"\\n")
+        .replace(/\r/g,"\\r");
+
+}
+
+/* START */
+
+loadProjects();
+
+</script>
+
+</body>
+</html>
