@@ -750,7 +750,7 @@ function mediaCard(data){
 
     const safeURL=String(data.url || "").replace(/'/g,"\\'");
 
-    /* NEW: Use converted playback URL when available */
+    /* USE CONVERTED PLAYBACK URL WHEN AVAILABLE */
 
     const videoSource=data.playbackUrl || data.url || "";
 
