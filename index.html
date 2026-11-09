@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -749,6 +750,14 @@ function mediaCard(data){
 
     const safeURL=String(data.url || "").replace(/'/g,"\\'");
 
+    /* NEW: Use converted playback URL when available */
+
+    const videoSource=data.playbackUrl || data.url || "";
+
+    const videoURL=escapeHTML(videoSource);
+
+    const safeVideoURL=String(videoSource).replace(/'/g,"\\'");
+
 
     if(data.type==="photo"){
 
@@ -789,7 +798,7 @@ function mediaCard(data){
             class="media-preview"
             src="${escapeHTML(data.thumbnailUrl)}"
             alt="${name}"
-            onclick="openViewer('video','${safeURL}')"
+            onclick="openViewer('video','${safeVideoURL}')"
         >
 
         `;
@@ -802,9 +811,9 @@ function mediaCard(data){
 
         <video
             class="media-preview"
-            src="${url}"
+            src="${videoURL}"
             preload="metadata"
-            onclick="openViewer('video','${safeURL}')"
+            onclick="openViewer('video','${safeVideoURL}')"
         ></video>
 
         `;
