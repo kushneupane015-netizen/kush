@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -831,7 +832,7 @@ Photo / Video
 <input
 type="file"
 id="mediaFile"
-accept="image/*,video/*"
+accept="image/*,video/*,.mkv,.avi,.mov,.wmv,.flv,.webm,.mp4,.mpeg,.mpg,.3gp,.3g2,.m4v,.ts,.m2ts,.mts,.ogv,.mxf"
 >
 
 </div>
@@ -1044,21 +1045,6 @@ console.error(error);
 
 /* =========================
 SECRET SEQUENCE
-
-1. LOGO
-2. CREATOR TEXT
-3. NAME LABEL
-4. AGE LABEL
-5. GENDER LABEL
-6. DATE OF BIRTH LABEL
-7. NATIONALITY LABEL
-8. E-MAIL LABEL
-
-FIRST PASSWORD:
-sikconta
-
-SECOND PASSWORD:
-sikconta
 ========================= */
 
 const creatorLogo=
@@ -1096,8 +1082,6 @@ document.getElementById(
 
 let secretStep=1;
 
-/* STEP 1 */
-
 creatorLogo.addEventListener(
 "click",
 function(){
@@ -1114,8 +1098,6 @@ resetSecretSequence();
 
 });
 
-/* STEP 2 */
-
 creatorSecretTrigger.addEventListener(
 "click",
 function(){
@@ -1131,8 +1113,6 @@ resetSecretSequence();
 }
 
 });
-
-/* STEPS 3-8 */
 
 secretSteps.forEach(
 function(stepElement){
@@ -1174,8 +1154,6 @@ resetSecretSequence();
 
 });
 
-/* SHOW PASSWORD */
-
 function showSecretPassword(){
 
 secretStep=1;
@@ -1198,15 +1176,11 @@ block:"center"
 
 }
 
-/* RESET */
-
 function resetSecretSequence(){
 
 secretStep=1;
 
 }
-
-/* FIRST PASSWORD */
 
 secretUnlockForm.addEventListener(
 "submit",
@@ -1553,6 +1527,53 @@ urlThumbnailField.style.display=
 }
 
 /* =========================
+VIDEO FORMAT SUPPORT
+========================= */
+
+function isSupportedVideoFile(file){
+
+if(!file){
+
+return false;
+
+}
+
+const videoExtensions=[
+"mkv",
+"mp4",
+"mov",
+"avi",
+"wmv",
+"flv",
+"webm",
+"mpeg",
+"mpg",
+"3gp",
+"3g2",
+"m4v",
+"ts",
+"m2ts",
+"mts",
+"ogv",
+"mxf"
+];
+
+const fileName=
+file.name.toLowerCase();
+
+const extension=
+fileName.includes(".")
+?fileName.split(".").pop()
+:"";
+
+return(
+file.type.startsWith("video/") ||
+videoExtensions.includes(extension)
+);
+
+}
+
+/* =========================
 YOUTUBE ID
 ========================= */
 
@@ -1672,15 +1693,42 @@ return result.secure_url;
 }
 
 /* =========================
+CLOUDINARY MP4 PLAYBACK URL
+
+The original upload remains
+unchanged in Cloudinary.
+
+This URL requests an MP4
+version using H.264 codec.
+========================= */
+
+function getCloudinaryPlaybackUrl(url){
+
+if(!url){
+
+return "";
+
+}
+
+if(
+!url.includes(
+"res.cloudinary.com/"
+)
+){
+
+return url;
+
+}
+
+return url.replace(
+"/upload/",
+"/upload/f_mp4,vc_h264/"
+);
+
+}
+
+/* =========================
 UPLOAD POST
-
-IMPORTANT:
-HOME  = page "home"
-PROJECTS = page "projects"
-
-This is what connects the
-Admin upload with the
-Home/Projects pages.
 ========================= */
 
 async function uploadMedia(){
@@ -1699,20 +1747,10 @@ return;
 
 }
 
-/*
-Read the selected destination
-directly from the Post To box.
-*/
-
 const selectedPage=
 document.getElementById(
 "postPage"
 ).value;
-
-/*
-Only allow the two valid
-destinations.
-*/
 
 const page=
 selectedPage==="projects"
@@ -1749,6 +1787,8 @@ status.textContent=
 "Preparing post...";
 
 let url="";
+
+let playbackUrl="";
 
 let thumbnailUrl="";
 
@@ -1807,15 +1847,15 @@ return;
 
 }
 
+/* UPDATED VIDEO VALIDATION */
+
 if(
 type==="video" &&
-!mediaFile.type.startsWith(
-"video/"
-)
+!isSupportedVideoFile(mediaFile)
 ){
 
 status.textContent=
-"Please select a video file.";
+"Please select a supported video file.";
 
 return;
 
@@ -1834,6 +1874,19 @@ await uploadToCloudinary(
 mediaFile,
 resourceType
 );
+
+/* CREATE MP4 PLAYBACK URL */
+
+if(type==="video"){
+
+playbackUrl=
+getCloudinaryPlaybackUrl(url);
+
+}else{
+
+playbackUrl=url;
+
+}
 
 if(
 type==="video" &&
@@ -1883,6 +1936,17 @@ getYouTubeId(
 mediaURL
 );
 
+if(youtubeId){
+
+playbackUrl=mediaURL;
+
+}else{
+
+playbackUrl=
+getCloudinaryPlaybackUrl(mediaURL);
+
+}
+
 if(
 type==="video" &&
 urlThumbnail
@@ -1911,11 +1975,10 @@ SAVE TO FIRESTORE
 status.textContent=
 "Saving post information...";
 
-/*
-This document is the important
-connection between the uploader
-and the Home/Projects pages.
-*/
+const savedType=
+youtubeId
+?"youtube"
+:type;
 
 await db
 .collection("media")
@@ -1923,13 +1986,17 @@ await db
 
 page:page,
 
-type:type,
+type:savedType,
 
 name:name,
 
 description:description,
 
 url:url,
+
+originalUrl:url,
+
+playbackUrl:playbackUrl,
 
 thumbnailUrl:thumbnailUrl,
 
