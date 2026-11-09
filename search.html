@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -625,6 +626,14 @@ function createCard(data){
 
     const safeURL=String(data.url || "").replace(/'/g,"\\'");
 
+    /* NEW: Prefer converted playback URL for videos */
+
+    const videoSource=data.playbackUrl || data.url || "";
+
+    const videoURL=escapeHTML(videoSource);
+
+    const safeVideoURL=String(videoSource).replace(/'/g,"\\'");
+
     if(data.type==="photo"){
 
         return `
@@ -656,15 +665,15 @@ function createCard(data){
             class="media-preview"
             src="${escapeHTML(data.thumbnailUrl)}"
             alt="${name}"
-            onclick="openViewer('video','${safeURL}')"
+            onclick="openViewer('video','${safeVideoURL}')"
         >
         `
         : `
         <video
             class="media-preview"
-            src="${url}"
+            src="${videoURL}"
             preload="metadata"
-            onclick="openViewer('video','${safeURL}')"
+            onclick="openViewer('video','${safeVideoURL}')"
         ></video>
         `;
 
@@ -824,3 +833,4 @@ document
 
 </body>
 </html>
+
