@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -577,6 +578,10 @@ async function loadProjects(){
             const url=data.url || data.mediaUrl || "";
             const thumbnail=data.thumbnail || data.thumbnailUrl || "";
 
+            /* NEW: Prefer converted playback URL for videos */
+
+            const videoSource=data.playbackUrl || url;
+
             let preview="";
 
             /* IMAGE */
@@ -604,7 +609,7 @@ async function loadProjects(){
                     preview=`
                         <div
                             class="video-wrapper"
-                            onclick="openMediaModal('video','${escapeJS(url)}')"
+                            onclick="openMediaModal('video','${escapeJS(videoSource)}')"
                         >
                             <img
                                 src="${escapeHTML(thumbnail)}"
@@ -619,11 +624,11 @@ async function loadProjects(){
                     preview=`
                         <div
                             class="video-wrapper"
-                            onclick="openMediaModal('video','${escapeJS(url)}')"
+                            onclick="openMediaModal('video','${escapeJS(videoSource)}')"
                         >
                             <video
                                 class="media-preview"
-                                src="${escapeHTML(url)}"
+                                src="${escapeHTML(videoSource)}"
                                 muted
                                 preload="metadata"
                             ></video>
