@@ -626,7 +626,7 @@ function createCard(data){
 
     const safeURL=String(data.url || "").replace(/'/g,"\\'");
 
-    /* NEW: Prefer converted playback URL for videos */
+    /* USE CONVERTED PLAYBACK URL WHEN AVAILABLE */
 
     const videoSource=data.playbackUrl || data.url || "";
 
@@ -833,4 +833,3 @@ document
 
 </body>
 </html>
-
