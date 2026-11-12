@@ -200,12 +200,55 @@ main{
     background:#32155d;
 }
 
+/* FILTERS */
+
+.filter-container{
+    width:min(1100px,100%);
+    margin:0 auto 28px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.filter-button{
+    padding:11px 23px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:30px;
+    background:rgba(0,0,0,.45);
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    transition:.25s;
+}
+
+.filter-button:hover{
+    background:rgba(255,255,255,.12);
+}
+
+.filter-button.active{
+    background:#32155d;
+    border-color:#9b70e8;
+}
+
+/* RESULT INFORMATION */
+
+#resultCount{
+    width:min(1100px,100%);
+    margin:0 auto 20px;
+    color:rgba(255,255,255,.75);
+    font-size:14px;
+}
+
+/* MEDIA GRID */
+
 #searchResults{
     width:min(1100px,100%);
     margin:auto;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:22px;
+    align-items:start;
 }
 
 .media-card{
@@ -214,31 +257,86 @@ main{
     border:1px solid rgba(255,255,255,.14);
     backdrop-filter:blur(8px);
     -webkit-backdrop-filter:blur(8px);
-    border-radius:20px;
+    border-radius:18px;
     box-shadow:0 20px 60px rgba(0,0,0,.35);
+    transition:transform .25s,border-color .25s;
+    min-width:0;
+}
+
+.media-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(190,150,255,.55);
 }
 
 .media-preview{
     display:block;
     width:100%;
     max-height:350px;
-    object-fit:cover;
-    background:#000;
+    object-fit:contain;
+    background:#080808;
     cursor:pointer;
 }
 
+.media-preview.image-preview{
+    height:auto;
+    max-height:400px;
+}
+
+.media-preview.video-preview{
+    aspect-ratio:16/9;
+    object-fit:cover;
+}
+
+.media-preview.short-preview{
+    aspect-ratio:9/16;
+    max-height:420px;
+    object-fit:contain;
+}
+
+.preview-wrapper{
+    position:relative;
+    background:#080808;
+    overflow:hidden;
+}
+
+.preview-label{
+    position:absolute;
+    top:10px;
+    left:10px;
+    padding:6px 10px;
+    background:rgba(0,0,0,.75);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:20px;
+    font-size:12px;
+    pointer-events:none;
+}
+
 .media-info{
-    padding:20px;
+    padding:17px;
 }
 
 .media-info h3{
-    font-size:22px;
-    margin-bottom:10px;
+    font-size:19px;
+    margin-bottom:9px;
+    overflow-wrap:anywhere;
 }
 
 .media-info p{
-    color:rgba(255,255,255,.85);
-    line-height:1.6;
+    color:rgba(255,255,255,.82);
+    line-height:1.55;
+    font-size:14px;
+    overflow-wrap:anywhere;
+}
+
+.media-category{
+    display:inline-block;
+    margin-top:12px;
+    padding:5px 10px;
+    border-radius:20px;
+    background:rgba(120,75,190,.25);
+    border:1px solid rgba(180,140,255,.25);
+    font-size:12px;
+    color:#e2d1ff;
 }
 
 .empty-state{
@@ -258,10 +356,10 @@ main{
     position:fixed;
     inset:0;
     z-index:5000;
-    background:rgba(0,0,0,.94);
+    background:rgba(0,0,0,.96);
     align-items:center;
     justify-content:center;
-    padding:30px;
+    padding:25px;
 }
 
 #mediaViewer.active{
@@ -270,22 +368,34 @@ main{
 
 #viewerClose{
     position:absolute;
-    top:20px;
-    right:25px;
-    width:50px;
-    height:50px;
+    top:18px;
+    right:22px;
+    width:48px;
+    height:48px;
     border:1px solid rgba(255,255,255,.3);
     border-radius:50%;
-    background:rgba(0,0,0,.6);
+    background:rgba(0,0,0,.7);
     color:white;
-    font-size:30px;
+    font-size:29px;
     cursor:pointer;
-    z-index:5001;
+    z-index:5005;
+}
+
+.viewer-layout{
+    width:min(1200px,100%);
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    padding:35px 0 10px;
 }
 
 #viewerContent{
     width:100%;
-    height:100%;
+    flex:1;
+    min-height:0;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -293,17 +403,85 @@ main{
 
 #viewerContent img,
 #viewerContent video{
-    max-width:95%;
-    max-height:90vh;
+    max-width:100%;
+    max-height:100%;
     object-fit:contain;
     border-radius:10px;
 }
 
 #viewerContent iframe{
     width:min(1000px,95vw);
-    height:min(70vh,600px);
+    height:min(65vh,600px);
     border:0;
     border-radius:12px;
+}
+
+.viewer-details{
+    width:min(850px,100%);
+    max-height:25vh;
+    overflow:auto;
+    text-align:center;
+    padding:10px 15px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;
+}
+
+#viewerTitle{
+    font-size:21px;
+    margin-bottom:7px;
+    overflow-wrap:anywhere;
+}
+
+#viewerDescription{
+    color:rgba(255,255,255,.8);
+    line-height:1.5;
+    font-size:14px;
+    overflow-wrap:anywhere;
+}
+
+#viewerMeta{
+    color:rgba(255,255,255,.55);
+    font-size:12px;
+    margin-top:9px;
+}
+
+.viewer-actions{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:9px;
+}
+
+.viewer-actions button{
+    min-width:85px;
+    padding:9px 15px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:20px;
+    background:rgba(255,255,255,.1);
+    color:white;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.viewer-actions button:hover{
+    background:rgba(120,75,190,.5);
+}
+
+.viewer-actions button:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+    #searchResults{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
 }
 
 @media(max-width:600px){
@@ -331,17 +509,36 @@ main{
 
     #searchResults{
         grid-template-columns:1fr;
+        gap:18px;
+    }
+
+    .filter-container{
+        justify-content:flex-start;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+        padding:4px 0 10px;
+    }
+
+    .filter-button{
+        white-space:nowrap;
     }
 
     #mediaViewer{
-        padding:15px;
+        padding:12px;
     }
 
-    #viewerContent img,
-    #viewerContent video{
-        max-width:100%;
-        max-height:85vh;
+    .viewer-layout{
+        padding-top:55px;
     }
+
+    #viewerContent iframe{
+        height:50vh;
+    }
+
+    .viewer-details{
+        max-height:23vh;
+    }
+
 }
 
 </style>
@@ -405,6 +602,30 @@ main{
 
 </section>
 
+<!-- MEDIA FILTERS -->
+
+<div class="filter-container" id="filterContainer">
+
+<button class="filter-button active" data-filter="all">
+All
+</button>
+
+<button class="filter-button" data-filter="shorts">
+Shorts
+</button>
+
+<button class="filter-button" data-filter="videos">
+Videos
+</button>
+
+<button class="filter-button" data-filter="photos">
+Photos
+</button>
+
+</div>
+
+<div id="resultCount"></div>
+
 <div id="searchResults">
 
 <div class="empty-state">
@@ -421,7 +642,41 @@ Enter something to search.
 
 <button id="viewerClose" onclick="closeViewer()">×</button>
 
-<div id="viewerContent"></div>
+<div class="viewer-layout">
+
+    <div id="viewerContent"></div>
+
+    <div class="viewer-details">
+
+        <h2 id="viewerTitle"></h2>
+
+        <p id="viewerDescription"></p>
+
+        <div id="viewerMeta"></div>
+
+    </div>
+
+    <div class="viewer-actions">
+
+        <button id="previousButton" onclick="navigateViewer(-1)">
+            Previous
+        </button>
+
+        <button onclick="shareCurrentMedia()">
+            Share
+        </button>
+
+        <button id="downloadButton" onclick="downloadCurrentMedia()">
+            Download
+        </button>
+
+        <button id="nextButton" onclick="navigateViewer(1)">
+            Next
+        </button>
+
+    </div>
+
+</div>
 
 </div>
 
@@ -436,6 +691,7 @@ let db=null;
 
 const firebaseReady =
     window.firebaseConfig &&
+    window.firebaseConfig.apiKey &&
     !String(window.firebaseConfig.apiKey).startsWith("PASTE_");
 
 if(firebaseReady){
@@ -487,7 +743,7 @@ document.addEventListener("click",function(event){
 
 });
 
-/* ESCAPE HTML */
+/* HTML ESCAPING */
 
 function escapeHTML(value){
 
@@ -505,6 +761,71 @@ function escapeHTML(value){
 
         }
     );
+
+}
+
+/* MEDIA DATA */
+
+let allMatches=[];
+let filteredMatches=[];
+let activeFilter="all";
+let currentViewerIndex=-1;
+let previousScrollPosition=0;
+
+const results=document.getElementById("searchResults");
+const resultCount=document.getElementById("resultCount");
+
+function getMediaURL(data){
+
+    return (
+        data.playbackUrl ||
+        data.mediaUrl ||
+        data.url ||
+        ""
+    );
+
+}
+
+function getThumbnail(data){
+
+    return (
+        data.thumbnailUrl ||
+        data.thumbnail ||
+        ""
+    );
+
+}
+
+function getMediaType(data){
+
+    const type=String(
+        data.type ||
+        data.mediaType ||
+        ""
+    ).toLowerCase();
+
+    if(
+        type==="photo" ||
+        type==="image" ||
+        type==="picture"
+    ){
+
+        return "photo";
+
+    }
+
+    if(
+        type==="youtube" ||
+        data.youtubeId ||
+        /youtube\.com|youtu\.be/i.test(getMediaURL(data))
+    ){
+
+        return "youtube";
+
+    }
+
+    return "video";
+
 }
 
 /* YOUTUBE */
@@ -533,20 +854,559 @@ function getYouTubeId(url){
     }
 
     return "";
+
 }
+
+function isYouTubeShort(data){
+
+    const url=getMediaURL(data);
+
+    return (
+        /youtube\.com\/shorts\//i.test(url) ||
+        data.format==="shorts" ||
+        data.categoryType==="shorts"
+    );
+
+}
+
+/* DATE */
+
+function getDateValue(data){
+
+    const date=data.createdAt || data.date;
+
+    if(!date){
+        return 0;
+    }
+
+    if(typeof date.toDate==="function"){
+        return date.toDate().getTime();
+    }
+
+    if(date.seconds){
+        return date.seconds*1000;
+    }
+
+    const parsed=new Date(date).getTime();
+
+    return Number.isNaN(parsed) ? 0 : parsed;
+
+}
+
+function formatDate(data){
+
+    const timestamp=getDateValue(data);
+
+    if(!timestamp){
+        return "Date unavailable";
+    }
+
+    return new Date(timestamp).toLocaleDateString(
+        undefined,
+        {
+            year:"numeric",
+            month:"short",
+            day:"numeric"
+        }
+    );
+
+}
+
+/* MEDIA CLASSIFICATION */
+
+function getMediaKind(data){
+
+    const type=getMediaType(data);
+
+    if(type==="photo"){
+        return "photos";
+    }
+
+    if(type==="youtube"){
+
+        return isYouTubeShort(data)
+            ? "shorts"
+            : "videos";
+
+    }
+
+    if(
+        data.format==="shorts" ||
+        data.categoryType==="shorts" ||
+        data.mediaCategory==="shorts"
+    ){
+
+        return "shorts";
+
+    }
+
+    if(
+        data.format==="video" ||
+        data.categoryType==="video"
+    ){
+
+        return "videos";
+
+    }
+
+    return data.detectedKind || "videos";
+
+}
+
+/* DETECT VIDEO DIMENSIONS */
+
+function detectVideoFormat(data){
+
+    if(
+        getMediaType(data)!=="video" ||
+        data.format ||
+        data.categoryType
+    ){
+
+        return Promise.resolve(data);
+
+    }
+
+    const url=getMediaURL(data);
+
+    if(!url){
+        return Promise.resolve(data);
+    }
+
+    return new Promise(function(resolve){
+
+        const video=document.createElement("video");
+
+        video.preload="metadata";
+        video.muted=true;
+
+        video.onloadedmetadata=function(){
+
+            if(video.videoHeight>video.videoWidth){
+
+                data.detectedKind="shorts";
+
+            }else{
+
+                data.detectedKind="videos";
+
+            }
+
+            video.removeAttribute("src");
+            video.load();
+
+            resolve(data);
+
+        };
+
+        video.onerror=function(){
+
+            data.detectedKind="videos";
+
+            resolve(data);
+
+        };
+
+        video.src=url;
+
+    });
+
+}
+
+/* CREATE CARD */
+
+function createCard(data,index){
+
+    const name=escapeHTML(data.name || "Untitled");
+    const description=escapeHTML(data.description || "");
+
+    const category=escapeHTML(
+        data.category ||
+        data.categoryName ||
+        ""
+    );
+
+    const kind=getMediaKind(data);
+
+    const url=getMediaURL(data);
+    const thumbnail=getThumbnail(data);
+
+    const type=getMediaType(data);
+
+    let preview="";
+
+    if(type==="photo"){
+
+        preview=`
+            <img
+                class="media-preview image-preview"
+                src="${escapeHTML(url)}"
+                alt="${name}"
+                loading="lazy"
+                onclick="openViewer(${index})"
+            >
+        `;
+
+    }else{
+
+        let previewContent="";
+
+        if(type==="youtube"){
+
+            const youtubeId=
+                data.youtubeId ||
+                getYouTubeId(url);
+
+            const youtubeThumbnail=
+                thumbnail ||
+                (
+                    youtubeId
+                    ? "https://img.youtube.com/vi/" +
+                      encodeURIComponent(youtubeId) +
+                      "/hqdefault.jpg"
+                    : ""
+                );
+
+            previewContent=youtubeThumbnail
+                ? `
+                    <img
+                        class="media-preview ${
+                            kind==="shorts"
+                            ? "short-preview"
+                            : "video-preview"
+                        }"
+                        src="${escapeHTML(youtubeThumbnail)}"
+                        alt="${name}"
+                        loading="lazy"
+                        onclick="openViewer(${index})"
+                    >
+                `
+                : `
+                    <div class="media-preview video-preview"
+                         onclick="openViewer(${index})">
+                         Video
+                    </div>
+                `;
+
+        }else if(thumbnail){
+
+            previewContent=`
+                <img
+                    class="media-preview ${
+                        kind==="shorts"
+                        ? "short-preview"
+                        : "video-preview"
+                    }"
+                    src="${escapeHTML(thumbnail)}"
+                    alt="${name}"
+                    loading="lazy"
+                    onclick="openViewer(${index})"
+                >
+            `;
+
+        }else{
+
+            previewContent=`
+                <video
+                    class="media-preview ${
+                        kind==="shorts"
+                        ? "short-preview"
+                        : "video-preview"
+                    }"
+                    src="${escapeHTML(url)}"
+                    preload="metadata"
+                    muted
+                    playsinline
+                    onclick="openViewer(${index})"
+                ></video>
+            `;
+
+        }
+
+        preview=`
+            <div class="preview-wrapper">
+
+                ${previewContent}
+
+                <span class="preview-label">
+                    ${kind==="shorts" ? "Shorts" : "Video"}
+                </span>
+
+            </div>
+        `;
+
+    }
+
+    return `
+        <article class="media-card">
+
+            ${preview}
+
+            <div class="media-info">
+
+                <h3>${name}</h3>
+
+                <p>${description}</p>
+
+                ${
+                    category
+                    ? `<span class="media-category">${category}</span>`
+                    : ""
+                }
+
+            </div>
+
+        </article>
+    `;
+
+}
+
+/* FILTERS */
+
+document
+    .querySelectorAll(".filter-button")
+    .forEach(function(button){
+
+        button.addEventListener("click",function(){
+
+            document
+                .querySelectorAll(".filter-button")
+                .forEach(function(item){
+
+                    item.classList.remove("active");
+
+                });
+
+            button.classList.add("active");
+
+            activeFilter=button.dataset.filter;
+
+            applyFilter();
+
+        });
+
+    });
+
+function applyFilter(){
+
+    if(activeFilter==="all"){
+
+        filteredMatches=allMatches.slice();
+
+    }else{
+
+        filteredMatches=allMatches.filter(function(data){
+
+            return getMediaKind(data)===activeFilter;
+
+        });
+
+    }
+
+    renderResults();
+
+}
+
+function renderResults(){
+
+    if(!filteredMatches.length){
+
+        results.innerHTML=`
+            <div class="empty-state">
+                No matching media found in this category.
+            </div>
+        `;
+
+        resultCount.textContent="0 results";
+
+        return;
+
+    }
+
+    resultCount.textContent=
+        filteredMatches.length +
+        (
+            filteredMatches.length===1
+            ? " result"
+            : " results"
+        );
+
+    results.innerHTML=filteredMatches
+        .map(function(data,index){
+
+            return createCard(data,index);
+
+        })
+        .join("");
+
+}
+
+/* SEARCH */
+
+async function performSearch(){
+
+    const input=document
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+    if(!input){
+
+        allMatches=[];
+        filteredMatches=[];
+
+        results.innerHTML=`
+            <div class="empty-state">
+                Enter something to search.
+            </div>
+        `;
+
+        resultCount.textContent="";
+
+        return;
+
+    }
+
+    if(!db){
+
+        results.innerHTML=`
+            <div class="empty-state">
+                Firebase is not configured.
+            </div>
+        `;
+
+        resultCount.textContent="";
+
+        return;
+
+    }
+
+    results.innerHTML=`
+        <div class="empty-state">
+            Searching...
+        </div>
+    `;
+
+    resultCount.textContent="";
+
+    try{
+
+        const snapshot=
+            await db.collection("media").get();
+
+        let matches=snapshot.docs
+            .map(function(doc){
+
+                return {
+                    id:doc.id,
+                    ...doc.data()
+                };
+
+            })
+            .filter(function(data){
+
+                const name=String(
+                    data.name ||
+                    data.title ||
+                    ""
+                ).toLowerCase();
+
+                const description=String(
+                    data.description || ""
+                ).toLowerCase();
+
+                const page=String(
+                    data.page || ""
+                ).toLowerCase();
+
+                const category=String(
+                    data.category ||
+                    data.categoryName ||
+                    ""
+                ).toLowerCase();
+
+                return(
+                    name.includes(input) ||
+                    description.includes(input) ||
+                    page.includes(input) ||
+                    category.includes(input)
+                );
+
+            })
+            .sort(function(a,b){
+
+                return getDateValue(b)-getDateValue(a);
+
+            });
+
+        allMatches=matches;
+
+        /*
+         * Detect portrait/landscape video formats.
+         * YouTube Shorts are identified from their URLs.
+         */
+
+        await Promise.all(
+            allMatches.map(detectVideoFormat)
+        );
+
+        applyFilter();
+
+    }catch(error){
+
+        console.error(error);
+
+        results.innerHTML=`
+            <div class="empty-state">
+                Could not search uploads.
+                Check your Firebase setup.
+            </div>
+        `;
+
+        resultCount.textContent="";
+
+    }
+
+}
+
+document
+    .getElementById("searchInput")
+    .addEventListener("keydown",function(event){
+
+        if(event.key==="Enter"){
+            performSearch();
+        }
+
+    });
 
 /* VIEWER */
 
-function openViewer(type,url){
+function openViewer(index){
+
+    if(index<0 || index>=filteredMatches.length){
+        return;
+    }
+
+    currentViewerIndex=index;
+
+    previousScrollPosition=window.scrollY;
+
+    const data=filteredMatches[index];
 
     const viewer=document.getElementById("mediaViewer");
     const content=document.getElementById("viewerContent");
 
     content.innerHTML="";
 
-    const youtubeId=getYouTubeId(url);
+    const url=getMediaURL(data);
+    const type=getMediaType(data);
 
-    if(youtubeId){
+    const youtubeId=
+        data.youtubeId ||
+        getYouTubeId(url);
+
+    if(type==="youtube" && youtubeId){
 
         const iframe=document.createElement("iframe");
 
@@ -567,6 +1427,7 @@ function openViewer(type,url){
         const image=document.createElement("img");
 
         image.src=url;
+        image.alt=data.name || "Photo";
 
         content.appendChild(image);
 
@@ -577,12 +1438,42 @@ function openViewer(type,url){
         video.src=url;
         video.controls=true;
         video.autoplay=true;
+        video.playsInline=true;
 
         content.appendChild(video);
 
     }
 
+    document.getElementById("viewerTitle").textContent=
+        data.name || "Untitled";
+
+    document.getElementById("viewerDescription").textContent=
+        data.description || "";
+
+    const category=data.category || data.categoryName || "";
+
+    document.getElementById("viewerMeta").textContent=
+        [
+            category,
+            formatDate(data),
+            getMediaKind(data)==="shorts"
+                ? "Shorts"
+                : getMediaKind(data)==="photos"
+                    ? "Photo"
+                    : "Video"
+        ].filter(Boolean).join(" • ");
+
+    document.getElementById("previousButton").disabled=
+        index===0;
+
+    document.getElementById("nextButton").disabled=
+        index===filteredMatches.length-1;
+
+    document.getElementById("downloadButton").style.display=
+        type==="youtube" ? "none" : "inline-block";
+
     viewer.classList.add("active");
+
     document.body.style.overflow="hidden";
 
 }
@@ -593,10 +1484,126 @@ function closeViewer(){
     const content=document.getElementById("viewerContent");
 
     viewer.classList.remove("active");
+
     content.innerHTML="";
+
     document.body.style.overflow="";
 
+    currentViewerIndex=-1;
+
+    window.scrollTo(0,previousScrollPosition);
+
 }
+
+function navigateViewer(direction){
+
+    const nextIndex=currentViewerIndex+direction;
+
+    if(
+        nextIndex>=0 &&
+        nextIndex<filteredMatches.length
+    ){
+
+        openViewer(nextIndex);
+
+    }
+
+}
+
+/* SHARE */
+
+async function shareCurrentMedia(){
+
+    if(currentViewerIndex<0){
+        return;
+    }
+
+    const data=filteredMatches[currentViewerIndex];
+
+    const shareURL=new URL(
+        window.location.href
+    );
+
+    shareURL.searchParams.set("post",data.id);
+
+    const shareData={
+        title:data.name || "Kush Neupane",
+        text:data.description || "Check out this upload.",
+        url:shareURL.href
+    };
+
+    try{
+
+        if(navigator.share){
+
+            await navigator.share(shareData);
+
+        }else{
+
+            await navigator.clipboard.writeText(shareURL.href);
+
+            alert("Link copied to clipboard.");
+
+        }
+
+    }catch(error){
+
+        if(error.name!=="AbortError"){
+
+            try{
+
+                await navigator.clipboard.writeText(shareURL.href);
+
+                alert("Link copied to clipboard.");
+
+            }catch(copyError){
+
+                alert("Unable to share this media.");
+
+            }
+
+        }
+
+    }
+
+}
+
+/* DOWNLOAD */
+
+function downloadCurrentMedia(){
+
+    if(currentViewerIndex<0){
+        return;
+    }
+
+    const data=filteredMatches[currentViewerIndex];
+
+    if(getMediaType(data)==="youtube"){
+        return;
+    }
+
+    const url=getMediaURL(data);
+
+    if(!url){
+        return;
+    }
+
+    const link=document.createElement("a");
+
+    link.href=url;
+    link.download=data.name || "media";
+
+    link.target="_blank";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+}
+
+/* CLOSE VIEWER */
 
 document
     .getElementById("mediaViewer")
@@ -614,220 +1621,95 @@ document.addEventListener("keydown",function(event){
         closeViewer();
     }
 
+    if(
+        document.getElementById("mediaViewer").classList.contains("active")
+    ){
+
+        if(event.key==="ArrowLeft"){
+            navigateViewer(-1);
+        }
+
+        if(event.key==="ArrowRight"){
+            navigateViewer(1);
+        }
+
+    }
+
 });
 
-/* CREATE CARD */
+/* OPEN SHARED MEDIA */
 
-function createCard(data){
+async function openSharedMedia(){
 
-    const url=escapeHTML(data.url);
-    const name=escapeHTML(data.name);
-    const description=escapeHTML(data.description);
+    const params=new URLSearchParams(
+        window.location.search
+    );
 
-    const safeURL=String(data.url || "").replace(/'/g,"\\'");
+    const postId=params.get("post");
 
-    /* USE CONVERTED PLAYBACK URL WHEN AVAILABLE */
-
-    const videoSource=data.playbackUrl || data.url || "";
-
-    const videoURL=escapeHTML(videoSource);
-
-    const safeVideoURL=String(videoSource).replace(/'/g,"\\'");
-
-    if(data.type==="photo"){
-
-        return `
-        <article class="media-card">
-
-            <img
-                class="media-preview"
-                src="${url}"
-                alt="${name}"
-                onclick="openViewer('photo','${safeURL}')"
-            >
-
-            <div class="media-info">
-
-                <h3>${name}</h3>
-
-                <p>${description}</p>
-
-            </div>
-
-        </article>
-        `;
-
-    }
-
-    const thumbnail=data.thumbnailUrl
-        ? `
-        <img
-            class="media-preview"
-            src="${escapeHTML(data.thumbnailUrl)}"
-            alt="${name}"
-            onclick="openViewer('video','${safeVideoURL}')"
-        >
-        `
-        : `
-        <video
-            class="media-preview"
-            src="${videoURL}"
-            preload="metadata"
-            onclick="openViewer('video','${safeVideoURL}')"
-        ></video>
-        `;
-
-    return `
-    <article class="media-card">
-
-        ${thumbnail}
-
-        <div class="media-info">
-
-            <h3>${name}</h3>
-
-            <p>${description}</p>
-
-        </div>
-
-    </article>
-    `;
-}
-
-/* SEARCH */
-
-async function performSearch(){
-
-    const input=document
-        .getElementById("searchInput")
-        .value
-        .trim()
-        .toLowerCase();
-
-    const results=document.getElementById("searchResults");
-
-    if(!input){
-
-        results.innerHTML=`
-            <div class="empty-state">
-                Enter something to search.
-            </div>
-        `;
-
+    if(!postId || !db){
         return;
-
     }
-
-    if(!db){
-
-        results.innerHTML=`
-            <div class="empty-state">
-                Firebase is not configured.
-            </div>
-        `;
-
-        return;
-
-    }
-
-    results.innerHTML=`
-        <div class="empty-state">
-            Searching...
-        </div>
-    `;
 
     try{
 
-        const snapshot=
-            await db.collection("media").get();
+        const doc=await db.collection("media").doc(postId).get();
 
-        const matches=snapshot.docs
-            .map(function(doc){
-
-                return {
-                    id:doc.id,
-                    ...doc.data()
-                };
-
-            })
-            .filter(function(data){
-
-                const name=
-                    String(data.name || "")
-                    .toLowerCase();
-
-                const description=
-                    String(data.description || "")
-                    .toLowerCase();
-
-                const page=
-                    String(data.page || "")
-                    .toLowerCase();
-
-                return(
-                    name.includes(input) ||
-                    description.includes(input) ||
-                    page.includes(input)
-                );
-
-            })
-            .sort(function(a,b){
-
-                const aTime=
-                    a.createdAt && a.createdAt.seconds
-                    ? a.createdAt.seconds
-                    : 0;
-
-                const bTime=
-                    b.createdAt && b.createdAt.seconds
-                    ? b.createdAt.seconds
-                    : 0;
-
-                return bTime-aTime;
-
-            });
-
-        if(!matches.length){
-
-            results.innerHTML=`
-                <div class="empty-state">
-                    No matching results found.
-                </div>
-            `;
-
+        if(!doc.exists){
             return;
+        }
+
+        const data={
+            id:doc.id,
+            ...doc.data()
+        };
+
+        await detectVideoFormat(data);
+
+        const existingIndex=allMatches.findIndex(function(item){
+
+            return item.id===data.id;
+
+        });
+
+        if(existingIndex===-1){
+
+            allMatches.unshift(data);
 
         }
 
-        results.innerHTML=
-            matches
-            .map(createCard)
-            .join("");
+        activeFilter="all";
+
+        document
+            .querySelectorAll(".filter-button")
+            .forEach(function(button){
+
+                button.classList.toggle(
+                    "active",
+                    button.dataset.filter==="all"
+                );
+
+            });
+
+        applyFilter();
+
+        const index=filteredMatches.findIndex(function(item){
+
+            return item.id===data.id;
+
+        });
+
+        if(index!==-1){
+            openViewer(index);
+        }
 
     }catch(error){
 
-        console.error(error);
-
-        results.innerHTML=`
-            <div class="empty-state">
-                Could not search uploads.
-                Check your Firebase setup.
-            </div>
-        `;
+        console.error("Could not open shared media:",error);
 
     }
 
 }
-
-document
-    .getElementById("searchInput")
-    .addEventListener("keydown",function(event){
-
-        if(event.key==="Enter"){
-            performSearch();
-        }
-
-    });
 
 </script>
 
