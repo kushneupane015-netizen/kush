@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -18,9 +17,7 @@ box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
 
-html{
-scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth;}
 
 body{
 min-height:100vh;
@@ -88,9 +85,7 @@ transition:.3s;
 transform:translateY(9px) rotate(45deg);
 }
 
-.menu-button.active span:nth-child(2){
-opacity:0;
-}
+.menu-button.active span:nth-child(2){opacity:0;}
 
 .menu-button.active span:nth-child(3){
 transform:translateY(-9px) rotate(-45deg);
@@ -208,63 +203,23 @@ color:white;
 margin:7px 0;
 }
 
-.creator-details strong{
-color:white;
-}
+.creator-details strong{color:white;}
 
 .creator-details a{
 color:white;
 text-decoration:none;
 }
 
-.creator-details a:hover{
-text-decoration:underline;
-}
-
-/* SECRET CLICK LABELS */
+.creator-details a:hover{text-decoration:underline;}
 
 .secret-step{
 cursor:pointer;
 user-select:none;
 }
 
-/* SECRET PASSWORD */
+/* SECRET PASSWORD AND LOGIN */
 
-#secretUnlock{
-display:none;
-margin:30px auto 0;
-max-width:500px;
-padding:25px;
-background:rgba(20,8,40,.95);
-border:1px solid rgba(255,255,255,.16);
-border-radius:18px;
-box-shadow:0 15px 45px rgba(0,0,0,.45);
-}
-
-#secretUnlock h2{
-margin-bottom:18px;
-}
-
-#secretPassword{
-width:100%;
-min-height:50px;
-padding:0 15px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.2);
-outline:none;
-background:rgba(0,0,0,.45);
-color:white;
-font-size:16px;
-margin-bottom:12px;
-}
-
-#secretMessage{
-margin-top:12px;
-color:#ff8080;
-}
-
-/* ADMIN LOGIN */
-
+#secretUnlock,
 #adminLogin{
 display:none;
 margin:30px auto 0;
@@ -276,10 +231,12 @@ border-radius:18px;
 box-shadow:0 15px 45px rgba(0,0,0,.45);
 }
 
+#secretUnlock h2,
 #adminLogin h2{
 margin-bottom:18px;
 }
 
+#secretPassword,
 #adminPassword{
 width:100%;
 min-height:50px;
@@ -293,22 +250,7 @@ font-size:16px;
 margin-bottom:12px;
 }
 
-.admin-button{
-width:100%;
-min-height:50px;
-border:0;
-border-radius:12px;
-background:#241044;
-color:white;
-font-size:16px;
-cursor:pointer;
-transition:.25s;
-}
-
-.admin-button:hover{
-background:#32155d;
-}
-
+#secretMessage,
 #loginMessage{
 margin-top:12px;
 color:#ff8080;
@@ -350,21 +292,13 @@ cursor:pointer;
 font-size:16px;
 }
 
-.admin-tab.active{
-background:#241044;
-}
+.admin-tab.active{background:#241044;}
 
-.admin-section{
-display:none;
-}
+.admin-section{display:none;}
 
-.admin-section.active{
-display:block;
-}
+.admin-section.active{display:block;}
 
-.admin-field{
-margin-bottom:16px;
-}
+.admin-field{margin-bottom:16px;}
 
 .admin-field label{
 display:block;
@@ -395,6 +329,31 @@ background:#241044;
 color:white;
 }
 
+.admin-field input[type="file"]{
+padding:10px;
+}
+
+.admin-help{
+color:rgba(255,255,255,.65);
+font-size:13px;
+line-height:1.5;
+margin-top:7px;
+}
+
+.admin-button{
+width:100%;
+min-height:50px;
+border:0;
+border-radius:12px;
+background:#241044;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:.25s;
+}
+
+.admin-button:hover{background:#32155d;}
+
 .admin-actions{
 display:flex;
 gap:10px;
@@ -410,6 +369,20 @@ min-width:140px;
 margin-top:15px;
 text-align:center;
 color:rgba(255,255,255,.85);
+line-height:1.5;
+}
+
+/* FORMAT STATUS */
+
+#formatStatus{
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+background:rgba(120,75,190,.2);
+border:1px solid rgba(180,140,255,.2);
+color:#e2d1ff;
+font-size:13px;
+line-height:1.5;
 }
 
 /* DELETE LIST */
@@ -422,14 +395,13 @@ border:1px solid rgba(255,255,255,.14);
 border-radius:14px;
 }
 
-.delete-card h3{
-margin-bottom:8px;
-}
+.delete-card h3{margin-bottom:8px;}
 
 .delete-card p{
 color:rgba(255,255,255,.8);
 line-height:1.5;
-margin-bottom:12px;
+margin-bottom:8px;
+overflow-wrap:anywhere;
 }
 
 .delete-button{
@@ -443,9 +415,7 @@ cursor:pointer;
 font-size:15px;
 }
 
-.delete-button:hover{
-background:#32155d;
-}
+.delete-button:hover{background:#32155d;}
 
 #deleteStatus{
 text-align:center;
@@ -471,50 +441,32 @@ color:white;
 cursor:pointer;
 }
 
-.source-button.active{
-background:#241044;
-}
+.source-button.active{background:#241044;}
 
-.source-section{
-display:none;
-}
+.source-section{display:none;}
 
-.source-section.active{
-display:block;
-}
+.source-section.active{display:block;}
 
 /* MOBILE */
 
 @media(max-width:600px){
 
-header{
-padding:0 15px;
-}
+header{padding:0 15px;}
 
 .menu{
 right:15px;
 width:min(245px,calc(100vw - 30px));
 }
 
-main{
-padding:30px 15px 50px;
-}
+main{padding:30px 15px 50px;}
 
-.content{
-padding:40px 22px;
-}
+.content{padding:40px 22px;}
 
-.content > p{
-font-size:17px;
-}
+.content > p{font-size:17px;}
 
-.creator-details{
-padding:22px 18px;
-}
+.creator-details{padding:22px 18px;}
 
-.creator-details p{
-font-size:17px;
-}
+.creator-details p{font-size:17px;}
 
 .admin-tabs,
 .source-buttons{
@@ -537,11 +489,9 @@ id="menuButton"
 onclick="toggleMenu()"
 aria-label="Open menu"
 >
-
 <span></span>
 <span></span>
 <span></span>
-
 </button>
 
 <nav class="menu" id="menu">
@@ -644,10 +594,7 @@ placeholder="Enter secret password"
 autocomplete="off"
 >
 
-<button
-type="submit"
-class="admin-button"
->
+<button type="submit" class="admin-button">
 Enter
 </button>
 
@@ -672,10 +619,7 @@ placeholder="Enter admin password"
 autocomplete="off"
 >
 
-<button
-type="submit"
-class="admin-button"
->
+<button type="submit" class="admin-button">
 Login
 </button>
 
@@ -713,24 +657,17 @@ Delete Files
 
 <!-- UPLOAD SECTION -->
 
-<div
-id="uploadSection"
-class="admin-section active"
->
+<div id="uploadSection" class="admin-section active">
 
 <div class="admin-field">
 
-<label for="postPage">
-Post To
-</label>
+<label for="postPage">Post To</label>
 
 <select id="postPage">
 
 <option value="home">Home</option>
 
-<option value="projects">
-Projects
-</option>
+<option value="projects">Projects</option>
 
 </select>
 
@@ -738,22 +675,39 @@ Projects
 
 <div class="admin-field">
 
-<label for="mediaType">
-Media Type
-</label>
+<label for="mediaType">Media Type</label>
 
-<select
-id="mediaType"
-onchange="updateMediaFields()"
->
+<select id="mediaType" onchange="updateMediaFields()">
 
-<option value="photo">
-Photo
-</option>
+<option value="photo">Photo</option>
 
-<option value="video">
-Video
-</option>
+<option value="video">Video</option>
+
+</select>
+
+</div>
+
+<!-- CATEGORY -->
+
+<div class="admin-field">
+
+<label for="mediaCategory">Content Category</label>
+
+<select id="mediaCategory">
+
+<option value="Technology">Technology</option>
+
+<option value="Gaming">Gaming</option>
+
+<option value="Education">Education</option>
+
+<option value="Entertainment">Entertainment</option>
+
+<option value="Creativity">Creativity</option>
+
+<option value="Personal">Personal</option>
+
+<option value="Other">Other</option>
 
 </select>
 
@@ -761,23 +715,18 @@ Video
 
 <div class="admin-field">
 
-<label for="mediaName">
-Name
-</label>
+<label for="mediaName">Name / Title</label>
 
 <input
 type="text"
 id="mediaName"
 placeholder="Enter media name"
 >
-
 </div>
 
 <div class="admin-field">
 
-<label for="mediaDescription">
-Description
-</label>
+<label for="mediaDescription">Description</label>
 
 <textarea
 id="mediaDescription"
@@ -786,11 +735,37 @@ placeholder="Enter description"
 
 </div>
 
+<!-- VIDEO FORMAT -->
+
+<div class="admin-field" id="videoFormatField" style="display:none;">
+
+<label for="videoFormat">Video Format</label>
+
+<select id="videoFormat" onchange="updateFormatStatus()">
+
+<option value="auto">Automatic Detection</option>
+
+<option value="shorts">Shorts / Vertical Video</option>
+
+<option value="video">Standard Video</option>
+
+</select>
+
+<div class="admin-help">
+Automatic detection uses the video's dimensions. Portrait videos are classified as Shorts; landscape and square videos are classified as Videos. You can manually override the result.
+</div>
+
+<div id="formatStatus">
+Video format will be detected automatically.
+</div>
+
+</div>
+
+<!-- SOURCE -->
+
 <div class="admin-field">
 
-<label>
-Source
-</label>
+<label>Source</label>
 
 <div class="source-buttons">
 
@@ -818,21 +793,17 @@ Post from URL
 
 <!-- DEVICE SOURCE -->
 
-<div
-id="deviceSource"
-class="source-section active"
->
+<div id="deviceSource" class="source-section active">
 
 <div class="admin-field">
 
-<label for="mediaFile">
-Photo / Video
-</label>
+<label for="mediaFile">Photo / Video</label>
 
 <input
 type="file"
 id="mediaFile"
 accept="image/*,video/*,.mkv,.avi,.mov,.wmv,.flv,.webm,.mp4,.mpeg,.mpg,.3gp,.3g2,.m4v,.ts,.m2ts,.mts,.ogv,.mxf"
+onchange="handleSelectedFile()"
 >
 
 </div>
@@ -844,7 +815,7 @@ style="display:none;"
 >
 
 <label for="thumbnailFile">
-Video Thumbnail
+Video Thumbnail (Optional)
 </label>
 
 <input
@@ -853,16 +824,17 @@ id="thumbnailFile"
 accept="image/*"
 >
 
+<div class="admin-help">
+If you do not select a thumbnail, the video may use its own preview where supported.
+</div>
+
 </div>
 
 </div>
 
 <!-- URL SOURCE -->
 
-<div
-id="urlSource"
-class="source-section"
->
+<div id="urlSource" class="source-section">
 
 <div class="admin-field">
 
@@ -874,7 +846,12 @@ Photo / Video / YouTube URL
 type="url"
 id="mediaURL"
 placeholder="Paste direct media URL or YouTube URL"
+oninput="handleURLChange()"
 >
+
+<div class="admin-help">
+For direct video URLs, automatic format detection may depend on whether the video host allows metadata access. YouTube Shorts are detected from their URL.
+</div>
 
 </div>
 
@@ -885,7 +862,7 @@ style="display:none;"
 >
 
 <label for="urlThumbnail">
-Video Thumbnail URL
+Video Thumbnail URL (Optional)
 </label>
 
 <input
@@ -903,6 +880,7 @@ placeholder="Paste video thumbnail URL"
 <button
 type="button"
 class="admin-button"
+id="postButton"
 onclick="uploadMedia()"
 >
 Post
@@ -924,10 +902,7 @@ Logout
 
 <!-- DELETE SECTION -->
 
-<div
-id="deleteSection"
-class="admin-section"
->
+<div id="deleteSection" class="admin-section">
 
 <div id="deleteStatus"></div>
 
@@ -959,20 +934,14 @@ Loading posts...
 
 <script>
 
-/* =========================
-MENU
-========================= */
+/* MENU */
 
-const menuButton=
-document.getElementById("menuButton");
-
-const menu=
-document.getElementById("menu");
+const menuButton=document.getElementById("menuButton");
+const menu=document.getElementById("menu");
 
 function toggleMenu(){
 
 menu.classList.toggle("active");
-
 menuButton.classList.toggle("active");
 
 }
@@ -980,14 +949,11 @@ menuButton.classList.toggle("active");
 function closeMenu(){
 
 menu.classList.remove("active");
-
 menuButton.classList.remove("active");
 
 }
 
-document.addEventListener(
-"click",
-function(event){
+document.addEventListener("click",function(event){
 
 if(
 !menu.contains(event.target) &&
@@ -1000,17 +966,14 @@ closeMenu();
 
 });
 
-/* =========================
-FIREBASE
-========================= */
+/* FIREBASE */
 
 let db=null;
 
 const firebaseReady=
 window.firebaseConfig &&
-!String(
-window.firebaseConfig.apiKey
-).startsWith("PASTE_");
+window.firebaseConfig.apiKey &&
+!String(window.firebaseConfig.apiKey).startsWith("PASTE_");
 
 if(firebaseReady){
 
@@ -1018,20 +981,15 @@ try{
 
 if(!firebase.apps.length){
 
-firebase.initializeApp(
-window.firebaseConfig
-);
+firebase.initializeApp(window.firebaseConfig);
 
 }
 
 db=firebase.firestore();
 
-firebase
-.auth()
-.signInAnonymously()
-.catch(function(error){
+firebase.auth().signInAnonymously().catch(function(error){
 
-console.error(error);
+console.error("Anonymous authentication:",error);
 
 });
 
@@ -1043,48 +1001,25 @@ console.error(error);
 
 }
 
-/* =========================
-SECRET SEQUENCE
-========================= */
+/* SECRET SEQUENCE */
 
-const creatorLogo=
-document.getElementById("creatorLogo");
+const creatorLogo=document.getElementById("creatorLogo");
 
-const creatorSecretTrigger=
-document.getElementById(
-"creatorSecretTrigger"
-);
+const creatorSecretTrigger=document.getElementById("creatorSecretTrigger");
 
-const secretSteps=
-document.querySelectorAll(
-".secret-step"
-);
+const secretSteps=document.querySelectorAll(".secret-step");
 
-const secretUnlock=
-document.getElementById(
-"secretUnlock"
-);
+const secretUnlock=document.getElementById("secretUnlock");
 
-const secretUnlockForm=
-document.getElementById(
-"secretUnlockForm"
-);
+const secretUnlockForm=document.getElementById("secretUnlockForm");
 
-const secretPassword=
-document.getElementById(
-"secretPassword"
-);
+const secretPassword=document.getElementById("secretPassword");
 
-const secretMessage=
-document.getElementById(
-"secretMessage"
-);
+const secretMessage=document.getElementById("secretMessage");
 
 let secretStep=1;
 
-creatorLogo.addEventListener(
-"click",
-function(){
+creatorLogo.addEventListener("click",function(){
 
 if(secretStep===1){
 
@@ -1098,9 +1033,7 @@ resetSecretSequence();
 
 });
 
-creatorSecretTrigger.addEventListener(
-"click",
-function(){
+creatorSecretTrigger.addEventListener("click",function(){
 
 if(secretStep===2){
 
@@ -1114,22 +1047,15 @@ resetSecretSequence();
 
 });
 
-secretSteps.forEach(
-function(stepElement){
+secretSteps.forEach(function(stepElement){
 
-stepElement.addEventListener(
-"click",
-function(event){
+stepElement.addEventListener("click",function(event){
 
 event.preventDefault();
-
 event.stopPropagation();
 
-const requiredStep=
-Number(
-stepElement.getAttribute(
-"data-step"
-)
+const requiredStep=Number(
+stepElement.getAttribute("data-step")
 );
 
 if(secretStep===requiredStep){
@@ -1169,7 +1095,6 @@ secretPassword.focus();
 secretUnlock.scrollIntoView({
 
 behavior:"smooth",
-
 block:"center"
 
 });
@@ -1182,118 +1107,77 @@ secretStep=1;
 
 }
 
-secretUnlockForm.addEventListener(
-"submit",
-function(event){
+secretUnlockForm.addEventListener("submit",function(event){
 
 event.preventDefault();
 
-if(
-secretPassword.value==="sikconta"
-){
+if(secretPassword.value==="sikconta"){
 
 secretUnlock.style.display="none";
 
 secretMessage.textContent="";
 
-document.getElementById(
-"adminLogin"
-).style.display="block";
+document.getElementById("adminLogin").style.display="block";
 
-document.getElementById(
-"adminPassword"
-).value="";
+document.getElementById("adminPassword").value="";
 
-document.getElementById(
-"loginMessage"
-).textContent="";
+document.getElementById("loginMessage").textContent="";
 
-document.getElementById(
-"adminLogin"
-).scrollIntoView({
+document.getElementById("adminLogin").scrollIntoView({
 
 behavior:"smooth",
-
 block:"center"
 
 });
 
-setTimeout(
-function(){
+setTimeout(function(){
 
-document.getElementById(
-"adminPassword"
-).focus();
+document.getElementById("adminPassword").focus();
 
-},
-400
-);
+},400);
 
 }else{
 
-secretMessage.textContent=
-"Incorrect password.";
+secretMessage.textContent="Incorrect password.";
 
 }
 
 });
 
-/* =========================
-ADMIN LOGIN
-========================= */
+/* ADMIN LOGIN */
 
 function loginAdmin(){
 
-const password=
-document.getElementById(
-"adminPassword"
-).value;
+const password=document.getElementById("adminPassword").value;
 
-const message=
-document.getElementById(
-"loginMessage"
-);
+const message=document.getElementById("loginMessage");
 
 if(password==="sikconta"){
 
-document.getElementById(
-"adminLogin"
-).style.display="none";
+document.getElementById("adminLogin").style.display="none";
 
-document.getElementById(
-"adminPanel"
-).style.display="block";
+document.getElementById("adminPanel").style.display="block";
 
 message.textContent="";
 
-showAdminSection(
-"uploadSection"
-);
+showAdminSection("uploadSection");
 
-document.getElementById(
-"adminPanel"
-).scrollIntoView({
+document.getElementById("adminPanel").scrollIntoView({
 
 behavior:"smooth",
-
 block:"center"
 
 });
 
 }else{
 
-message.textContent=
-"Incorrect password.";
+message.textContent="Incorrect password.";
 
 }
 
 }
 
-document.getElementById(
-"adminLoginForm"
-).addEventListener(
-"submit",
-function(event){
+document.getElementById("adminLoginForm").addEventListener("submit",function(event){
 
 event.preventDefault();
 
@@ -1301,101 +1185,50 @@ loginAdmin();
 
 });
 
-/* =========================
-LOGOUT
-========================= */
+/* LOGOUT */
 
 function logoutAdmin(){
 
-document.getElementById(
-"adminPanel"
-).style.display="none";
+document.getElementById("adminPanel").style.display="none";
+document.getElementById("adminLogin").style.display="none";
+document.getElementById("secretUnlock").style.display="none";
 
-document.getElementById(
-"adminLogin"
-).style.display="none";
+document.getElementById("adminPassword").value="";
+document.getElementById("secretPassword").value="";
 
-document.getElementById(
-"secretUnlock"
-).style.display="none";
-
-document.getElementById(
-"adminPassword"
-).value="";
-
-document.getElementById(
-"secretPassword"
-).value="";
-
-document.getElementById(
-"loginMessage"
-).textContent="";
-
-document.getElementById(
-"secretMessage"
-).textContent="";
-
-document.getElementById(
-"uploadStatus"
-).textContent="";
+document.getElementById("loginMessage").textContent="";
+document.getElementById("secretMessage").textContent="";
+document.getElementById("uploadStatus").textContent="";
 
 resetSecretSequence();
 
 }
 
-/* =========================
-ADMIN TABS
-========================= */
+/* ADMIN TABS */
 
-function showAdminSection(
-sectionId
-){
+function showAdminSection(sectionId){
 
-document
-.querySelectorAll(".admin-section")
-.forEach(
-function(section){
+document.querySelectorAll(".admin-section").forEach(function(section){
 
-section.classList.remove(
-"active"
-);
+section.classList.remove("active");
 
 });
 
-document
-.querySelectorAll(".admin-tab")
-.forEach(
-function(tab){
+document.querySelectorAll(".admin-tab").forEach(function(tab){
 
-tab.classList.remove(
-"active"
-);
+tab.classList.remove("active");
 
 });
 
-document
-.getElementById(sectionId)
-.classList.add(
-"active"
-);
+document.getElementById(sectionId).classList.add("active");
 
-if(
-sectionId==="uploadSection"
-){
+if(sectionId==="uploadSection"){
 
-document
-.getElementById("uploadTab")
-.classList.add(
-"active"
-);
+document.getElementById("uploadTab").classList.add("active");
 
 }else{
 
-document
-.getElementById("deleteTab")
-.classList.add(
-"active"
-);
+document.getElementById("deleteTab").classList.add("active");
 
 loadDeleteList();
 
@@ -1403,77 +1236,29 @@ loadDeleteList();
 
 }
 
-/* =========================
-UPLOAD SOURCE
-========================= */
+/* UPLOAD SOURCE */
 
 let uploadSource="device";
 
-function setUploadSource(
-source
-){
+function setUploadSource(source){
 
 uploadSource=source;
 
-document
-.getElementById("deviceSource")
-.classList.remove(
-"active"
-);
+document.getElementById("deviceSource").classList.remove("active");
+document.getElementById("urlSource").classList.remove("active");
 
-document
-.getElementById("urlSource")
-.classList.remove(
-"active"
-);
-
-document
-.getElementById(
-"deviceSourceButton"
-)
-.classList.remove(
-"active"
-);
-
-document
-.getElementById(
-"urlSourceButton"
-)
-.classList.remove(
-"active"
-);
+document.getElementById("deviceSourceButton").classList.remove("active");
+document.getElementById("urlSourceButton").classList.remove("active");
 
 if(source==="device"){
 
-document
-.getElementById("deviceSource")
-.classList.add(
-"active"
-);
-
-document
-.getElementById(
-"deviceSourceButton"
-)
-.classList.add(
-"active"
-);
+document.getElementById("deviceSource").classList.add("active");
+document.getElementById("deviceSourceButton").classList.add("active");
 
 }else{
 
-document
-.getElementById("urlSource")
-.classList.add(
-"active"
-);
-
-document
-.getElementById(
-"urlSourceButton"
-)
-.classList.add(
-"active"
-);
+document.getElementById("urlSource").classList.add("active");
+document.getElementById("urlSourceButton").classList.add("active");
 
 }
 
@@ -1481,133 +1266,100 @@ updateMediaFields();
 
 }
 
-/* =========================
-MEDIA TYPE
-========================= */
+/* MEDIA FIELDS */
 
 function updateMediaFields(){
 
-const type=
-document.getElementById(
-"mediaType"
-).value;
+const type=document.getElementById("mediaType").value;
 
-const thumbnailField=
-document.getElementById(
-"thumbnailField"
-);
+const thumbnailField=document.getElementById("thumbnailField");
+const urlThumbnailField=document.getElementById("urlThumbnailField");
+const videoFormatField=document.getElementById("videoFormatField");
 
-const urlThumbnailField=
-document.getElementById(
-"urlThumbnailField"
-);
-
-if(type==="video"){
+const isVideo=type==="video";
 
 thumbnailField.style.display=
-uploadSource==="device"
-?"block"
-:"none";
+isVideo && uploadSource==="device"
+?"block":"none";
 
 urlThumbnailField.style.display=
-uploadSource==="url"
-?"block"
-:"none";
+isVideo && uploadSource==="url"
+?"block":"none";
+
+videoFormatField.style.display=
+isVideo
+?"block":"none";
+
+if(!isVideo){
+
+document.getElementById("formatStatus").textContent=
+"Photos are automatically classified as Photos.";
 
 }else{
 
-thumbnailField.style.display=
-"none";
-
-urlThumbnailField.style.display=
-"none";
+updateFormatStatus();
 
 }
 
 }
 
-/* =========================
-VIDEO FORMAT SUPPORT
-========================= */
+document.getElementById("mediaType").addEventListener("change",function(){
+
+document.getElementById("mediaFile").value="";
+document.getElementById("mediaURL").value="";
+
+updateMediaFields();
+
+});
+
+/* VIDEO FILE VALIDATION */
 
 function isSupportedVideoFile(file){
 
 if(!file){
-
 return false;
-
 }
 
-const videoExtensions=[
-"mkv",
-"mp4",
-"mov",
-"avi",
-"wmv",
-"flv",
-"webm",
-"mpeg",
-"mpg",
-"3gp",
-"3g2",
-"m4v",
-"ts",
-"m2ts",
-"mts",
-"ogv",
-"mxf"
+const extensions=[
+"mkv","mp4","mov","avi","wmv","flv","webm",
+"mpeg","mpg","3gp","3g2","m4v","ts","m2ts",
+"mts","ogv","mxf"
 ];
 
-const fileName=
-file.name.toLowerCase();
+const fileName=file.name.toLowerCase();
 
-const extension=
-fileName.includes(".")
+const extension=fileName.includes(".")
 ?fileName.split(".").pop()
 :"";
 
 return(
 file.type.startsWith("video/") ||
-videoExtensions.includes(extension)
+extensions.includes(extension)
 );
 
 }
 
-/* =========================
-YOUTUBE ID
-========================= */
+/* YOUTUBE */
 
 function getYouTubeId(url){
 
 if(!url){
-
 return "";
-
 }
 
 const patterns=[
-
 /youtube\.com\/watch\?v=([^&]+)/i,
-
 /youtu\.be\/([^?&]+)/i,
-
 /youtube\.com\/embed\/([^?&]+)/i,
-
 /youtube\.com\/shorts\/([^?&]+)/i
-
 ];
 
-for(
-const pattern of patterns
-){
+for(const pattern of patterns){
 
-const match=
-url.match(pattern);
+const match=url.match(pattern);
 
 if(match){
-
 return match[1];
-
 }
 
 }
@@ -1616,75 +1368,286 @@ return "";
 
 }
 
-/* =========================
-CLOUDINARY
-========================= */
+function isYouTubeShort(url){
 
-async function uploadToCloudinary(
-file,
-resourceType
-){
+return /youtube\.com\/shorts\//i.test(url);
 
-const cloudName=
-"mnsjr7lc";
+}
 
-const uploadPreset=
-"Kush website upload";
+/* VIDEO DIMENSION DETECTION */
+
+let detectedVideoFormat="";
+
+function detectVideoFormat(source){
+
+return new Promise(function(resolve){
+
+if(!source){
+
+resolve("");
+
+return;
+
+}
+
+const video=document.createElement("video");
+
+video.preload="metadata";
+
+video.muted=true;
+
+video.onloadedmetadata=function(){
+
+const width=video.videoWidth;
+const height=video.videoHeight;
+
+let format="video";
+
+if(height>width){
+
+format="shorts";
+
+}
+
+video.removeAttribute("src");
+video.load();
+
+resolve(format);
+
+};
+
+video.onerror=function(){
+
+resolve("");
+
+};
+
+video.src=source;
+
+});
+
+}
+
+/* FILE SELECTION */
+
+async function handleSelectedFile(){
+
+const file=document.getElementById("mediaFile").files[0];
+
+const status=document.getElementById("formatStatus");
+
+detectedVideoFormat="";
+
+if(!file){
+
+status.textContent="Video format will be detected automatically.";
+
+return;
+
+}
+
+if(document.getElementById("mediaType").value!=="video"){
+
+return;
+
+}
+
+if(!isSupportedVideoFile(file)){
+
+status.textContent="Please select a supported video file.";
+
+return;
+
+}
+
+status.textContent="Detecting video dimensions...";
+
+const temporaryURL=URL.createObjectURL(file);
+
+detectedVideoFormat=await detectVideoFormat(temporaryURL);
+
+URL.revokeObjectURL(temporaryURL);
+
+updateFormatStatus();
+
+}
+
+/* URL FORMAT DETECTION */
+
+let urlDetectionRequest=0;
+
+async function handleURLChange(){
+
+if(document.getElementById("mediaType").value!=="video"){
+
+return;
+
+}
+
+const url=document.getElementById("mediaURL").value.trim();
+
+const status=document.getElementById("formatStatus");
+
+detectedVideoFormat="";
+
+const request=++urlDetectionRequest;
+
+if(!url){
+
+updateFormatStatus();
+
+return;
+
+}
+
+if(isYouTubeShort(url)){
+
+detectedVideoFormat="shorts";
+
+updateFormatStatus("YouTube Shorts URL detected.");
+
+return;
+
+}
+
+if(getYouTubeId(url)){
+
+detectedVideoFormat="video";
+
+updateFormatStatus("Standard YouTube video detected.");
+
+return;
+
+}
+
+status.textContent="Checking video dimensions...";
+
+const detected=await detectVideoFormat(url);
+
+if(request!==urlDetectionRequest){
+
+return;
+
+}
+
+detectedVideoFormat=detected;
+
+updateFormatStatus(
+detected
+?"Video dimensions detected."
+:"Automatic detection was unavailable. Choose the format manually."
+);
+
+}
+
+function updateFormatStatus(extraMessage){
+
+const selected=document.getElementById("videoFormat").value;
+
+const status=document.getElementById("formatStatus");
+
+if(selected==="shorts"){
+
+status.textContent="Manual selection: Shorts / Vertical Video.";
+
+return;
+
+}
+
+if(selected==="video"){
+
+status.textContent="Manual selection: Standard Video.";
+
+return;
+
+}
+
+if(detectedVideoFormat==="shorts"){
+
+status.textContent=
+(extraMessage ? extraMessage+" " : "")+
+"Detected format: Shorts / Vertical Video.";
+
+}else if(detectedVideoFormat==="video"){
+
+status.textContent=
+(extraMessage ? extraMessage+" " : "")+
+"Detected format: Standard Video.";
+
+}else{
+
+status.textContent=
+extraMessage ||
+"Automatic detection will classify portrait videos as Shorts and other videos as Videos.";
+
+}
+
+}
+
+document.getElementById("mediaURL").addEventListener("change",handleURLChange);
+
+/* FINAL FORMAT */
+
+function getFinalVideoFormat(url){
+
+const selected=document.getElementById("videoFormat").value;
+
+if(selected==="shorts"){
+return "shorts";
+}
+
+if(selected==="video"){
+return "video";
+}
+
+if(isYouTubeShort(url)){
+return "shorts";
+}
+
+return detectedVideoFormat || "video";
+
+}
+
+/* CLOUDINARY */
+
+async function uploadToCloudinary(file,resourceType){
+
+const cloudName="mnsjr7lc";
+
+const uploadPreset="Kush website upload";
 
 const uploadUrl=
-"https://api.cloudinary.com/v1_1/"
-+
-cloudName
-+
-"/"
-+
-resourceType
-+
+"https://api.cloudinary.com/v1_1/"+
+cloudName+
+"/"+
+resourceType+
 "/upload";
 
-const formData=
-new FormData();
+const formData=new FormData();
 
-formData.append(
-"file",
-file
-);
+formData.append("file",file);
+formData.append("upload_preset",uploadPreset);
 
-formData.append(
-"upload_preset",
-uploadPreset
-);
+const response=await fetch(uploadUrl,{
 
-const response=
-await fetch(
-uploadUrl,
-{
 method:"POST",
 body:formData
-}
-);
+
+});
 
 if(!response.ok){
 
-const errorText=
-await response.text();
+const errorText=await response.text();
 
-throw new Error(
-"Cloudinary upload failed: "
-+
-errorText
-);
+throw new Error("Cloudinary upload failed: "+errorText);
 
 }
 
-const result=
-await response.json();
+const result=await response.json();
 
 if(!result.secure_url){
 
-throw new Error(
-"Cloudinary did not return a file URL."
-);
+throw new Error("Cloudinary did not return a file URL.");
 
 }
 
@@ -1692,32 +1655,16 @@ return result.secure_url;
 
 }
 
-/* =========================
-CLOUDINARY MP4 PLAYBACK URL
-
-The original upload remains
-unchanged in Cloudinary.
-
-This URL requests an MP4
-version using H.264 codec.
-========================= */
+/* CLOUDINARY PLAYBACK URL */
 
 function getCloudinaryPlaybackUrl(url){
 
 if(!url){
-
 return "";
-
 }
 
-if(
-!url.includes(
-"res.cloudinary.com/"
-)
-){
-
+if(!url.includes("res.cloudinary.com/")){
 return url;
-
 }
 
 return url.replace(
@@ -1727,203 +1674,128 @@ return url.replace(
 
 }
 
-/* =========================
-UPLOAD POST
-========================= */
+/* UPLOAD MEDIA */
 
 async function uploadMedia(){
 
-const status=
-document.getElementById(
-"uploadStatus"
-);
+const status=document.getElementById("uploadStatus");
+const postButton=document.getElementById("postButton");
 
 if(!db){
 
-status.textContent=
-"Firebase Firestore is not configured.";
+status.textContent="Firebase Firestore is not configured.";
 
 return;
 
 }
 
-const selectedPage=
-document.getElementById(
-"postPage"
-).value;
+const page=document.getElementById("postPage").value;
 
-const page=
-selectedPage==="projects"
-?"projects"
-:"home";
+const type=document.getElementById("mediaType").value;
 
-const type=
-document.getElementById(
-"mediaType"
-).value;
+const category=document.getElementById("mediaCategory").value;
 
-const name=
-document.getElementById(
-"mediaName"
-).value.trim();
+const name=document.getElementById("mediaName").value.trim();
 
-const description=
-document.getElementById(
-"mediaDescription"
-).value.trim();
+const description=document.getElementById("mediaDescription").value.trim();
 
 if(!name){
 
-status.textContent=
-"Please enter a name.";
+status.textContent="Please enter a name.";
 
 return;
 
 }
+
+let url="";
+let playbackUrl="";
+let thumbnailUrl="";
+let youtubeId="";
+let format="";
+let source=uploadSource;
+
+postButton.disabled=true;
+postButton.textContent="Publishing...";
 
 try{
 
-status.textContent=
-"Preparing post...";
+/* DEVICE UPLOAD */
 
-let url="";
+if(uploadSource==="device"){
 
-let playbackUrl="";
+const mediaFile=document.getElementById("mediaFile").files[0];
 
-let thumbnailUrl="";
-
-let youtubeId="";
-
-let source=uploadSource;
-
-/* DEVICE */
-
-if(
-uploadSource==="device"
-){
-
-const mediaFile=
-document.getElementById(
-"mediaFile"
-).files[0];
-
-const thumbnailFile=
-document.getElementById(
-"thumbnailFile"
-).files[0];
+const thumbnailFile=document.getElementById("thumbnailFile").files[0];
 
 if(!mediaFile){
 
-status.textContent=
-"Please select a photo or video.";
+status.textContent="Please select a photo or video.";
 
 return;
 
 }
 
-if(
-type==="video" &&
-!thumbnailFile
-){
+if(type==="photo" && !mediaFile.type.startsWith("image/")){
 
-status.textContent=
-"Please select a video thumbnail.";
+status.textContent="Please select an image file.";
 
 return;
 
 }
 
-if(
-type==="photo" &&
-!mediaFile.type.startsWith(
-"image/"
-)
-){
+if(type==="video" && !isSupportedVideoFile(mediaFile)){
 
-status.textContent=
-"Please select an image file.";
+status.textContent="Please select a supported video file.";
 
 return;
 
 }
-
-/* UPDATED VIDEO VALIDATION */
-
-if(
-type==="video" &&
-!isSupportedVideoFile(mediaFile)
-){
-
-status.textContent=
-"Please select a supported video file.";
-
-return;
-
-}
-
-status.textContent=
-"Uploading media...";
-
-const resourceType=
-type==="video"
-?"video"
-:"image";
-
-url=
-await uploadToCloudinary(
-mediaFile,
-resourceType
-);
-
-/* CREATE MP4 PLAYBACK URL */
 
 if(type==="video"){
 
-playbackUrl=
-getCloudinaryPlaybackUrl(url);
-
-}else{
-
-playbackUrl=url;
+format=getFinalVideoFormat("");
 
 }
 
-if(
-type==="video" &&
-thumbnailFile
-){
+status.textContent="Uploading media...";
 
-status.textContent=
-"Uploading video thumbnail...";
+const resourceType=type==="video"?"video":"image";
 
-thumbnailUrl=
-await uploadToCloudinary(
-thumbnailFile,
-"image"
-);
+url=await uploadToCloudinary(mediaFile,resourceType);
+
+playbackUrl=type==="video"
+?getCloudinaryPlaybackUrl(url)
+:url;
+
+if(type==="video" && thumbnailFile){
+
+if(!thumbnailFile.type.startsWith("image/")){
+
+status.textContent="The thumbnail must be an image.";
+
+return;
+
+}
+
+status.textContent="Uploading thumbnail...";
+
+thumbnailUrl=await uploadToCloudinary(thumbnailFile,"image");
 
 }
 
 }
 
-/* URL */
+/* URL UPLOAD */
 
 else{
 
-const mediaURL=
-document.getElementById(
-"mediaURL"
-).value.trim();
+const mediaURL=document.getElementById("mediaURL").value.trim();
 
-const urlThumbnail=
-document.getElementById(
-"urlThumbnail"
-).value.trim();
+const urlThumbnail=document.getElementById("urlThumbnail").value.trim();
 
 if(!mediaURL){
 
-status.textContent=
-"Please enter a media URL.";
+status.textContent="Please enter a media URL.";
 
 return;
 
@@ -1931,10 +1803,13 @@ return;
 
 url=mediaURL;
 
-youtubeId=
-getYouTubeId(
-mediaURL
-);
+youtubeId=getYouTubeId(mediaURL);
+
+if(type==="video"){
+
+format=getFinalVideoFormat(mediaURL);
+
+}
 
 if(youtubeId){
 
@@ -1942,51 +1817,42 @@ playbackUrl=mediaURL;
 
 }else{
 
-playbackUrl=
-getCloudinaryPlaybackUrl(mediaURL);
+playbackUrl=getCloudinaryPlaybackUrl(mediaURL);
 
 }
 
-if(
-type==="video" &&
-urlThumbnail
-){
+if(type==="video" && urlThumbnail){
 
-thumbnailUrl=
-urlThumbnail;
+thumbnailUrl=urlThumbnail;
 
 }else if(youtubeId){
 
 thumbnailUrl=
-"https://img.youtube.com/vi/"
-+
-youtubeId
-+
+"https://img.youtube.com/vi/"+
+youtubeId+
 "/hqdefault.jpg";
 
 }
 
 }
 
-/* =========================
-SAVE TO FIRESTORE
-========================= */
+/* SAVE TO FIRESTORE */
 
-status.textContent=
-"Saving post information...";
+status.textContent="Saving post information...";
 
-const savedType=
-youtubeId
-?"youtube"
-:type;
+const savedType=youtubeId?"youtube":type;
 
-await db
-.collection("media")
-.add({
+await db.collection("media").add({
 
 page:page,
 
 type:savedType,
+
+mediaType:type,
+
+format:format,
+
+category:category,
 
 name:name,
 
@@ -2004,71 +1870,80 @@ youtubeId:youtubeId,
 
 source:source,
 
-createdAt:
-firebase.firestore.FieldValue
-.serverTimestamp()
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
 
 });
 
 status.textContent=
-page==="projects"
-?"Posted successfully to Projects."
-:"Posted successfully to Home.";
+"Successfully published to "+
+(page==="projects"?"Projects":"Home")+
+" as "+
+(
+type==="photo"
+?"Photo"
+:format==="shorts"
+?"Shorts"
+:"Video"
+)+
+" in "+category+".";
 
 /* CLEAR FORM */
 
-document.getElementById(
-"mediaName"
-).value="";
+document.getElementById("mediaName").value="";
+document.getElementById("mediaDescription").value="";
+document.getElementById("mediaFile").value="";
+document.getElementById("thumbnailFile").value="";
+document.getElementById("mediaURL").value="";
+document.getElementById("urlThumbnail").value="";
 
-document.getElementById(
-"mediaDescription"
-).value="";
+detectedVideoFormat="";
 
-document.getElementById(
-"mediaFile"
-).value="";
-
-document.getElementById(
-"thumbnailFile"
-).value="";
-
-document.getElementById(
-"mediaURL"
-).value="";
-
-document.getElementById(
-"urlThumbnail"
-).value="";
+document.getElementById("formatStatus").textContent=
+"Video format will be detected automatically.";
 
 }catch(error){
 
 console.error(error);
 
-status.textContent=
-"Upload failed: "
-+
-error.message;
+status.textContent="Upload failed: "+error.message;
+
+}finally{
+
+postButton.disabled=false;
+postButton.textContent="Post";
 
 }
 
 }
 
-/* =========================
-DELETE LIST
-========================= */
+/* ESCAPE HTML */
+
+function escapeHTML(value){
+
+return String(value||"").replace(
+/[&<>"']/g,
+function(character){
+
+return{
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[character];
+
+}
+);
+
+}
+
+/* DELETE LIST */
 
 async function loadDeleteList(){
 
-const list=
-document.getElementById(
-"deleteList"
-);
+const list=document.getElementById("deleteList");
 
-const status=
-document.getElementById(
-"deleteStatus"
-);
+const status=document.getElementById("deleteStatus");
 
 if(!db){
 
@@ -2082,42 +1957,26 @@ return;
 
 }
 
-status.textContent=
-"Loading posts...";
+status.textContent="Loading posts...";
 
 try{
 
-const snapshot=
-await db
-.collection("media")
-.get();
+const snapshot=await db.collection("media").get();
 
-const documents=
-snapshot.docs
-.map(function(doc){
+const documents=snapshot.docs.map(function(doc){
 
 return{
-
 id:doc.id,
-
 ...doc.data()
-
 };
 
-})
-.sort(function(a,b){
+}).sort(function(a,b){
 
-const aTime=
-a.createdAt &&
-a.createdAt.seconds
-?a.createdAt.seconds
-:0;
+const aTime=a.createdAt&&a.createdAt.seconds
+?a.createdAt.seconds:0;
 
-const bTime=
-b.createdAt &&
-b.createdAt.seconds
-?b.createdAt.seconds
-:0;
+const bTime=b.createdAt&&b.createdAt.seconds
+?b.createdAt.seconds:0;
 
 return bTime-aTime;
 
@@ -2137,36 +1996,37 @@ return;
 
 }
 
-list.innerHTML=
-documents
-.map(function(data){
+list.innerHTML=documents.map(function(data){
 
-const name=
-escapeHTML(data.name);
+const name=escapeHTML(data.name||"Untitled");
 
-const description=
-escapeHTML(
-data.description
+const description=escapeHTML(data.description||"");
+
+const page=escapeHTML(data.page||"");
+
+const category=escapeHTML(data.category||"Not specified");
+
+const format=escapeHTML(
+data.type==="photo"
+?"Photo"
+:data.format==="shorts"
+?"Shorts"
+:"Video"
 );
-
-const page=
-escapeHTML(data.page);
 
 return`
 
 <div class="delete-card">
 
-<h3>
-${name}
-</h3>
+<h3>${name}</h3>
 
-<p>
-${description}
-</p>
+<p>${description}</p>
 
-<p>
-Posted to: ${page}
-</p>
+<p>Posted to: ${page}</p>
+
+<p>Type: ${format}</p>
+
+<p>Category: ${category}</p>
 
 <button
 class="delete-button"
@@ -2179,115 +2039,61 @@ Delete
 
 `;
 
-})
-.join("");
+}).join("");
 
 }catch(error){
 
 console.error(error);
 
-status.textContent=
-"Could not load posts.";
+status.textContent="Could not load posts.";
 
 }
 
 }
 
-/* =========================
-ESCAPE HTML
-========================= */
+/* DELETE POST */
 
-function escapeHTML(value){
-
-return String(
-value || ""
-).replace(
-/[&<>"']/g,
-function(character){
-
-return{
-
-"&":"&amp;",
-
-"<":"&lt;",
-
-">":"&gt;",
-
-'"':"&quot;",
-
-"'":"&#039;"
-
-}[character];
-
-}
-);
-
-}
-
-/* =========================
-DELETE POST
-========================= */
-
-async function deletePost(
-documentId
-){
+async function deletePost(documentId){
 
 if(!db){
-
 return;
-
 }
 
-const confirmed=
-confirm(
+const confirmed=confirm(
 "Are you sure you want to delete this post?"
 );
 
 if(!confirmed){
-
 return;
-
 }
 
-const status=
-document.getElementById(
-"deleteStatus"
-);
+const status=document.getElementById("deleteStatus");
 
 try{
 
-status.textContent=
-"Deleting post...";
+status.textContent="Deleting post...";
 
-await db
-.collection("media")
-.doc(documentId)
-.delete();
+await db.collection("media").doc(documentId).delete();
 
-status.textContent=
-"Post deleted successfully.";
+status.textContent="Post deleted successfully.";
 
-loadDeleteList();
+await loadDeleteList();
 
 }catch(error){
 
 console.error(error);
 
-status.textContent=
-"Delete failed: "
-+
-error.message;
-
-}
+status.textContent="Delete failed: "+error.message;
 
 }
 
 /* INITIAL SETTINGS */
+
+}
 
 updateMediaFields();
 
 </script>
 
 </body>
-
 </html>
