@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="icon" type="image/png" href="kushneupane.png">
+
 <title>Projects | Kush Neupane</title>
 
 <style>
@@ -153,7 +155,7 @@ main{
 
 .page-title{
     text-align:center;
-    margin-bottom:35px;
+    margin-bottom:30px;
 }
 
 .page-title h1{
@@ -166,44 +168,172 @@ main{
     color:rgba(255,255,255,.85);
 }
 
-#mediaGrid{
+/* GALLERY */
+
+.gallery-section{
     width:min(1100px,100%);
     margin:auto;
+}
+
+.gallery-heading{
+    margin-bottom:18px;
+}
+
+.gallery-heading h2{
+    font-size:23px;
+}
+
+/* FILTERS */
+
+.filter-bar{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+.filter-button{
+    padding:10px 19px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:25px;
+    color:white;
+    background:rgba(0,0,0,.38);
+    cursor:pointer;
+    font-size:14px;
+    transition:.25s;
+}
+
+.filter-button:hover{
+    background:rgba(255,255,255,.13);
+}
+
+.filter-button.active{
+    background:rgba(130,35,190,.55);
+    border-color:rgba(210,130,255,.8);
+    box-shadow:0 0 13px rgba(160,40,255,.2);
+}
+
+/* EDITORIAL MEDIA GRID */
+
+#mediaGrid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    align-items:start;
+    gap:22px;
 }
 
 .media-card{
+    min-width:0;
     overflow:hidden;
-    background:rgba(0,0,0,.38);
+    background:rgba(0,0,0,.42);
     border:1px solid rgba(255,255,255,.14);
     backdrop-filter:blur(8px);
     -webkit-backdrop-filter:blur(8px);
-    border-radius:20px;
-    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    border-radius:17px;
+    box-shadow:0 15px 40px rgba(0,0,0,.28);
+    transition:transform .25s,border-color .25s;
+}
+
+.media-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(190,80,255,.5);
 }
 
 .media-preview{
     display:block;
     width:100%;
-    max-height:350px;
-    object-fit:cover;
-    background:#000;
+    height:auto;
+    max-height:460px;
+    object-fit:contain;
+    background:rgba(0,0,0,.65);
+}
+
+.media-click{
+    position:relative;
+    display:block;
+    width:100%;
+    cursor:pointer;
+    border:0;
+    padding:0;
+    background:rgba(0,0,0,.65);
+    color:white;
+    text-align:left;
+}
+
+.media-click img{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:460px;
+    object-fit:contain;
+}
+
+.media-placeholder{
+    width:100%;
+    min-height:190px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    background:rgba(0,0,0,.65);
+    color:rgba(255,255,255,.75);
+}
+
+.play-button{
+    width:54px;
+    height:54px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-left:4px;
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:50%;
+    background:rgba(120,30,180,.55);
+    font-size:22px;
 }
 
 .media-info{
-    padding:20px;
+    padding:17px;
 }
 
 .media-info h3{
-    font-size:22px;
-    margin-bottom:10px;
+    font-size:19px;
+    margin-bottom:9px;
+    overflow-wrap:anywhere;
 }
 
 .media-info p{
-    color:rgba(255,255,255,.85);
-    line-height:1.6;
+    color:rgba(255,255,255,.78);
+    line-height:1.55;
+    font-size:14px;
+    overflow-wrap:anywhere;
+    white-space:pre-wrap;
+}
+
+.media-category{
+    margin-top:10px;
+    color:rgba(255,255,255,.58);
+    font-size:12px;
+}
+
+.media-details{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+    font-size:12px;
+    color:rgba(255,255,255,.58);
+}
+
+.media-type-label{
+    color:#dfb5ff;
+    border:1px solid rgba(190,80,255,.35);
+    border-radius:20px;
+    padding:5px 9px;
+    background:rgba(120,30,180,.18);
 }
 
 .empty-state{
@@ -216,82 +346,160 @@ main{
     color:rgba(255,255,255,.8);
 }
 
-/* VIDEO THUMBNAIL */
-
-.video-wrapper{
-    position:relative;
-    width:100%;
-    background:#000;
-    cursor:pointer;
-}
-
-.video-wrapper img{
-    display:block;
-    width:100%;
-    max-height:350px;
-    object-fit:cover;
-}
-
-.play-button{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    background:rgba(0,0,0,.7);
-    border:2px solid rgba(255,255,255,.8);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:30px;
-    color:white;
-}
-
-/* FULLSCREEN MODAL */
+/* FULLSCREEN VIEWER */
 
 #mediaModal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.92);
+    background:rgba(0,0,0,.96);
     display:none;
     align-items:center;
     justify-content:center;
     z-index:9999;
-    padding:20px;
+    padding:65px 25px 25px;
 }
 
 #mediaModal.active{
     display:flex;
 }
 
+#modalLayout{
+    width:min(1200px,100%);
+    height:100%;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 290px;
+    gap:20px;
+    align-items:center;
+}
+
 #modalContent{
-    max-width:95vw;
-    max-height:90vh;
+    min-width:0;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
 }
 
 #modalContent img,
-#modalContent video,
-#modalContent iframe{
-    max-width:95vw;
-    max-height:90vh;
-    border:none;
+#modalContent video{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
     border-radius:10px;
+}
+
+#modalContent iframe{
+    width:100%;
+    height:min(75vh,700px);
+    border:0;
+    border-radius:12px;
 }
 
 .modal-close{
     position:absolute;
-    top:20px;
-    right:25px;
-    width:45px;
-    height:45px;
-    border:none;
+    top:15px;
+    right:20px;
+    width:46px;
+    height:46px;
+    border:1px solid rgba(255,255,255,.3);
     border-radius:50%;
-    background:rgba(255,255,255,.15);
+    background:rgba(0,0,0,.6);
     color:white;
-    font-size:28px;
+    font-size:29px;
     cursor:pointer;
+    z-index:10001;
+}
+
+.modal-info{
+    max-height:100%;
+    overflow-y:auto;
+    padding:20px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:16px;
+    background:rgba(20,20,20,.8);
+}
+
+.modal-info h2{
+    font-size:22px;
+    margin-bottom:12px;
+    overflow-wrap:anywhere;
+}
+
+.modal-info p{
+    color:rgba(255,255,255,.8);
+    line-height:1.6;
+    font-size:14px;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+
+.modal-date{
+    margin-top:15px;
+    font-size:12px;
+    color:rgba(255,255,255,.5);
+}
+
+.modal-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-top:22px;
+}
+
+.modal-action{
+    padding:10px 14px;
+    border:1px solid rgba(190,80,255,.5);
+    border-radius:9px;
+    background:rgba(110,25,160,.3);
+    color:white;
+    cursor:pointer;
+}
+
+.modal-action:hover{
+    background:rgba(145,35,210,.5);
+}
+
+.modal-navigation{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.modal-navigation button{
+    flex:1;
+    padding:10px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:9px;
+    background:rgba(255,255,255,.08);
+    color:white;
+    cursor:pointer;
+}
+
+.modal-navigation button:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+#shareStatus{
+    min-height:18px;
+    margin-top:12px;
+    font-size:12px;
+    color:#d8b0ff;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+    #mediaGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    #modalLayout{
+        grid-template-columns:minmax(0,1fr) 250px;
+    }
+
 }
 
 @media(max-width:600px){
@@ -309,9 +517,60 @@ main{
         padding:30px 15px 50px;
     }
 
+    .page-title p{
+        font-size:16px;
+    }
+
     #mediaGrid{
         grid-template-columns:1fr;
+        gap:18px;
     }
+
+    .filter-bar{
+        gap:7px;
+    }
+
+    .filter-button{
+        padding:9px 14px;
+        font-size:13px;
+    }
+
+    #mediaModal{
+        padding:65px 12px 12px;
+        overflow-y:auto;
+        align-items:flex-start;
+    }
+
+    #modalLayout{
+        height:auto;
+        min-height:100%;
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    #modalContent{
+        width:100%;
+        min-height:45vh;
+        max-height:65vh;
+        flex:none;
+    }
+
+    #modalContent img,
+    #modalContent video{
+        max-width:100%;
+        max-height:60vh;
+    }
+
+    #modalContent iframe{
+        height:45vh;
+    }
+
+    .modal-info{
+        width:100%;
+        max-height:none;
+    }
+
 }
 
 </style>
@@ -364,17 +623,79 @@ main{
 
 </div>
 
-<div id="mediaGrid"></div>
+<section class="gallery-section">
+
+    <div class="gallery-heading">
+        <h2>Explore Media</h2>
+    </div>
+
+    <div class="filter-bar" id="filterBar">
+
+        <button class="filter-button active" data-filter="all">All</button>
+
+        <button class="filter-button" data-filter="shorts">Shorts</button>
+
+        <button class="filter-button" data-filter="videos">Videos</button>
+
+        <button class="filter-button" data-filter="photos">Photos</button>
+
+    </div>
+
+    <div id="mediaGrid">
+
+        <div class="empty-state">
+            Loading projects...
+        </div>
+
+    </div>
+
+</section>
 
 </main>
 
-<!-- MEDIA MODAL -->
+<!-- FULLSCREEN MEDIA VIEWER -->
 
 <div id="mediaModal">
 
-<button class="modal-close" onclick="closeMediaModal()">×</button>
+<button class="modal-close" id="modalClose" aria-label="Close viewer">×</button>
 
-<div id="modalContent"></div>
+<div id="modalLayout">
+
+    <div id="modalContent"></div>
+
+    <aside class="modal-info">
+
+        <h2 id="modalTitle"></h2>
+
+        <p id="modalDescription"></p>
+
+        <div class="modal-date" id="modalDate"></div>
+
+        <div class="modal-actions">
+
+            <button class="modal-action" id="shareButton">
+                Share
+            </button>
+
+            <button class="modal-action" id="downloadButton">
+                Download
+            </button>
+
+        </div>
+
+        <div id="shareStatus"></div>
+
+        <div class="modal-navigation">
+
+            <button id="previousButton">Previous</button>
+
+            <button id="nextButton">Next</button>
+
+        </div>
+
+    </aside>
+
+</div>
 
 </div>
 
@@ -386,17 +707,26 @@ main{
 
 <script>
 
-const menuButton=document.getElementById("menuButton");
-const menu=document.getElementById("menu");
+/* MENU */
+
+const menuButton = document.getElementById("menuButton");
+
+const menu = document.getElementById("menu");
 
 function toggleMenu(){
+
     menu.classList.toggle("active");
+
     menuButton.classList.toggle("active");
+
 }
 
 function closeMenu(){
+
     menu.classList.remove("active");
+
     menuButton.classList.remove("active");
+
 }
 
 document.addEventListener("click",function(event){
@@ -405,364 +735,1004 @@ document.addEventListener("click",function(event){
         !menu.contains(event.target) &&
         !menuButton.contains(event.target)
     ){
+
         closeMenu();
+
     }
 
 });
 
 /* FIREBASE */
 
-if (!firebase.apps.length) {
-    firebase.initializeApp(window.firebaseConfig);
+let db = null;
+
+const firebaseReady =
+    window.firebaseConfig &&
+    window.firebaseConfig.apiKey &&
+    !String(window.firebaseConfig.apiKey).startsWith("PASTE_");
+
+if(firebaseReady){
+
+    try{
+
+        if(!firebase.apps.length){
+
+            firebase.initializeApp(window.firebaseConfig);
+
+        }
+
+        db = firebase.firestore();
+
+    }catch(error){
+
+        console.error("Firebase initialization error:",error);
+
+    }
+
 }
 
-const db = firebase.firestore();
+/* GLOBAL MEDIA DATA */
 
-/* MODAL */
+let allMedia = [];
 
-const mediaModal=document.getElementById("mediaModal");
-const modalContent=document.getElementById("modalContent");
+let visibleMedia = [];
 
-function openMediaModal(type,url){
+let activeFilter = "all";
 
-    modalContent.innerHTML="";
+let currentViewerIndex = 0;
 
-    if(type==="image"){
+let currentViewerMedia = null;
 
-        const img=document.createElement("img");
-        img.src=url;
-        img.alt="Project image";
-        modalContent.appendChild(img);
+/* HTML SECURITY */
 
-    }else if(type==="video"){
+function escapeHTML(value){
 
-        const video=document.createElement("video");
+    return String(value || "").replace(/[&<>"']/g,function(character){
 
-        video.src=url;
-        video.controls=true;
-        video.autoplay=true;
+        return {
+
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+
+        }[character];
+
+    });
+
+}
+
+/* YOUTUBE */
+
+function getYouTubeId(url){
+
+    if(!url) return "";
+
+    try{
+
+        const parsed = new URL(url);
+
+        if(parsed.hostname.includes("youtube.com")){
+
+            const videoId = parsed.searchParams.get("v");
+
+            if(videoId) return videoId;
+
+            if(parsed.pathname.startsWith("/shorts/")){
+
+                return parsed.pathname.split("/shorts/")[1].split("/")[0];
+
+            }
+
+            if(parsed.pathname.startsWith("/embed/")){
+
+                return parsed.pathname.split("/embed/")[1].split("/")[0];
+
+            }
+
+        }
+
+        if(
+            parsed.hostname === "youtu.be" ||
+            parsed.hostname.endsWith(".youtu.be")
+        ){
+
+            return parsed.pathname.substring(1).split("/")[0];
+
+        }
+
+    }catch(error){
+
+        return "";
+
+    }
+
+    return "";
+
+}
+
+function getYouTubeEmbed(url){
+
+    const id = getYouTubeId(url);
+
+    return id
+        ? "https://www.youtube.com/embed/" + encodeURIComponent(id)
+        : "";
+
+}
+
+function isYouTubeShort(url){
+
+    return /youtube\.com\/shorts\//i.test(String(url || ""));
+
+}
+
+/* DATE */
+
+function getDateValue(value){
+
+    if(!value) return 0;
+
+    if(value.seconds){
+
+        return value.seconds * 1000;
+
+    }
+
+    if(typeof value.toDate === "function"){
+
+        return value.toDate().getTime();
+
+    }
+
+    if(typeof value === "number"){
+
+        return value;
+
+    }
+
+    const parsed = new Date(value).getTime();
+
+    return Number.isNaN(parsed) ? 0 : parsed;
+
+}
+
+function formatDate(value){
+
+    const time = getDateValue(value);
+
+    if(!time) return "";
+
+    return new Date(time).toLocaleDateString(undefined,{
+
+        year:"numeric",
+        month:"short",
+        day:"numeric"
+
+    });
+
+}
+
+/* NORMALIZE OLD AND NEW MEDIA RECORDS */
+
+function normalizeMedia(data,id){
+
+    let type = String(
+        data.type ||
+        data.mediaType ||
+        data.format ||
+        ""
+    ).toLowerCase();
+
+    const url = data.url || data.mediaUrl || "";
+
+    const youtubeId = getYouTubeId(url);
+
+    if(
+        type === "image" ||
+        type === "photo" ||
+        type === "photos"
+    ){
+
+        type = "photo";
+
+    }else if(
+        type === "youtube" ||
+        youtubeId
+    ){
+
+        type = "youtube";
+
+    }else if(
+        type === "video" ||
+        type === "videos" ||
+        type === "short" ||
+        type === "shorts"
+    ){
+
+        type = "video";
+
+    }
+
+    return {
+
+        ...data,
+
+        id:id,
+
+        type:type,
+
+        url:url,
+
+        thumbnailUrl:
+            data.thumbnailUrl ||
+            data.thumbnail ||
+            ""
+
+    };
+
+}
+
+/* ASPECT RATIO */
+
+function getAspectRatio(item){
+
+    if(item.aspectRatio){
+
+        const ratio = Number(item.aspectRatio);
+
+        if(ratio > 0) return ratio;
+
+    }
+
+    const width = Number(item.width || item.videoWidth || 0);
+
+    const height = Number(item.height || item.videoHeight || 0);
+
+    if(width > 0 && height > 0){
+
+        return width / height;
+
+    }
+
+    return item._detectedRatio || 0;
+
+}
+
+/* MEDIA CLASSIFICATION */
+
+function getMediaKind(item){
+
+    if(item.type === "photo"){
+
+        return "photos";
+
+    }
+
+    if(item.type === "short" || item.type === "shorts"){
+
+        return "shorts";
+
+    }
+
+    if(item.type === "youtube" && isYouTubeShort(item.url)){
+
+        return "shorts";
+
+    }
+
+    const ratio = getAspectRatio(item);
+
+    if(ratio && ratio < 0.85){
+
+        return "shorts";
+
+    }
+
+    return "videos";
+
+}
+
+function getTypeLabel(item){
+
+    const kind = getMediaKind(item);
+
+    if(kind === "photos") return "Photo";
+
+    if(kind === "shorts") return "Short";
+
+    return "Video";
+
+}
+
+/* DETECT VIDEO DIMENSIONS */
+
+function detectVideoDimensions(item){
+
+    if(!item.url) return;
+
+    if(item.type === "photo") return;
+
+    if(getYouTubeId(item.url)) return;
+
+    if(getAspectRatio(item)) return;
+
+    const video = document.createElement("video");
+
+    video.preload = "metadata";
+
+    video.onloadedmetadata = function(){
+
+        if(video.videoWidth && video.videoHeight){
+
+            item._detectedRatio =
+                video.videoWidth / video.videoHeight;
+
+            renderMedia();
+
+        }
+
+        video.removeAttribute("src");
+
+        video.load();
+
+    };
+
+    video.onerror = function(){
+
+        video.removeAttribute("src");
+
+        video.load();
+
+    };
+
+    video.src = item.playbackUrl || item.url;
+
+}
+
+/* THUMBNAILS */
+
+function getThumbnail(item){
+
+    if(item.thumbnailUrl){
+
+        return item.thumbnailUrl;
+
+    }
+
+    const youtubeId = getYouTubeId(item.url);
+
+    if(youtubeId){
+
+        return "https://img.youtube.com/vi/" +
+            youtubeId +
+            "/hqdefault.jpg";
+
+    }
+
+    if(item.type === "photo"){
+
+        return item.url;
+
+    }
+
+    return "";
+
+}
+
+/* MEDIA FILTERS */
+
+function getFilteredMedia(){
+
+    if(activeFilter === "all"){
+
+        return allMedia;
+
+    }
+
+    return allMedia.filter(function(item){
+
+        return getMediaKind(item) === activeFilter;
+
+    });
+
+}
+
+function updateFilterButtons(){
+
+    document.querySelectorAll(".filter-button").forEach(function(button){
+
+        button.classList.toggle(
+            "active",
+            button.dataset.filter === activeFilter
+        );
+
+    });
+
+}
+
+/* MEDIA CARD */
+
+function mediaCard(item){
+
+    const kind = getMediaKind(item);
+
+    const thumbnail = getThumbnail(item);
+
+    let preview = "";
+
+    if(kind === "photos"){
+
+        preview = `
+
+            <button
+                class="media-click"
+                type="button"
+                data-open-id="${escapeHTML(item.id)}"
+                aria-label="Open photo"
+            >
+
+                <img
+                    src="${escapeHTML(item.url)}"
+                    alt="${escapeHTML(item.name || "Project photo")}"
+                    loading="lazy"
+                >
+
+            </button>
+
+        `;
+
+    }else{
+
+        if(thumbnail){
+
+            preview = `
+
+                <button
+                    class="media-click"
+                    type="button"
+                    data-open-id="${escapeHTML(item.id)}"
+                    aria-label="Play video"
+                >
+
+                    <img
+                        src="${escapeHTML(thumbnail)}"
+                        alt="${escapeHTML(item.name || "Video thumbnail")}"
+                        loading="lazy"
+                    >
+
+                    <span class="play-button"
+                        style="
+                            position:absolute;
+                            left:50%;
+                            top:50%;
+                            transform:translate(-50%,-50%);
+                        "
+                    >▶</span>
+
+                </button>
+
+            `;
+
+        }else{
+
+            preview = `
+
+                <button
+                    class="media-click"
+                    type="button"
+                    data-open-id="${escapeHTML(item.id)}"
+                    aria-label="Open video"
+                >
+
+                    <div class="media-placeholder">
+
+                        <span class="play-button">▶</span>
+
+                        <span>Open video</span>
+
+                    </div>
+
+                </button>
+
+            `;
+
+        }
+
+    }
+
+    return `
+
+        <article class="media-card">
+
+            ${preview}
+
+            <div class="media-info">
+
+                <h3>
+                    ${escapeHTML(item.name || "Untitled Project")}
+                </h3>
+
+                <p>
+                    ${escapeHTML(item.description || "")}
+                </p>
+
+                ${
+                    item.category
+                    ? `<div class="media-category">${escapeHTML(item.category)}</div>`
+                    : ""
+                }
+
+                <div class="media-details">
+
+                    <span class="media-type-label">
+                        ${escapeHTML(getTypeLabel(item))}
+                    </span>
+
+                    <span>
+                        ${escapeHTML(formatDate(item.createdAt))}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+/* RENDER GALLERY */
+
+function renderMedia(){
+
+    const mediaGrid = document.getElementById("mediaGrid");
+
+    visibleMedia = getFilteredMedia();
+
+    if(!visibleMedia.length){
+
+        mediaGrid.innerHTML = `
+
+            <div class="empty-state">
+
+                No ${
+                    activeFilter === "all"
+                    ? "projects"
+                    : activeFilter
+                } found.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    mediaGrid.innerHTML = visibleMedia.map(mediaCard).join("");
+
+}
+
+/* FILTER EVENTS */
+
+document.getElementById("filterBar").addEventListener("click",function(event){
+
+    const button = event.target.closest(".filter-button");
+
+    if(!button) return;
+
+    activeFilter = button.dataset.filter;
+
+    updateFilterButtons();
+
+    renderMedia();
+
+});
+
+/* VIEWER */
+
+const mediaModal = document.getElementById("mediaModal");
+
+const modalContent = document.getElementById("modalContent");
+
+function openMediaModal(itemId){
+
+    const list = getFilteredMedia();
+
+    const index = list.findIndex(function(item){
+
+        return item.id === itemId;
+
+    });
+
+    if(index < 0) return;
+
+    currentViewerIndex = index;
+
+    showViewerItem();
+
+}
+
+function showViewerItem(){
+
+    const list = getFilteredMedia();
+
+    if(!list.length) return;
+
+    if(currentViewerIndex < 0){
+
+        currentViewerIndex = 0;
+
+    }
+
+    if(currentViewerIndex >= list.length){
+
+        currentViewerIndex = list.length - 1;
+
+    }
+
+    currentViewerMedia = list[currentViewerIndex];
+
+    modalContent.innerHTML = "";
+
+    const youtubeId = getYouTubeId(currentViewerMedia.url);
+
+    if(youtubeId){
+
+        const iframe = document.createElement("iframe");
+
+        iframe.src =
+            getYouTubeEmbed(currentViewerMedia.url) +
+            "?autoplay=1";
+
+        iframe.allow =
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
+        iframe.allowFullscreen = true;
+
+        modalContent.appendChild(iframe);
+
+    }else if(getMediaKind(currentViewerMedia) === "photos"){
+
+        const image = document.createElement("img");
+
+        image.src = currentViewerMedia.url;
+
+        image.alt = currentViewerMedia.name || "Project photo";
+
+        modalContent.appendChild(image);
+
+    }else{
+
+        const video = document.createElement("video");
+
+        video.src =
+            currentViewerMedia.playbackUrl ||
+            currentViewerMedia.url;
+
+        video.controls = true;
+
+        video.autoplay = true;
+
+        video.playsInline = true;
 
         modalContent.appendChild(video);
 
-    }else if(type==="youtube"){
-
-        const iframe=document.createElement("iframe");
-
-        iframe.src=url;
-        iframe.width="900";
-        iframe.height="506";
-        iframe.allow="autoplay; encrypted-media; picture-in-picture";
-        iframe.allowFullscreen=true;
-
-        modalContent.appendChild(iframe);
     }
 
+    document.getElementById("modalTitle").textContent =
+        currentViewerMedia.name || "Untitled Project";
+
+    document.getElementById("modalDescription").textContent =
+        currentViewerMedia.description || "No description available.";
+
+    document.getElementById("modalDate").textContent = [
+
+        getTypeLabel(currentViewerMedia),
+
+        currentViewerMedia.category || "",
+
+        formatDate(currentViewerMedia.createdAt)
+
+    ].filter(Boolean).join(" · ");
+
+    document.getElementById("previousButton").disabled =
+        currentViewerIndex === 0;
+
+    document.getElementById("nextButton").disabled =
+        currentViewerIndex === list.length - 1;
+
+    document.getElementById("shareStatus").textContent = "";
+
+    document.getElementById("downloadButton").style.display =
+        youtubeId ? "none" : "";
+
     mediaModal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
 }
 
 function closeMediaModal(){
 
     mediaModal.classList.remove("active");
-    modalContent.innerHTML="";
+
+    modalContent.innerHTML = "";
+
+    currentViewerMedia = null;
+
+    document.body.style.overflow = "";
 
 }
 
+document.getElementById("modalClose").addEventListener("click",closeMediaModal);
+
 mediaModal.addEventListener("click",function(event){
 
-    if(event.target===mediaModal){
+    if(event.target === mediaModal){
+
         closeMediaModal();
+
     }
 
 });
 
-/* YOUTUBE */
+/* NAVIGATION */
 
-function getYouTubeEmbed(url){
+document.getElementById("previousButton").addEventListener("click",function(){
+
+    if(currentViewerIndex > 0){
+
+        currentViewerIndex--;
+
+        showViewerItem();
+
+    }
+
+});
+
+document.getElementById("nextButton").addEventListener("click",function(){
+
+    if(currentViewerIndex < getFilteredMedia().length - 1){
+
+        currentViewerIndex++;
+
+        showViewerItem();
+
+    }
+
+});
+
+/* OPEN CARD */
+
+document.addEventListener("click",function(event){
+
+    const target = event.target.closest("[data-open-id]");
+
+    if(!target) return;
+
+    openMediaModal(target.dataset.openId);
+
+});
+
+/* SHARE */
+
+function getShareURL(item){
+
+    const url = new URL(window.location.href);
+
+    url.searchParams.set("post",item.id);
+
+    return url.toString();
+
+}
+
+document.getElementById("shareButton").addEventListener("click",async function(){
+
+    if(!currentViewerMedia) return;
+
+    const shareURL = getShareURL(currentViewerMedia);
+
+    const shareData = {
+
+        title:currentViewerMedia.name || "Project",
+
+        text:currentViewerMedia.description || "",
+
+        url:shareURL
+
+    };
 
     try{
 
-        const parsed=new URL(url);
+        if(navigator.share){
 
-        let videoId="";
+            await navigator.share(shareData);
 
-        if(parsed.hostname.includes("youtube.com")){
+        }else{
 
-            videoId=parsed.searchParams.get("v");
+            await navigator.clipboard.writeText(shareURL);
 
-            if(!videoId && parsed.pathname.startsWith("/shorts/")){
-                videoId=parsed.pathname.split("/shorts/")[1].split("/")[0];
-            }
-
-        }
-
-        if(parsed.hostname==="youtu.be"){
-
-            videoId=parsed.pathname.substring(1).split("/")[0];
-
-        }
-
-        if(videoId){
-
-            return "https://www.youtube.com/embed/"+videoId;
+            document.getElementById("shareStatus").textContent =
+                "Link copied.";
 
         }
 
     }catch(error){
 
+        if(error.name !== "AbortError"){
+
+            try{
+
+                await navigator.clipboard.writeText(shareURL);
+
+                document.getElementById("shareStatus").textContent =
+                    "Link copied.";
+
+            }catch(copyError){
+
+                document.getElementById("shareStatus").textContent =
+                    "Unable to share. Please copy the page link.";
+
+            }
+
+        }
+
     }
 
-    return null;
-}
+});
+
+/* DOWNLOAD */
+
+document.getElementById("downloadButton").addEventListener("click",function(){
+
+    if(!currentViewerMedia) return;
+
+    if(getYouTubeId(currentViewerMedia.url)) return;
+
+    const url =
+        currentViewerMedia.url ||
+        currentViewerMedia.playbackUrl;
+
+    if(!url) return;
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        (currentViewerMedia.name || "project")
+        .replace(/[^\w\- ]/g,"")
+        .trim() || "project";
+
+    link.target = "_blank";
+
+    link.rel = "noopener";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+});
+
+/* KEYBOARD */
+
+document.addEventListener("keydown",function(event){
+
+    if(event.key === "Escape"){
+
+        closeMediaModal();
+
+    }
+
+    if(!mediaModal.classList.contains("active")) return;
+
+    if(event.key === "ArrowLeft"){
+
+        document.getElementById("previousButton").click();
+
+    }
+
+    if(event.key === "ArrowRight"){
+
+        document.getElementById("nextButton").click();
+
+    }
+
+});
 
 /* LOAD PROJECTS */
 
 async function loadProjects(){
 
-    const mediaGrid=document.getElementById("mediaGrid");
+    const mediaGrid = document.getElementById("mediaGrid");
 
-    mediaGrid.innerHTML="";
+    if(!db){
+
+        mediaGrid.innerHTML = `
+
+            <div class="empty-state">
+
+                Firebase is not configured.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
 
     try{
 
-        const snapshot=await db
+        const snapshot = await db
             .collection("media")
             .where("page","==","projects")
             .get();
 
-        if(snapshot.empty){
+        allMedia = snapshot.docs.map(function(doc){
 
-            mediaGrid.innerHTML=`
-                <div class="empty-state">
-                    No projects have been uploaded yet.
-                </div>
-            `;
-
-            return;
-        }
-
-        const posts=[];
-
-        snapshot.forEach(doc=>{
-
-            const data=doc.data();
-
-            posts.push({
-                id:doc.id,
-                ...data
-            });
+            return normalizeMedia(doc.data(),doc.id);
 
         });
 
         /* NEWEST FIRST */
 
-        posts.sort((a,b)=>{
+        allMedia.sort(function(a,b){
 
-            const dateA=a.createdAt
-                ? (a.createdAt.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt).getTime())
-                : 0;
-
-            const dateB=b.createdAt
-                ? (b.createdAt.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt).getTime())
-                : 0;
-
-            return dateB-dateA;
+            return getDateValue(b.createdAt) -
+                   getDateValue(a.createdAt);
 
         });
 
-        posts.forEach(data=>{
+        renderMedia();
 
-            const card=document.createElement("div");
-            card.className="media-card";
+        /* DETECT VIDEO DIMENSIONS WHEN AVAILABLE */
 
-            const type=data.type || data.mediaType || "image";
-            const url=data.url || data.mediaUrl || "";
-            const thumbnail=data.thumbnail || data.thumbnailUrl || "";
+        allMedia.forEach(detectVideoDimensions);
 
-            /* NEW: Prefer converted playback URL for videos */
+        /* OPEN A SHARED POST DIRECTLY */
 
-            const videoSource=data.playbackUrl || url;
+        const requestedPost =
+            new URLSearchParams(window.location.search).get("post");
 
-            let preview="";
+        if(requestedPost){
 
-            /* IMAGE */
+            const requested = allMedia.find(function(item){
 
-            if(type==="image"){
+                return item.id === requestedPost;
 
-                preview=`
-                    <img
-                        class="media-preview"
-                        src="${escapeHTML(url)}"
-                        alt="${escapeHTML(data.name || "Project image")}"
-                        onclick="openMediaModal('image','${escapeJS(url)}')"
-                        style="cursor:pointer;"
-                    >
-                `;
+            });
+
+            if(requested){
+
+                openMediaModal(requestedPost);
 
             }
 
-            /* NORMAL VIDEO */
-
-            else if(type==="video"){
-
-                if(thumbnail){
-
-                    preview=`
-                        <div
-                            class="video-wrapper"
-                            onclick="openMediaModal('video','${escapeJS(videoSource)}')"
-                        >
-                            <img
-                                src="${escapeHTML(thumbnail)}"
-                                alt="${escapeHTML(data.name || "Project video")}"
-                            >
-                            <div class="play-button">▶</div>
-                        </div>
-                    `;
-
-                }else{
-
-                    preview=`
-                        <div
-                            class="video-wrapper"
-                            onclick="openMediaModal('video','${escapeJS(videoSource)}')"
-                        >
-                            <video
-                                class="media-preview"
-                                src="${escapeHTML(videoSource)}"
-                                muted
-                                preload="metadata"
-                            ></video>
-                            <div class="play-button">▶</div>
-                        </div>
-                    `;
-
-                }
-
-            }
-
-            /* YOUTUBE */
-
-            else if(type==="youtube"){
-
-                const embedUrl=getYouTubeEmbed(url);
-
-                if(embedUrl){
-
-                    if(thumbnail){
-
-                        preview=`
-                            <div
-                                class="video-wrapper"
-                                onclick="openMediaModal('youtube','${escapeJS(embedUrl)}')"
-                            >
-                                <img
-                                    src="${escapeHTML(thumbnail)}"
-                                    alt="${escapeHTML(data.name || "YouTube video")}"
-                                >
-                                <div class="play-button">▶</div>
-                            </div>
-                        `;
-
-                    }else{
-
-                        preview=`
-                            <div
-                                class="video-wrapper"
-                                onclick="openMediaModal('youtube','${escapeJS(embedUrl)}')"
-                            >
-                                <div
-                                    style="
-                                        width:100%;
-                                        height:250px;
-                                        display:flex;
-                                        align-items:center;
-                                        justify-content:center;
-                                        background:#000;
-                                        font-size:50px;
-                                    "
-                                >
-                                    ▶
-                                </div>
-                            </div>
-                        `;
-
-                    }
-
-                }
-
-            }
-
-            /* FALLBACK */
-
-            if(!preview && url){
-
-                preview=`
-                    <img
-                        class="media-preview"
-                        src="${escapeHTML(url)}"
-                        alt="${escapeHTML(data.name || "Project")}"
-                    >
-                `;
-
-            }
-
-            card.innerHTML=`
-
-                ${preview}
-
-                <div class="media-info">
-
-                    <h3>
-                        ${escapeHTML(data.name || "Untitled Project")}
-                    </h3>
-
-                    <p>
-                        ${escapeHTML(data.description || "")}
-                    </p>
-
-                </div>
-
-            `;
-
-            mediaGrid.appendChild(card);
-
-        });
+        }
 
     }catch(error){
 
         console.error("Error loading projects:",error);
 
-        mediaGrid.innerHTML=`
+        mediaGrid.innerHTML = `
+
             <div class="empty-state">
+
                 Unable to load projects right now.
+                Please check your Firebase setup.
+
             </div>
+
         `;
 
     }
-
-}
-
-/* SECURITY / TEXT HELPERS */
-
-function escapeHTML(value){
-
-    return String(value || "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-function escapeJS(value){
-
-    return String(value || "")
-        .replace(/\\/g,"\\\\")
-        .replace(/'/g,"\\'")
-        .replace(/"/g,'\\"')
-        .replace(/\n/g,"\\n")
-        .replace(/\r/g,"\\r");
 
 }
 
