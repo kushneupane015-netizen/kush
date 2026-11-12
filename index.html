@@ -17,9 +17,7 @@
     font-family:Arial,sans-serif;
 }
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth;}
 
 body{
     min-height:100vh;
@@ -52,8 +50,6 @@ header{
     position:relative;
     z-index:1000;
 }
-
-/* HAMBURGER */
 
 .menu-button{
     width:54px;
@@ -89,9 +85,7 @@ header{
     transform:translateY(9px) rotate(45deg);
 }
 
-.menu-button.active span:nth-child(2){
-    opacity:0;
-}
+.menu-button.active span:nth-child(2){opacity:0;}
 
 .menu-button.active span:nth-child(3){
     transform:translateY(-9px) rotate(-45deg);
@@ -147,10 +141,7 @@ header{
     margin:8px 5px;
 }
 
-
-/* ================================================= */
-/* WELCOME BANNER - ADDED */
-/* ================================================= */
+/* WELCOME BANNER */
 
 .welcome-banner{
     width:min(1100px,calc(100% - 40px));
@@ -161,17 +152,14 @@ header{
     justify-content:center;
     position:relative;
     overflow:hidden;
-
     border:1px solid rgba(190,80,255,.65);
     border-radius:18px;
-
     background:linear-gradient(
         90deg,
         rgba(45,0,80,.72),
         rgba(115,0,180,.42),
         rgba(45,0,80,.72)
     );
-
     box-shadow:
         0 0 18px rgba(160,40,255,.35),
         inset 0 0 25px rgba(160,40,255,.12);
@@ -183,24 +171,17 @@ header{
     position:absolute;
     width:90px;
     height:1px;
-
     background:linear-gradient(
         90deg,
         transparent,
         #c45cff,
         transparent
     );
-
     box-shadow:0 0 10px #c45cff;
 }
 
-.welcome-banner::before{
-    left:7%;
-}
-
-.welcome-banner::after{
-    right:7%;
-}
+.welcome-banner::before{left:7%;}
+.welcome-banner::after{right:7%;}
 
 .welcome-banner-content{
     text-align:center;
@@ -222,7 +203,6 @@ header{
     color:rgba(255,255,255,.8);
 }
 
-
 /* MAIN */
 
 main{
@@ -232,7 +212,7 @@ main{
 
 .page-title{
     text-align:center;
-    margin-bottom:35px;
+    margin-bottom:30px;
 }
 
 .page-title h1{
@@ -245,48 +225,260 @@ main{
     color:rgba(255,255,255,.85);
 }
 
+/* FEATURED LATEST UPLOAD */
 
-/* MEDIA GRID */
+.featured-section{
+    width:min(1100px,100%);
+    margin:0 auto 38px;
+}
 
-#mediaGrid{
+.section-heading{
+    font-size:23px;
+    margin-bottom:16px;
+}
+
+.featured-card{
+    display:grid;
+    grid-template-columns:minmax(0,1.35fr) minmax(250px,1fr);
+    overflow:hidden;
+    border:1px solid rgba(190,80,255,.38);
+    border-radius:20px;
+    background:rgba(0,0,0,.48);
+    backdrop-filter:blur(10px);
+    box-shadow:0 18px 55px rgba(0,0,0,.3);
+}
+
+.featured-media{
+    min-height:270px;
+    max-height:440px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.55);
+    cursor:pointer;
+    overflow:hidden;
+}
+
+.featured-media img{
+    width:100%;
+    height:100%;
+    max-height:440px;
+    object-fit:contain;
+}
+
+.featured-placeholder{
+    color:rgba(255,255,255,.7);
+    font-size:15px;
+    text-align:center;
+    padding:30px;
+}
+
+.featured-info{
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.featured-label{
+    display:inline-block;
+    width:fit-content;
+    padding:7px 12px;
+    border:1px solid rgba(196,92,255,.55);
+    border-radius:20px;
+    background:rgba(120,30,180,.22);
+    color:#e2b5ff;
+    font-size:12px;
+    letter-spacing:1px;
+    margin-bottom:16px;
+}
+
+.featured-info h2{
+    font-size:clamp(22px,3vw,32px);
+    margin-bottom:12px;
+    overflow-wrap:anywhere;
+}
+
+.featured-info p{
+    color:rgba(255,255,255,.8);
+    line-height:1.65;
+    overflow-wrap:anywhere;
+}
+
+.featured-meta{
+    margin-top:17px;
+    font-size:13px;
+    color:rgba(255,255,255,.55);
+}
+
+.featured-open{
+    margin-top:22px;
+    width:fit-content;
+    padding:11px 19px;
+    border:1px solid rgba(196,92,255,.65);
+    border-radius:10px;
+    background:rgba(115,0,180,.3);
+    color:white;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.featured-open:hover{
+    background:rgba(145,35,210,.5);
+}
+
+/* MEDIA FILTERS */
+
+.gallery-section{
     width:min(1100px,100%);
     margin:auto;
+}
+
+.gallery-heading{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+}
+
+.gallery-heading h2{
+    font-size:23px;
+}
+
+.filter-bar{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+.filter-button{
+    padding:10px 19px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:25px;
+    color:white;
+    background:rgba(0,0,0,.38);
+    cursor:pointer;
+    font-size:14px;
+    transition:.25s;
+}
+
+.filter-button:hover{
+    background:rgba(255,255,255,.13);
+}
+
+.filter-button.active{
+    background:rgba(130,35,190,.55);
+    border-color:rgba(210,130,255,.8);
+    box-shadow:0 0 13px rgba(160,40,255,.2);
+}
+
+/* EDITORIAL MEDIA GRID */
+
+#mediaGrid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    align-items:start;
+    gap:22px;
 }
 
 .media-card{
+    min-width:0;
     overflow:hidden;
-    background:rgba(0,0,0,.38);
+    background:rgba(0,0,0,.42);
     border:1px solid rgba(255,255,255,.14);
     backdrop-filter:blur(8px);
     -webkit-backdrop-filter:blur(8px);
-    border-radius:20px;
-    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    border-radius:17px;
+    box-shadow:0 15px 40px rgba(0,0,0,.28);
+    transition:transform .25s,border-color .25s;
+}
+
+.media-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(190,80,255,.5);
 }
 
 .media-preview{
     display:block;
     width:100%;
-    max-height:350px;
-    object-fit:cover;
-    background:#000;
+    height:auto;
+    max-height:460px;
+    object-fit:contain;
+    background:rgba(0,0,0,.65);
     cursor:pointer;
 }
 
+.media-placeholder{
+    width:100%;
+    min-height:190px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    background:rgba(0,0,0,.65);
+    color:rgba(255,255,255,.75);
+    cursor:pointer;
+}
+
+.play-symbol{
+    width:54px;
+    height:54px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-left:4px;
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:50%;
+    background:rgba(120,30,180,.55);
+    font-size:22px;
+}
+
 .media-info{
-    padding:20px;
+    padding:17px;
 }
 
 .media-info h3{
-    font-size:22px;
-    margin-bottom:10px;
+    font-size:19px;
+    margin-bottom:9px;
+    overflow-wrap:anywhere;
 }
 
 .media-info p{
-    color:rgba(255,255,255,.85);
-    line-height:1.6;
+    color:rgba(255,255,255,.78);
+    line-height:1.55;
+    font-size:14px;
+    overflow-wrap:anywhere;
+    white-space:pre-wrap;
+}
+
+.media-details{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+    font-size:12px;
+    color:rgba(255,255,255,.58);
+}
+
+.media-type-label{
+    color:#dfb5ff;
+    border:1px solid rgba(190,80,255,.35);
+    border-radius:20px;
+    padding:5px 9px;
+    background:rgba(120,30,180,.18);
+}
+
+.media-category{
+    margin-top:10px;
+    color:rgba(255,255,255,.58);
+    font-size:12px;
 }
 
 .empty-state{
@@ -299,77 +491,174 @@ main{
     color:rgba(255,255,255,.8);
 }
 
-
-/* FULL SCREEN MEDIA VIEWER */
+/* FULLSCREEN VIEWER */
 
 #mediaViewer{
     display:none;
     position:fixed;
     inset:0;
     z-index:5000;
-    background:rgba(0,0,0,.94);
+    background:rgba(0,0,0,.96);
     align-items:center;
     justify-content:center;
-    padding:30px;
+    padding:65px 25px 25px;
 }
 
-#mediaViewer.active{
-    display:flex;
-}
+#mediaViewer.active{display:flex;}
 
 #viewerClose{
     position:absolute;
-    top:20px;
-    right:25px;
-    width:50px;
-    height:50px;
+    top:15px;
+    right:20px;
+    width:46px;
+    height:46px;
     border:1px solid rgba(255,255,255,.3);
     border-radius:50%;
     background:rgba(0,0,0,.6);
     color:white;
-    font-size:30px;
+    font-size:29px;
     cursor:pointer;
-    z-index:5001;
+    z-index:5002;
+}
+
+#viewerLayout{
+    width:min(1200px,100%);
+    height:100%;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 290px;
+    gap:20px;
+    align-items:center;
 }
 
 #viewerContent{
-    width:100%;
+    min-width:0;
     height:100%;
     display:flex;
     align-items:center;
     justify-content:center;
+    overflow:hidden;
 }
 
 #viewerContent img,
 #viewerContent video{
-    max-width:95%;
-    max-height:90vh;
+    max-width:100%;
+    max-height:100%;
     object-fit:contain;
     border-radius:10px;
 }
 
 #viewerContent iframe{
-    width:min(1000px,95vw);
-    height:min(70vh,600px);
+    width:100%;
+    height:min(75vh,700px);
     border:0;
     border-radius:12px;
 }
 
+.viewer-info{
+    max-height:100%;
+    overflow-y:auto;
+    padding:20px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:16px;
+    background:rgba(20,20,20,.8);
+}
 
-/* MOBILE */
+.viewer-info h2{
+    font-size:22px;
+    margin-bottom:12px;
+    overflow-wrap:anywhere;
+}
+
+.viewer-info p{
+    color:rgba(255,255,255,.8);
+    line-height:1.6;
+    font-size:14px;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+
+.viewer-date{
+    margin-top:15px;
+    font-size:12px;
+    color:rgba(255,255,255,.5);
+}
+
+.viewer-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-top:22px;
+}
+
+.viewer-action{
+    padding:10px 14px;
+    border:1px solid rgba(190,80,255,.5);
+    border-radius:9px;
+    background:rgba(110,25,160,.3);
+    color:white;
+    cursor:pointer;
+}
+
+.viewer-action:hover{
+    background:rgba(145,35,210,.5);
+}
+
+.viewer-navigation{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.viewer-navigation button{
+    flex:1;
+    padding:10px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:9px;
+    background:rgba(255,255,255,.08);
+    color:white;
+    cursor:pointer;
+}
+
+.viewer-navigation button:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+#shareStatus{
+    min-height:18px;
+    margin-top:12px;
+    font-size:12px;
+    color:#d8b0ff;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+    #mediaGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .featured-card{
+        grid-template-columns:1fr;
+    }
+
+    .featured-media{
+        min-height:220px;
+    }
+
+    #viewerLayout{
+        grid-template-columns:minmax(0,1fr) 250px;
+    }
+}
 
 @media(max-width:600px){
 
-    header{
-        padding:0 15px;
-    }
+    header{padding:0 15px;}
 
     .menu{
         right:15px;
         width:min(245px,calc(100vw - 30px));
     }
-
-    /* WELCOME BANNER MOBILE */
 
     .welcome-banner{
         width:calc(100% - 30px);
@@ -388,33 +677,64 @@ main{
     }
 
     .welcome-banner::before,
-    .welcome-banner::after{
-        width:35px;
-    }
+    .welcome-banner::after{width:35px;}
 
-    main{
-        padding:30px 15px 50px;
-    }
+    main{padding:30px 15px 50px;}
 
-    .page-title p{
-        font-size:16px;
-    }
+    .page-title p{font-size:16px;}
 
     #mediaGrid{
         grid-template-columns:1fr;
+        gap:18px;
     }
 
+    .filter-bar{
+        gap:7px;
+    }
+
+    .filter-button{
+        padding:9px 14px;
+        font-size:13px;
+    }
+
+    .featured-info{padding:20px;}
+
     #mediaViewer{
-        padding:15px;
+        padding:65px 12px 12px;
+        overflow-y:auto;
+        align-items:flex-start;
+    }
+
+    #viewerLayout{
+        height:auto;
+        min-height:100%;
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    #viewerContent{
+        width:100%;
+        min-height:45vh;
+        max-height:65vh;
+        flex:none;
     }
 
     #viewerContent img,
     #viewerContent video{
         max-width:100%;
-        max-height:85vh;
+        max-height:60vh;
+    }
+
+    #viewerContent iframe{
+        height:45vh;
+    }
+
+    .viewer-info{
+        width:100%;
+        max-height:none;
     }
 }
-
 </style>
 </head>
 
@@ -436,543 +756,845 @@ main{
 <nav class="menu" id="menu">
 
 <a href="index.html" onclick="closeMenu()">Home</a>
-
 <div class="divider"></div>
-
 <a href="search.html" onclick="closeMenu()">Search</a>
-
 <a href="projects.html" onclick="closeMenu()">Projects</a>
-
 <a href="contact.html" onclick="closeMenu()">Contact</a>
-
 <div class="divider"></div>
-
 <a href="about-website.html" onclick="closeMenu()">About Website</a>
-
 <a href="about-creator.html" onclick="closeMenu()">About Creator</a>
 
 </nav>
-
 </header>
 
-
-<!-- ================================================= -->
-<!-- WELCOME BANNER - ADDED -->
-<!-- ================================================= -->
-
 <section class="welcome-banner">
-
     <div class="welcome-banner-content">
-
         <h2>Welcome To My Website</h2>
-
         <p>EXPLORE • CREATE • BEYOND</p>
-
     </div>
-
 </section>
-
 
 <main>
 
 <div class="page-title">
-
-<h1>Home</h1>
-
-<p>Explore the latest uploads and content.</p>
-
+    <h1>Home</h1>
+    <p>Explore the latest uploads and content.</p>
 </div>
 
-<div id="mediaGrid"></div>
+<section class="featured-section" id="featuredSection" hidden>
+    <h2 class="section-heading">Latest Upload</h2>
+    <div id="featuredContainer"></div>
+</section>
+
+<section class="gallery-section">
+
+    <div class="gallery-heading">
+        <h2>Explore Media</h2>
+    </div>
+
+    <div class="filter-bar" id="filterBar">
+
+        <button class="filter-button active" data-filter="all">All</button>
+        <button class="filter-button" data-filter="shorts">Shorts</button>
+        <button class="filter-button" data-filter="videos">Videos</button>
+        <button class="filter-button" data-filter="photos">Photos</button>
+
+    </div>
+
+    <div id="mediaGrid">
+        <div class="empty-state">Loading uploads...</div>
+    </div>
+
+</section>
 
 </main>
 
-
-<!-- FULL SCREEN VIEWER -->
+<!-- FULLSCREEN VIEWER -->
 
 <div id="mediaViewer">
 
-<button id="viewerClose" onclick="closeViewer()">×</button>
+    <button id="viewerClose" aria-label="Close viewer">×</button>
 
-<div id="viewerContent"></div>
+    <div id="viewerLayout">
+
+        <div id="viewerContent"></div>
+
+        <aside class="viewer-info">
+
+            <h2 id="viewerTitle"></h2>
+
+            <p id="viewerDescription"></p>
+
+            <div class="viewer-date" id="viewerDate"></div>
+
+            <div class="viewer-actions">
+
+                <button class="viewer-action" id="shareButton">
+                    Share
+                </button>
+
+                <button class="viewer-action" id="downloadButton">
+                    Download
+                </button>
+
+            </div>
+
+            <div id="shareStatus"></div>
+
+            <div class="viewer-navigation">
+
+                <button id="previousButton">Previous</button>
+                <button id="nextButton">Next</button>
+
+            </div>
+
+        </aside>
+
+    </div>
 
 </div>
 
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
 <script src="firebase-config.js"></script>
 
-
 <script>
-
-let db=null;
+let db = null;
+let allMedia = [];
+let visibleMedia = [];
+let activeFilter = "all";
+let currentViewerIndex = 0;
+let currentViewerMedia = null;
 
 const firebaseReady =
     window.firebaseConfig &&
+    window.firebaseConfig.apiKey &&
     !String(window.firebaseConfig.apiKey).startsWith("PASTE_");
 
 if(firebaseReady){
-
     try{
-
         if(!firebase.apps.length){
             firebase.initializeApp(window.firebaseConfig);
         }
-
-        db=firebase.firestore();
-
+        db = firebase.firestore();
     }catch(error){
-        console.error(error);
+        console.error("Firebase initialization error:",error);
     }
 }
-
 
 /* MENU */
 
-const menuButton=document.getElementById("menuButton");
-
-const menu=document.getElementById("menu");
-
+const menuButton = document.getElementById("menuButton");
+const menu = document.getElementById("menu");
 
 function toggleMenu(){
-
     menu.classList.toggle("active");
-
     menuButton.classList.toggle("active");
-
 }
-
 
 function closeMenu(){
-
     menu.classList.remove("active");
-
     menuButton.classList.remove("active");
-
 }
-
 
 document.addEventListener("click",function(event){
-
-    if(
-        !menu.contains(event.target) &&
-        !menuButton.contains(event.target)
-    ){
-
+    if(!menu.contains(event.target) && !menuButton.contains(event.target)){
         closeMenu();
-
     }
-
 });
 
-
-/* ESCAPE HTML */
+/* SAFE HTML */
 
 function escapeHTML(value){
-
-    return String(value || "").replace(
-
-        /[&<>"']/g,
-
-        function(character){
-
-            return {
-
-                "&":"&amp;",
-                "<":"&lt;",
-                ">":"&gt;",
-                '"':"&quot;",
-                "'":"&#039;"
-
-            }[character];
-
-        }
-
-    );
-
+    return String(value || "").replace(/[&<>"']/g,function(character){
+        return {
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+        }[character];
+    });
 }
-
 
 /* YOUTUBE */
 
 function getYouTubeId(url){
+    if(!url) return "";
 
-    if(!url){
-
-        return "";
-
-    }
-
-    const patterns=[
-
+    const patterns = [
         /youtube\.com\/watch\?v=([^&]+)/i,
-
         /youtu\.be\/([^?&]+)/i,
-
         /youtube\.com\/embed\/([^?&]+)/i,
-
         /youtube\.com\/shorts\/([^?&]+)/i
-
     ];
 
-
     for(const pattern of patterns){
-
-        const match=url.match(pattern);
-
-        if(match){
-
-            return match[1];
-
-        }
-
+        const match = String(url).match(pattern);
+        if(match) return match[1];
     }
 
     return "";
-
 }
 
+function isYouTubeShort(url){
+    return /youtube\.com\/shorts\//i.test(String(url || ""));
+}
+
+/* DATE */
+
+function getDateValue(value){
+    if(!value) return 0;
+
+    if(value.seconds) return value.seconds * 1000;
+
+    if(typeof value.toDate === "function"){
+        return value.toDate().getTime();
+    }
+
+    if(typeof value === "number") return value;
+
+    const parsed = new Date(value).getTime();
+
+    return Number.isNaN(parsed) ? 0 : parsed;
+}
+
+function formatDate(value){
+    const time = getDateValue(value);
+
+    if(!time) return "";
+
+    return new Date(time).toLocaleDateString(undefined,{
+        year:"numeric",
+        month:"short",
+        day:"numeric"
+    });
+}
+
+/* MEDIA TYPE DETECTION */
+
+function getMediaKind(data){
+    const type = String(
+        data.type ||
+        data.mediaType ||
+        data.format ||
+        ""
+    ).toLowerCase();
+
+    const url = String(data.url || "");
+
+    if(
+        type === "photo" ||
+        type === "photos" ||
+        type === "image"
+    ){
+        return "photos";
+    }
+
+    if(
+        type === "short" ||
+        type === "shorts"
+    ){
+        return "shorts";
+    }
+
+    if(
+        type === "video" ||
+        type === "videos"
+    ){
+        if(isYouTubeShort(url)) return "shorts";
+
+        const ratio = getAspectRatio(data);
+
+        if(ratio && ratio < 0.85) return "shorts";
+
+        return "videos";
+    }
+
+    if(isYouTubeShort(url)) return "shorts";
+
+    const ratio = getAspectRatio(data);
+
+    if(ratio && ratio < 0.85) return "shorts";
+
+    return "videos";
+}
+
+function getAspectRatio(data){
+    if(data.aspectRatio){
+        const ratio = Number(data.aspectRatio);
+        if(ratio > 0) return ratio;
+    }
+
+    const width = Number(data.width || data.videoWidth || 0);
+    const height = Number(data.height || data.videoHeight || 0);
+
+    if(width > 0 && height > 0){
+        return width / height;
+    }
+
+    return data._detectedRatio || 0;
+}
+
+/* DETECT VIDEO DIMENSIONS */
+
+function detectVideoDimensions(item){
+    if(!item.url || getYouTubeId(item.url)) return;
+
+    if(item.type === "photo") return;
+
+    const video = document.createElement("video");
+
+    video.preload = "metadata";
+
+    video.onloadedmetadata = function(){
+        if(video.videoWidth && video.videoHeight){
+            item._detectedRatio =
+                video.videoWidth / video.videoHeight;
+
+            renderMedia();
+        }
+
+        video.removeAttribute("src");
+        video.load();
+    };
+
+    video.onerror = function(){
+        video.removeAttribute("src");
+        video.load();
+    };
+
+    video.src = item.playbackUrl || item.url;
+}
+
+/* MEDIA TYPE LABEL */
+
+function getTypeLabel(item){
+    const kind = getMediaKind(item);
+
+    if(kind === "photos") return "Photo";
+    if(kind === "shorts") return "Short";
+    return "Video";
+}
+
+/* FEATURED MEDIA */
+
+function getThumbnail(item){
+    if(item.thumbnailUrl) return item.thumbnailUrl;
+
+    if(getYouTubeId(item.url)){
+        return "https://img.youtube.com/vi/" +
+            getYouTubeId(item.url) +
+            "/hqdefault.jpg";
+    }
+
+    if(getMediaKind(item) === "photos"){
+        return item.url || "";
+    }
+
+    return "";
+}
+
+function renderFeatured(item){
+    const section = document.getElementById("featuredSection");
+    const container = document.getElementById("featuredContainer");
+
+    if(!item){
+        section.hidden = true;
+        return;
+    }
+
+    section.hidden = false;
+
+    const thumbnail = getThumbnail(item);
+
+    container.innerHTML = `
+        <article class="featured-card">
+
+            <div
+                class="featured-media"
+                data-open-id="${escapeHTML(item.id)}"
+                role="button"
+                tabindex="0"
+                aria-label="Open latest upload"
+            >
+                ${
+                    thumbnail
+                    ? `<img src="${escapeHTML(thumbnail)}" alt="${escapeHTML(item.name)}">`
+                    : `<div class="featured-placeholder">Video preview<br>Open to play</div>`
+                }
+            </div>
+
+            <div class="featured-info">
+
+                <span class="featured-label">LATEST UPLOAD</span>
+
+                <h2>${escapeHTML(item.name || "Untitled")}</h2>
+
+                <p>${escapeHTML(item.description || "No description available.")}</p>
+
+                <div class="featured-meta">
+                    ${escapeHTML(getTypeLabel(item))}
+                    ${item.category ? " · " + escapeHTML(item.category) : ""}
+                    ${formatDate(item.createdAt) ? " · " + escapeHTML(formatDate(item.createdAt)) : ""}
+                </div>
+
+                <button
+                    class="featured-open"
+                    data-open-id="${escapeHTML(item.id)}"
+                >
+                    Open Content
+                </button>
+
+            </div>
+
+        </article>
+    `;
+}
+
+/* MEDIA CARDS */
+
+function mediaCard(item){
+    const kind = getMediaKind(item);
+    const thumbnail = getThumbnail(item);
+
+    let preview = "";
+
+    if(kind === "photos"){
+        preview = `
+            <img
+                class="media-preview"
+                src="${escapeHTML(item.url)}"
+                alt="${escapeHTML(item.name)}"
+                loading="lazy"
+            >
+        `;
+    }else if(thumbnail){
+        preview = `
+            <div class="media-placeholder">
+                <img
+                    class="media-preview"
+                    src="${escapeHTML(thumbnail)}"
+                    alt="${escapeHTML(item.name)}"
+                    loading="lazy"
+                >
+                <div class="play-symbol">▶</div>
+            </div>
+        `;
+    }else{
+        preview = `
+            <div class="media-placeholder">
+                <div class="play-symbol">▶</div>
+                <span>Open video</span>
+            </div>
+        `;
+    }
+
+    return `
+        <article
+            class="media-card"
+            data-open-id="${escapeHTML(item.id)}"
+        >
+
+            ${preview}
+
+            <div class="media-info">
+
+                <h3>${escapeHTML(item.name || "Untitled")}</h3>
+
+                <p>${escapeHTML(item.description || "")}</p>
+
+                ${
+                    item.category
+                    ? `<div class="media-category">${escapeHTML(item.category)}</div>`
+                    : ""
+                }
+
+                <div class="media-details">
+
+                    <span class="media-type-label">
+                        ${escapeHTML(getTypeLabel(item))}
+                    </span>
+
+                    <span>${escapeHTML(formatDate(item.createdAt))}</span>
+
+                </div>
+
+            </div>
+
+        </article>
+    `;
+}
+
+/* FILTERING */
+
+function getFilteredMedia(){
+    if(activeFilter === "all") return allMedia;
+
+    return allMedia.filter(function(item){
+        return getMediaKind(item) === activeFilter;
+    });
+}
+
+function updateFilterButtons(){
+    document.querySelectorAll(".filter-button").forEach(function(button){
+        button.classList.toggle(
+            "active",
+            button.dataset.filter === activeFilter
+        );
+    });
+}
+
+function renderMedia(){
+    const box = document.getElementById("mediaGrid");
+
+    const featured = allMedia.length ? allMedia[0] : null;
+
+    renderFeatured(featured);
+
+    visibleMedia = getFilteredMedia();
+
+    if(!visibleMedia.length){
+        box.innerHTML = `
+            <div class="empty-state">
+                No ${activeFilter === "all" ? "uploads" : activeFilter} found.
+            </div>
+        `;
+        return;
+    }
+
+    box.innerHTML = visibleMedia.map(mediaCard).join("");
+}
+
+document.getElementById("filterBar").addEventListener("click",function(event){
+    const button = event.target.closest(".filter-button");
+
+    if(!button) return;
+
+    activeFilter = button.dataset.filter;
+
+    updateFilterButtons();
+    renderMedia();
+});
 
 /* VIEWER */
 
-function openViewer(type,url){
+function openViewer(itemId){
+    const list = getFilteredMedia();
 
-    const viewer=document.getElementById("mediaViewer");
+    const index = list.findIndex(function(item){
+        return item.id === itemId;
+    });
 
-    const content=document.getElementById("viewerContent");
+    if(index < 0) return;
 
-    content.innerHTML="";
+    currentViewerIndex = index;
 
-    const youtubeId=getYouTubeId(url);
+    showViewerItem();
+}
 
+function showViewerItem(){
+    const list = getFilteredMedia();
+
+    if(!list.length) return;
+
+    if(currentViewerIndex < 0) currentViewerIndex = 0;
+
+    if(currentViewerIndex >= list.length){
+        currentViewerIndex = list.length - 1;
+    }
+
+    currentViewerMedia = list[currentViewerIndex];
+
+    const content = document.getElementById("viewerContent");
+
+    const viewer = document.getElementById("mediaViewer");
+
+    content.innerHTML = "";
+
+    const youtubeId = getYouTubeId(currentViewerMedia.url);
 
     if(youtubeId){
 
-        const iframe=document.createElement("iframe");
+        const iframe = document.createElement("iframe");
 
-        iframe.src=
+        iframe.src =
             "https://www.youtube.com/embed/" +
             encodeURIComponent(youtubeId) +
             "?autoplay=1";
 
-        iframe.allow=
+        iframe.allow =
             "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
 
-        iframe.allowFullscreen=true;
+        iframe.allowFullscreen = true;
 
         content.appendChild(iframe);
 
-    }
+    }else if(getMediaKind(currentViewerMedia) === "photos"){
 
-    else if(type==="photo"){
+        const image = document.createElement("img");
 
-        const image=document.createElement("img");
+        image.src = currentViewerMedia.url;
 
-        image.src=url;
+        image.alt = currentViewerMedia.name || "Photo";
 
         content.appendChild(image);
 
-    }
+    }else{
 
-    else{
+        const video = document.createElement("video");
 
-        const video=document.createElement("video");
+        video.src =
+            currentViewerMedia.playbackUrl ||
+            currentViewerMedia.url;
 
-        video.src=url;
+        video.controls = true;
 
-        video.controls=true;
+        video.autoplay = true;
 
-        video.autoplay=true;
+        video.playsInline = true;
 
         content.appendChild(video);
 
     }
 
+    document.getElementById("viewerTitle").textContent =
+        currentViewerMedia.name || "Untitled";
+
+    document.getElementById("viewerDescription").textContent =
+        currentViewerMedia.description || "No description available.";
+
+    document.getElementById("viewerDate").textContent =
+        [
+            getTypeLabel(currentViewerMedia),
+            currentViewerMedia.category || "",
+            formatDate(currentViewerMedia.createdAt)
+        ].filter(Boolean).join(" · ");
+
+    document.getElementById("previousButton").disabled =
+        currentViewerIndex === 0;
+
+    document.getElementById("nextButton").disabled =
+        currentViewerIndex === list.length - 1;
+
+    document.getElementById("shareStatus").textContent = "";
+
+    const downloadButton = document.getElementById("downloadButton");
+
+    downloadButton.style.display = youtubeId ? "none" : "";
 
     viewer.classList.add("active");
 
-    document.body.style.overflow="hidden";
-
+    document.body.style.overflow = "hidden";
 }
 
-
 function closeViewer(){
+    const viewer = document.getElementById("mediaViewer");
 
-    const viewer=document.getElementById("mediaViewer");
-
-    const content=document.getElementById("viewerContent");
+    const content = document.getElementById("viewerContent");
 
     viewer.classList.remove("active");
 
-    content.innerHTML="";
+    content.innerHTML = "";
 
-    document.body.style.overflow="";
+    currentViewerMedia = null;
 
+    document.body.style.overflow = "";
 }
 
+document.getElementById("viewerClose").addEventListener("click",closeViewer);
 
-document
-    .getElementById("mediaViewer")
-    .addEventListener("click",function(event){
-
-        if(event.target===this){
-
-            closeViewer();
-
-        }
-
-    });
-
-
-document.addEventListener("keydown",function(event){
-
-    if(event.key==="Escape"){
-
+document.getElementById("mediaViewer").addEventListener("click",function(event){
+    if(event.target === this){
         closeViewer();
-
     }
-
 });
 
+document.getElementById("previousButton").addEventListener("click",function(){
+    if(currentViewerIndex > 0){
+        currentViewerIndex--;
+        showViewerItem();
+    }
+});
 
-/* MEDIA CARD */
+document.getElementById("nextButton").addEventListener("click",function(){
+    if(currentViewerIndex < getFilteredMedia().length - 1){
+        currentViewerIndex++;
+        showViewerItem();
+    }
+});
 
-function mediaCard(data){
+/* OPEN MEDIA FROM CARDS AND FEATURE */
 
-    const url=escapeHTML(data.url);
+document.addEventListener("click",function(event){
+    const target = event.target.closest("[data-open-id]");
 
-    const name=escapeHTML(data.name);
+    if(!target) return;
 
-    const description=escapeHTML(data.description);
+    const id = target.dataset.openId;
 
-    const safeURL=String(data.url || "").replace(/'/g,"\\'");
+    openViewer(id);
+});
 
-    /* USE CONVERTED PLAYBACK URL WHEN AVAILABLE */
-
-    const videoSource=data.playbackUrl || data.url || "";
-
-    const videoURL=escapeHTML(videoSource);
-
-    const safeVideoURL=String(videoSource).replace(/'/g,"\\'");
-
-
-    if(data.type==="photo"){
-
-        return `
-
-        <article class="media-card">
-
-            <img
-                class="media-preview"
-                src="${url}"
-                alt="${name}"
-                onclick="openViewer('photo','${safeURL}')"
-            >
-
-            <div class="media-info">
-
-                <h3>${name}</h3>
-
-                <p>${description}</p>
-
-            </div>
-
-        </article>
-
-        `;
-
+document.addEventListener("keydown",function(event){
+    if(event.key === "Escape"){
+        closeViewer();
     }
 
-
-    let thumbnail="";
-
-
-    if(data.thumbnailUrl){
-
-        thumbnail=`
-
-        <img
-            class="media-preview"
-            src="${escapeHTML(data.thumbnailUrl)}"
-            alt="${name}"
-            onclick="openViewer('video','${safeVideoURL}')"
-        >
-
-        `;
-
+    if(!document.getElementById("mediaViewer").classList.contains("active")){
+        return;
     }
 
-    else{
-
-        thumbnail=`
-
-        <video
-            class="media-preview"
-            src="${videoURL}"
-            preload="metadata"
-            onclick="openViewer('video','${safeVideoURL}')"
-        ></video>
-
-        `;
-
+    if(event.key === "ArrowLeft"){
+        document.getElementById("previousButton").click();
     }
 
+    if(event.key === "ArrowRight"){
+        document.getElementById("nextButton").click();
+    }
+});
 
-    return `
+/* SHARE */
 
-    <article class="media-card">
+function getShareURL(item){
+    const url = new URL(window.location.href);
 
-        ${thumbnail}
+    url.searchParams.set("post",item.id);
 
-        <div class="media-info">
-
-            <h3>${name}</h3>
-
-            <p>${description}</p>
-
-        </div>
-
-    </article>
-
-    `;
-
+    return url.toString();
 }
 
+document.getElementById("shareButton").addEventListener("click",async function(){
+    if(!currentViewerMedia) return;
+
+    const shareURL = getShareURL(currentViewerMedia);
+
+    const shareData = {
+        title:currentViewerMedia.name || "Media",
+        text:currentViewerMedia.description || "",
+        url:shareURL
+    };
+
+    try{
+        if(navigator.share){
+            await navigator.share(shareData);
+        }else{
+            await navigator.clipboard.writeText(shareURL);
+
+            document.getElementById("shareStatus").textContent =
+                "Link copied.";
+        }
+    }catch(error){
+        if(error.name !== "AbortError"){
+            try{
+                await navigator.clipboard.writeText(shareURL);
+
+                document.getElementById("shareStatus").textContent =
+                    "Link copied.";
+            }catch(copyError){
+                document.getElementById("shareStatus").textContent =
+                    "Unable to share. Please copy the page link.";
+            }
+        }
+    }
+});
+
+/* DOWNLOAD */
+
+document.getElementById("downloadButton").addEventListener("click",function(){
+    if(!currentViewerMedia) return;
+
+    if(getYouTubeId(currentViewerMedia.url)){
+        return;
+    }
+
+    const url =
+        currentViewerMedia.url ||
+        currentViewerMedia.playbackUrl;
+
+    if(!url) return;
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        (currentViewerMedia.name || "media")
+        .replace(/[^\w\- ]/g,"")
+        .trim() || "media";
+
+    link.target = "_blank";
+
+    link.rel = "noopener";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+});
 
 /* LOAD HOME MEDIA */
 
 async function loadMedia(page){
-
-    const box=document.getElementById("mediaGrid");
-
-
-    if(!box){
-
-        return;
-
-    }
-
+    const box = document.getElementById("mediaGrid");
 
     if(!db){
-
-        box.innerHTML=`
-
+        box.innerHTML = `
             <div class="empty-state">
-
                 Firebase is not configured.
-
             </div>
-
         `;
-
         return;
-
     }
-
 
     try{
-
-        const snapshot=
-
-            await db.collection("media")
-
+        const snapshot = await db.collection("media")
             .where("page","==",page)
-
             .get();
 
+        allMedia = snapshot.docs.map(function(doc){
+            return {
+                id:doc.id,
+                ...doc.data()
+            };
+        });
 
-        const documents=snapshot.docs
+        allMedia.sort(function(a,b){
+            return getDateValue(b.createdAt) -
+                   getDateValue(a.createdAt);
+        });
 
-            .map(function(doc){
+        renderMedia();
 
-                return {
+        allMedia.forEach(detectVideoDimensions);
 
-                    id:doc.id,
+        /* Open a post directly when a valid post ID is in the URL. */
 
-                    ...doc.data()
+        const requestedPost =
+            new URLSearchParams(window.location.search).get("post");
 
-                };
-
-            })
-
-
-            .sort(function(a,b){
-
-                const aTime=
-
-                    a.createdAt && a.createdAt.seconds
-
-                    ? a.createdAt.seconds
-
-                    : 0;
-
-
-                const bTime=
-
-                    b.createdAt && b.createdAt.seconds
-
-                    ? b.createdAt.seconds
-
-                    : 0;
-
-
-                return bTime-aTime;
-
+        if(requestedPost){
+            const requested = allMedia.find(function(item){
+                return item.id === requestedPost;
             });
 
-
-        if(!documents.length){
-
-            box.innerHTML=`
-
-                <div class="empty-state">
-
-                    No uploads yet.
-
-                </div>
-
-            `;
-
-            return;
-
+            if(requested){
+                openViewer(requestedPost);
+            }
         }
 
+    }catch(error){
+        console.error("Media loading error:",error);
 
-        box.innerHTML=
-
-            documents
-
-            .map(mediaCard)
-
-            .join("");
-
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-
-        box.innerHTML=`
-
+        box.innerHTML = `
             <div class="empty-state">
-
                 Could not load uploads.
-
                 Check your Firebase setup.
-
             </div>
-
         `;
-
     }
-
 }
-
 
 loadMedia("home");
 
