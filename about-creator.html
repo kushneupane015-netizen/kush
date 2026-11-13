@@ -2,1892 +2,708 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>About Creator | Kush Neupane</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-html{scroll-behavior:smooth;}
-
-body{
-min-height:100vh;
-color:white;
-background-image:url("web back.png");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-background-attachment:fixed;
-position:relative;
-}
-
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.45);
-z-index:-1;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+html{scroll-behavior:smooth}
+body{min-height:100vh;color:white;background-image:url("web back.png");background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;position:relative}
+body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:-1}
 
 /* HEADER */
-
-header{
-width:100%;
-height:80px;
-display:flex;
-justify-content:flex-end;
-align-items:center;
-padding:0 30px;
-position:relative;
-z-index:1000;
-}
-
-.menu-button{
-width:54px;
-height:54px;
-border:1px solid rgba(255,255,255,.25);
-border-radius:14px;
-background:rgba(0,0,0,.55);
-backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
-cursor:pointer;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-gap:6px;
-transition:.3s;
-}
-
-.menu-button:hover{
-background:rgba(255,255,255,.12);
-transform:scale(1.05);
-}
-
-.menu-button span{
-width:27px;
-height:3px;
-background:white;
-border-radius:5px;
-transition:.3s;
-}
-
-.menu-button.active span:nth-child(1){
-transform:translateY(9px) rotate(45deg);
-}
-
-.menu-button.active span:nth-child(2){opacity:0;}
-
-.menu-button.active span:nth-child(3){
-transform:translateY(-9px) rotate(-45deg);
-}
-
-.menu{
-position:absolute;
-top:72px;
-right:30px;
-width:245px;
-padding:10px;
-background:rgba(10,10,10,.88);
-border:1px solid rgba(255,255,255,.16);
-backdrop-filter:blur(18px);
--webkit-backdrop-filter:blur(18px);
-border-radius:18px;
-box-shadow:0 15px 45px rgba(0,0,0,.55);
-opacity:0;
-visibility:hidden;
-transform:translateY(-10px) scale(.98);
-transition:.25s;
-}
-
-.menu.active{
-opacity:1;
-visibility:visible;
-transform:translateY(0) scale(1);
-}
-
-.menu a{
-display:flex;
-align-items:center;
-min-height:48px;
-color:white;
-text-decoration:none;
-padding:12px 15px;
-margin:3px 0;
-border-radius:11px;
-font-size:16px;
-transition:.25s;
-}
-
-.menu a:hover{
-background:rgba(255,255,255,.12);
-padding-left:21px;
-}
-
-.menu .divider{
-height:1px;
-background:rgba(255,255,255,.12);
-margin:8px 5px;
-}
+header{width:100%;height:80px;display:flex;justify-content:flex-end;align-items:center;padding:0 30px;position:relative;z-index:1000}
+.menu-button{width:54px;height:54px;border:1px solid rgba(255,255,255,.25);border-radius:14px;background:rgba(0,0,0,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;transition:.3s}
+.menu-button:hover{background:rgba(255,255,255,.12);transform:scale(1.05)}
+.menu-button span{width:27px;height:3px;background:white;border-radius:5px;transition:.3s}
+.menu-button.active span:nth-child(1){transform:translateY(9px) rotate(45deg)}
+.menu-button.active span:nth-child(2){opacity:0}
+.menu-button.active span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+.menu{position:absolute;top:72px;right:30px;width:245px;padding:10px;background:rgba(10,10,10,.88);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:18px;box-shadow:0 15px 45px rgba(0,0,0,.55);opacity:0;visibility:hidden;transform:translateY(-10px) scale(.98);transition:.25s}
+.menu.active{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.menu a{display:flex;align-items:center;min-height:48px;color:white;text-decoration:none;padding:12px 15px;margin:3px 0;border-radius:11px;font-size:16px;transition:.25s}
+.menu a:hover{background:rgba(255,255,255,.12);padding-left:21px}
+.menu .divider{height:1px;background:rgba(255,255,255,.12);margin:8px 5px}
 
 /* MAIN */
-
-main{
-min-height:calc(100vh - 80px);
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:40px 25px 60px;
-}
-
-.content{
-width:min(900px,100%);
-padding:55px 45px;
-background:rgba(0,0,0,.38);
-border:1px solid rgba(255,255,255,.14);
-backdrop-filter:blur(8px);
--webkit-backdrop-filter:blur(8px);
-border-radius:24px;
-box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.content h1{
-font-size:clamp(36px,6vw,58px);
-margin-bottom:25px;
-}
-
-.creator-logo{
-width:250px;
-max-width:80%;
-margin:10px auto 25px;
-display:block;
-cursor:pointer;
-user-select:none;
--webkit-user-drag:none;
-touch-action:none;
-}
-
-.content > p{
-font-size:19px;
-line-height:1.7;
-color:rgba(255,255,255,.9);
-cursor:pointer;
-}
+main{min-height:calc(100vh - 80px);display:flex;justify-content:center;align-items:center;text-align:center;padding:40px 25px 60px}
+.content{width:min(900px,100%);padding:55px 45px;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.content h1{font-size:clamp(36px,6vw,58px);margin-bottom:25px}
+.creator-logo{width:250px;max-width:80%;margin:10px auto 25px;display:block;user-select:none;-webkit-user-drag:none}
+.content>p{font-size:19px;line-height:1.7;color:rgba(255,255,255,.9)}
 
 /* CREATOR DETAILS */
+.creator-details{margin:30px auto 0;max-width:650px;padding:25px;background:#241044;border-radius:18px;text-align:left;box-shadow:0 15px 45px rgba(0,0,0,.4)}
+.creator-details p{font-size:18px;line-height:1.8;color:white;margin:7px 0}
+.creator-details strong{color:white}
+.creator-details a{color:white;text-decoration:none}
+.creator-details a:hover{text-decoration:underline}
 
-.creator-details{
-margin:30px auto 0;
-max-width:650px;
-padding:25px;
-background:#241044;
-border-radius:18px;
-text-align:left;
-box-shadow:0 15px 45px rgba(0,0,0,.4);
-}
-
-.creator-details p{
-font-size:18px;
-line-height:1.8;
-color:white;
-margin:7px 0;
-}
-
-.creator-details strong{color:white;}
-
-.creator-details a{
-color:white;
-text-decoration:none;
-}
-
-.creator-details a:hover{text-decoration:underline;}
-
-.secret-step{
-cursor:pointer;
-user-select:none;
-}
-
-/* SECRET PASSWORD AND LOGIN */
-
-#secretUnlock,
-#adminLogin{
-display:none;
-margin:30px auto 0;
-max-width:500px;
-padding:25px;
-background:rgba(20,8,40,.95);
-border:1px solid rgba(255,255,255,.16);
-border-radius:18px;
-box-shadow:0 15px 45px rgba(0,0,0,.45);
-}
-
-#secretUnlock h2,
-#adminLogin h2{
-margin-bottom:18px;
-}
-
-#secretPassword,
-#adminPassword{
-width:100%;
-min-height:50px;
-padding:0 15px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.2);
-outline:none;
-background:rgba(0,0,0,.45);
-color:white;
-font-size:16px;
-margin-bottom:12px;
-}
-
-#secretMessage,
-#loginMessage{
-margin-top:12px;
-color:#ff8080;
-}
-
-/* ADMIN PANEL */
-
-#adminPanel{
-display:none;
-margin:30px auto 0;
-max-width:650px;
-padding:25px;
-background:rgba(20,8,40,.95);
-border:1px solid rgba(255,255,255,.16);
-border-radius:18px;
-box-shadow:0 15px 45px rgba(0,0,0,.45);
-text-align:left;
-}
-
-#adminPanel h2{
-text-align:center;
-margin-bottom:20px;
-}
-
-.admin-tabs{
-display:flex;
-gap:10px;
-margin-bottom:25px;
-}
-
-.admin-tab{
-flex:1;
-min-height:48px;
-border:1px solid rgba(255,255,255,.18);
-border-radius:12px;
-background:rgba(0,0,0,.4);
-color:white;
-cursor:pointer;
-font-size:16px;
-}
-
-.admin-tab.active{background:#241044;}
-
-.admin-section{display:none;}
-
-.admin-section.active{display:block;}
-
-.admin-field{margin-bottom:16px;}
-
-.admin-field label{
-display:block;
-margin-bottom:7px;
-font-weight:bold;
-}
-
-.admin-field input,
-.admin-field textarea,
-.admin-field select{
-width:100%;
-border:1px solid rgba(255,255,255,.2);
-border-radius:12px;
-outline:none;
-background:rgba(0,0,0,.45);
-color:white;
-padding:13px;
-font-size:16px;
-}
-
-.admin-field textarea{
-min-height:100px;
-resize:vertical;
-}
-
-.admin-field select option{
-background:#241044;
-color:white;
-}
-
-.admin-field input[type="file"]{
-padding:10px;
-}
-
-.admin-help{
-color:rgba(255,255,255,.65);
-font-size:13px;
-line-height:1.5;
-margin-top:7px;
-}
-
-.admin-button{
-width:100%;
-min-height:50px;
-border:0;
-border-radius:12px;
-background:#241044;
-color:white;
-font-size:16px;
-cursor:pointer;
-transition:.25s;
-}
-
-.admin-button:hover{background:#32155d;}
-
-.admin-actions{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-}
-
-.admin-actions button{
-flex:1;
-min-width:140px;
-}
-
-#uploadStatus{
-margin-top:15px;
-text-align:center;
-color:rgba(255,255,255,.85);
-line-height:1.5;
-}
-
-/* FORMAT STATUS */
-
-#formatStatus{
-padding:12px;
-margin-top:10px;
-border-radius:10px;
-background:rgba(120,75,190,.2);
-border:1px solid rgba(180,140,255,.2);
-color:#e2d1ff;
-font-size:13px;
-line-height:1.5;
-}
-
-/* DELETE LIST */
-
-.delete-card{
-padding:18px;
-margin-bottom:14px;
-background:rgba(0,0,0,.4);
-border:1px solid rgba(255,255,255,.14);
-border-radius:14px;
-}
-
-.delete-card h3{margin-bottom:8px;}
-
-.delete-card p{
-color:rgba(255,255,255,.8);
-line-height:1.5;
-margin-bottom:8px;
-overflow-wrap:anywhere;
-}
-
-.delete-button{
-width:100%;
-min-height:45px;
-border:0;
-border-radius:10px;
-background:#241044;
-color:white;
-cursor:pointer;
-font-size:15px;
-}
-
-.delete-button:hover{background:#32155d;}
-
-#deleteStatus{
-text-align:center;
-margin-bottom:15px;
-color:rgba(255,255,255,.85);
-}
-
-/* SOURCE SELECTOR */
-
-.source-buttons{
-display:flex;
-gap:10px;
-margin-bottom:16px;
-}
-
-.source-button{
-flex:1;
-min-height:45px;
-border:1px solid rgba(255,255,255,.18);
-border-radius:10px;
-background:rgba(0,0,0,.4);
-color:white;
-cursor:pointer;
-}
-
-.source-button.active{background:#241044;}
-
-.source-section{display:none;}
-
-.source-section.active{display:block;}
-
-/* MOBILE */
+/* CREATOR ACCESS */
+#creatorAccess{display:none;margin:30px auto 0;max-width:650px;padding:25px;background:rgba(20,8,40,.95);border:1px solid rgba(255,255,255,.16);border-radius:18px;box-shadow:0 15px 45px rgba(0,0,0,.45);text-align:left}
+#creatorAccess h2{text-align:center;margin-bottom:15px}
+#creatorStatus{text-align:center;color:rgba(255,255,255,.8);line-height:1.5;margin-bottom:18px}
+#adminPanel{display:none}
+.admin-tabs{display:flex;gap:10px;margin-bottom:25px}
+.admin-tab{flex:1;min-height:48px;border:1px solid rgba(255,255,255,.18);border-radius:12px;background:rgba(0,0,0,.4);color:white;cursor:pointer;font-size:16px}
+.admin-tab.active{background:#241044}
+.admin-section{display:none}
+.admin-section.active{display:block}
+.admin-field{margin-bottom:16px}
+.admin-field label{display:block;margin-bottom:7px;font-weight:bold}
+.admin-field input,.admin-field textarea,.admin-field select{width:100%;border:1px solid rgba(255,255,255,.2);border-radius:12px;outline:none;background:rgba(0,0,0,.45);color:white;padding:13px;font-size:16px}
+.admin-field textarea{min-height:100px;resize:vertical}
+.admin-field select option{background:#241044;color:white}
+.admin-field input[type=file]{padding:10px}
+.admin-help{color:rgba(255,255,255,.65);font-size:13px;line-height:1.5;margin-top:7px}
+.admin-button{width:100%;min-height:50px;border:0;border-radius:12px;background:#241044;color:white;font-size:16px;cursor:pointer;transition:.25s}
+.admin-button:hover{background:#32155d}
+.admin-button:disabled{opacity:.5;cursor:not-allowed}
+.admin-actions{display:flex;gap:10px;flex-wrap:wrap}
+.admin-actions button{flex:1;min-width:140px}
+#uploadStatus{margin-top:15px;text-align:center;color:rgba(255,255,255,.85);line-height:1.5}
+#formatStatus{padding:12px;margin-top:10px;border-radius:10px;background:rgba(120,75,190,.2);border:1px solid rgba(180,140,255,.2);color:#e2d1ff;font-size:13px;line-height:1.5}
+.delete-card{padding:18px;margin-bottom:14px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.14);border-radius:14px}
+.delete-card h3{margin-bottom:8px}
+.delete-card p{color:rgba(255,255,255,.8);line-height:1.5;margin-bottom:8px;overflow-wrap:anywhere}
+.delete-button{width:100%;min-height:45px;border:0;border-radius:10px;background:#241044;color:white;cursor:pointer;font-size:15px}
+.delete-button:hover{background:#32155d}
+#deleteStatus{text-align:center;margin-bottom:15px;color:rgba(255,255,255,.85)}
+.source-buttons{display:flex;gap:10px;margin-bottom:16px}
+.source-button{flex:1;min-height:45px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:rgba(0,0,0,.4);color:white;cursor:pointer}
+.source-button.active{background:#241044}
+.source-section{display:none}
+.source-section.active{display:block}
 
 @media(max-width:600px){
-
-header{padding:0 15px;}
-
-.menu{
-right:15px;
-width:min(245px,calc(100vw - 30px));
+header{padding:0 15px}
+.menu{right:15px;width:min(245px,calc(100vw - 30px))}
+main{padding:30px 15px 50px}
+.content{padding:40px 22px}
+.content>p{font-size:17px}
+.creator-details{padding:22px 18px}
+.creator-details p{font-size:17px}
+.admin-tabs,.source-buttons{flex-direction:column}
 }
-
-main{padding:30px 15px 50px;}
-
-.content{padding:40px 22px;}
-
-.content > p{font-size:17px;}
-
-.creator-details{padding:22px 18px;}
-
-.creator-details p{font-size:17px;}
-
-.admin-tabs,
-.source-buttons{
-flex-direction:column;
-}
-
-}
-
 </style>
-
 </head>
 
 <body>
 
 <header>
-
-<button
-class="menu-button"
-id="menuButton"
-onclick="toggleMenu()"
-aria-label="Open menu"
->
-<span></span>
-<span></span>
-<span></span>
+<button class="menu-button" id="menuButton" onclick="toggleMenu()" aria-label="Open menu">
+<span></span><span></span><span></span>
 </button>
 
 <nav class="menu" id="menu">
-
 <a href="index.html" onclick="closeMenu()">Home</a>
-
 <div class="divider"></div>
-
 <a href="search.html" onclick="closeMenu()">Search</a>
-
 <a href="projects.html" onclick="closeMenu()">Projects</a>
-
 <a href="contact.html" onclick="closeMenu()">Contact</a>
-
 <div class="divider"></div>
-
 <a href="about-website.html" onclick="closeMenu()">About Website</a>
-
 <a href="about-creator.html" onclick="closeMenu()">About Creator</a>
-
 </nav>
-
 </header>
 
 <main>
-
 <div class="content">
 
 <h1>About Creator</h1>
 
-<img
-src="kushneupane.png"
-alt="Kush Neupane Logo"
-class="creator-logo"
-id="creatorLogo"
->
+<img src="kushneupane.png" alt="Kush Neupane Logo" class="creator-logo">
 
-<p id="creatorSecretTrigger">
-This website was created and designed by Kush Neupane.
-</p>
+<p>This website was created and designed by Kush Neupane.</p>
 
 <div class="creator-details">
-
-<p>
-<strong class="secret-step" data-step="3">Name:</strong>
-Kush Neupane
-</p>
-
-<p>
-<strong class="secret-step" data-step="4">Age:</strong>
-15
-</p>
-
-<p>
-<strong class="secret-step" data-step="5">Gender:</strong>
-Male
-</p>
-
-<p>
-<strong class="secret-step" data-step="6">Date of Birth:</strong>
-9th October 2010
-</p>
-
-<p>
-<strong class="secret-step" data-step="7">Nationality:</strong>
-Nepali
-</p>
-
-<p>
-<strong>Profession:</strong>
-Student
-</p>
-
-<p>
-<strong>Phone:</strong>
-<a href="tel:9704728286">9704728286</a>
-</p>
-
-<p>
-<strong class="secret-step" data-step="8">E-mail:</strong>
-<a href="mailto:kushneupane015@gmail.com">
-kushneupane015@gmail.com
-</a>
-</p>
-
+<p><strong>Name:</strong> Kush Neupane</p>
+<p><strong>Age:</strong> 15</p>
+<p><strong>Gender:</strong> Male</p>
+<p><strong>Date of Birth:</strong> 9th October 2010</p>
+<p><strong>Nationality:</strong> Nepali</p>
+<p><strong>Profession:</strong> Student</p>
+<p><strong>Phone:</strong> <a href="tel:9704728286">9704728286</a></p>
+<p><strong>E-mail:</strong> <a href="mailto:kushneupane015@gmail.com">kushneupane015@gmail.com</a></p>
 </div>
 
-<!-- FIRST SECRET PASSWORD -->
+<!-- CREATOR-ONLY AREA -->
+<div id="creatorAccess">
 
-<div id="secretUnlock">
-
-<h2>Enter Secret Password</h2>
-
-<form id="secretUnlockForm">
-
-<input
-type="password"
-id="secretPassword"
-placeholder="Enter secret password"
-autocomplete="off"
->
-
-<button type="submit" class="admin-button">
-Enter
-</button>
-
-<div id="secretMessage"></div>
-
-</form>
-
-</div>
-
-<!-- ADMIN LOGIN -->
-
-<div id="adminLogin">
-
-<h2>Admin Login</h2>
-
-<form id="adminLoginForm">
-
-<input
-type="password"
-id="adminPassword"
-placeholder="Enter admin password"
-autocomplete="off"
->
-
-<button type="submit" class="admin-button">
-Login
-</button>
-
-<div id="loginMessage"></div>
-
-</form>
-
-</div>
-
-<!-- ADMIN PANEL -->
+<h2>Creator Panel</h2>
+<div id="creatorStatus">Checking Creator access...</div>
 
 <div id="adminPanel">
 
-<h2>Admin Panel</h2>
-
 <div class="admin-tabs">
-
-<button
-class="admin-tab active"
-id="uploadTab"
-onclick="showAdminSection('uploadSection')"
->
-Upload Files
-</button>
-
-<button
-class="admin-tab"
-id="deleteTab"
-onclick="showAdminSection('deleteSection')"
->
-Delete Files
-</button>
-
+<button class="admin-tab active" id="uploadTab" onclick="showAdminSection('uploadSection')">Upload Files</button>
+<button class="admin-tab" id="deleteTab" onclick="showAdminSection('deleteSection')">Delete Files</button>
 </div>
 
-<!-- UPLOAD SECTION -->
-
+<!-- UPLOAD -->
 <div id="uploadSection" class="admin-section active">
 
 <div class="admin-field">
-
 <label for="postPage">Post To</label>
-
 <select id="postPage">
-
 <option value="home">Home</option>
-
 <option value="projects">Projects</option>
-
 </select>
-
 </div>
 
 <div class="admin-field">
-
 <label for="mediaType">Media Type</label>
-
-<select id="mediaType" onchange="updateMediaFields()">
-
+<select id="mediaType">
 <option value="photo">Photo</option>
-
 <option value="video">Video</option>
-
 </select>
-
 </div>
 
-<!-- CATEGORY -->
-
 <div class="admin-field">
-
 <label for="mediaCategory">Content Category</label>
-
 <select id="mediaCategory">
-
 <option value="Technology">Technology</option>
-
 <option value="Gaming">Gaming</option>
-
 <option value="Education">Education</option>
-
 <option value="Entertainment">Entertainment</option>
-
 <option value="Creativity">Creativity</option>
-
 <option value="Personal">Personal</option>
-
 <option value="Other">Other</option>
-
 </select>
-
 </div>
 
 <div class="admin-field">
-
 <label for="mediaName">Name / Title</label>
-
-<input
-type="text"
-id="mediaName"
-placeholder="Enter media name"
->
+<input type="text" id="mediaName" placeholder="Enter media name">
 </div>
 
 <div class="admin-field">
-
 <label for="mediaDescription">Description</label>
-
-<textarea
-id="mediaDescription"
-placeholder="Enter description"
-></textarea>
-
+<textarea id="mediaDescription" placeholder="Enter description"></textarea>
 </div>
 
-<!-- VIDEO FORMAT -->
-
-<div class="admin-field" id="videoFormatField" style="display:none;">
-
+<div class="admin-field" id="videoFormatField" style="display:none">
 <label for="videoFormat">Video Format</label>
-
-<select id="videoFormat" onchange="updateFormatStatus()">
-
+<select id="videoFormat">
 <option value="auto">Automatic Detection</option>
-
 <option value="shorts">Shorts / Vertical Video</option>
-
 <option value="video">Standard Video</option>
-
 </select>
-
-<div class="admin-help">
-Automatic detection uses the video's dimensions. Portrait videos are classified as Shorts; landscape and square videos are classified as Videos. You can manually override the result.
+<div class="admin-help">Automatic detection uses the video's dimensions. Portrait videos are classified as Shorts; landscape and square videos are classified as Videos. You can manually override the result.</div>
+<div id="formatStatus">Video format will be detected automatically.</div>
 </div>
-
-<div id="formatStatus">
-Video format will be detected automatically.
-</div>
-
-</div>
-
-<!-- SOURCE -->
 
 <div class="admin-field">
-
 <label>Source</label>
-
 <div class="source-buttons">
-
-<button
-type="button"
-class="source-button active"
-id="deviceSourceButton"
-onclick="setUploadSource('device')"
->
-Upload from Device
-</button>
-
-<button
-type="button"
-class="source-button"
-id="urlSourceButton"
-onclick="setUploadSource('url')"
->
-Post from URL
-</button>
-
+<button type="button" class="source-button active" id="deviceSourceButton" onclick="setUploadSource('device')">Upload from Device</button>
+<button type="button" class="source-button" id="urlSourceButton" onclick="setUploadSource('url')">Post from URL</button>
 </div>
-
 </div>
-
-<!-- DEVICE SOURCE -->
 
 <div id="deviceSource" class="source-section active">
-
 <div class="admin-field">
-
 <label for="mediaFile">Photo / Video</label>
-
-<input
-type="file"
-id="mediaFile"
-accept="image/*,video/*,.mkv,.avi,.mov,.wmv,.flv,.webm,.mp4,.mpeg,.mpg,.3gp,.3g2,.m4v,.ts,.m2ts,.mts,.ogv,.mxf"
-onchange="handleSelectedFile()"
->
-
+<input type="file" id="mediaFile" accept="image/*,video/*,.mkv,.avi,.mov,.wmv,.flv,.webm,.mp4,.mpeg,.mpg,.3gp,.3g2,.m4v,.ts,.m2ts,.mts,.ogv,.mxf">
 </div>
-
-<div
-class="admin-field"
-id="thumbnailField"
-style="display:none;"
->
-
-<label for="thumbnailFile">
-Video Thumbnail (Optional)
-</label>
-
-<input
-type="file"
-id="thumbnailFile"
-accept="image/*"
->
-
-<div class="admin-help">
-If you do not select a thumbnail, the video may use its own preview where supported.
+<div class="admin-field" id="thumbnailField" style="display:none">
+<label for="thumbnailFile">Video Thumbnail (Optional)</label>
+<input type="file" id="thumbnailFile" accept="image/*">
+<div class="admin-help">If you do not select a thumbnail, the video may use its own preview where supported.</div>
 </div>
-
 </div>
-
-</div>
-
-<!-- URL SOURCE -->
 
 <div id="urlSource" class="source-section">
-
 <div class="admin-field">
-
-<label for="mediaURL">
-Photo / Video / YouTube URL
-</label>
-
-<input
-type="url"
-id="mediaURL"
-placeholder="Paste direct media URL or YouTube URL"
-oninput="handleURLChange()"
->
-
-<div class="admin-help">
-For direct video URLs, automatic format detection may depend on whether the video host allows metadata access. YouTube Shorts are detected from their URL.
+<label for="mediaURL">Photo / Video / YouTube URL</label>
+<input type="url" id="mediaURL" placeholder="Paste direct media URL or YouTube URL">
+<div class="admin-help">For direct video URLs, automatic format detection may depend on whether the video host allows metadata access. YouTube Shorts are detected from their URLs.</div>
 </div>
-
+<div class="admin-field" id="urlThumbnailField" style="display:none">
+<label for="urlThumbnail">Video Thumbnail URL (Optional)</label>
+<input type="url" id="urlThumbnail" placeholder="Paste video thumbnail URL">
 </div>
-
-<div
-class="admin-field"
-id="urlThumbnailField"
-style="display:none;"
->
-
-<label for="urlThumbnail">
-Video Thumbnail URL (Optional)
-</label>
-
-<input
-type="url"
-id="urlThumbnail"
-placeholder="Paste video thumbnail URL"
->
-
-</div>
-
 </div>
 
 <div class="admin-actions">
-
-<button
-type="button"
-class="admin-button"
-id="postButton"
-onclick="uploadMedia()"
->
-Post
-</button>
-
-<button
-type="button"
-class="admin-button"
-onclick="logoutAdmin()"
->
-Logout
-</button>
-
+<button type="button" class="admin-button" id="postButton" onclick="uploadMedia()">Post</button>
 </div>
-
 <div id="uploadStatus"></div>
-
 </div>
 
-<!-- DELETE SECTION -->
-
+<!-- DELETE -->
 <div id="deleteSection" class="admin-section">
-
 <div id="deleteStatus"></div>
-
 <div id="deleteList">
-
-<div class="delete-card">
-Loading posts...
+<div class="delete-card">Your posts will appear here.</div>
+</div>
 </div>
 
 </div>
-
 </div>
 
 </div>
-
-</div>
-
 </main>
 
-<!-- FIREBASE -->
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
 <script src="firebase-config.js"></script>
+<script src="auth.js"></script>
 
 <script>
-
 /* MENU */
-
 const menuButton=document.getElementById("menuButton");
 const menu=document.getElementById("menu");
 
 function toggleMenu(){
-
 menu.classList.toggle("active");
 menuButton.classList.toggle("active");
-
 }
 
 function closeMenu(){
-
 menu.classList.remove("active");
 menuButton.classList.remove("active");
-
 }
 
 document.addEventListener("click",function(event){
-
-if(
-!menu.contains(event.target) &&
-!menuButton.contains(event.target)
-){
-
+if(!menu.contains(event.target)&&!menuButton.contains(event.target)){
 closeMenu();
-
 }
-
 });
 
-/* FIREBASE */
-
+/* FIREBASE CONNECTION */
 let db=null;
+let creatorAuthorized=false;
 
-const firebaseReady=
-window.firebaseConfig &&
-window.firebaseConfig.apiKey &&
-!String(window.firebaseConfig.apiKey).startsWith("PASTE_");
+function getSiteDatabase(){
+if(window.siteAuth&&window.siteAuth.db){
+return window.siteAuth.db;
+}
+if(window.firebase&&firebase.apps.length){
+return firebase.firestore();
+}
+return null;
+}
 
-if(firebaseReady){
+/* CREATOR ACCESS */
+async function refreshCreatorAccess(){
+const access=document.getElementById("creatorAccess");
+const panel=document.getElementById("adminPanel");
+const status=document.getElementById("creatorStatus");
+
+access.style.display="block";
+panel.style.display="none";
+creatorAuthorized=false;
+
+db=getSiteDatabase();
+
+if(!window.siteAuth||!window.siteAuth.auth){
+status.textContent="The account system is not available. Please refresh the page.";
+return;
+}
+
+const user=window.siteAuth.getCurrentUser
+?window.siteAuth.getCurrentUser()
+:window.siteAuth.auth.currentUser;
+
+if(!user){
+status.textContent="Please log in using the Login option to check Creator access.";
+return;
+}
 
 try{
-
-if(!firebase.apps.length){
-
-firebase.initializeApp(window.firebaseConfig);
-
-}
-
-db=firebase.firestore();
-
-firebase.auth().signInAnonymously().catch(function(error){
-
-console.error("Anonymous authentication:",error);
-
-});
-
-}catch(error){
-
-console.error(error);
-
-}
-
-}
-
-/* SECRET SEQUENCE */
-
-const creatorLogo=document.getElementById("creatorLogo");
-
-const creatorSecretTrigger=document.getElementById("creatorSecretTrigger");
-
-const secretSteps=document.querySelectorAll(".secret-step");
-
-const secretUnlock=document.getElementById("secretUnlock");
-
-const secretUnlockForm=document.getElementById("secretUnlockForm");
-
-const secretPassword=document.getElementById("secretPassword");
-
-const secretMessage=document.getElementById("secretMessage");
-
-let secretStep=1;
-
-creatorLogo.addEventListener("click",function(){
-
-if(secretStep===1){
-
-secretStep=2;
-
-}else{
-
-resetSecretSequence();
-
-}
-
-});
-
-creatorSecretTrigger.addEventListener("click",function(){
-
-if(secretStep===2){
-
-secretStep=3;
-
-}else{
-
-resetSecretSequence();
-
-}
-
-});
-
-secretSteps.forEach(function(stepElement){
-
-stepElement.addEventListener("click",function(event){
-
-event.preventDefault();
-event.stopPropagation();
-
-const requiredStep=Number(
-stepElement.getAttribute("data-step")
-);
-
-if(secretStep===requiredStep){
-
-if(requiredStep===8){
-
-showSecretPassword();
-
-}else{
-
-secretStep++;
-
-}
-
-}else{
-
-resetSecretSequence();
-
-}
-
-});
-
-});
-
-function showSecretPassword(){
-
-secretStep=1;
-
-secretUnlock.style.display="block";
-
-secretMessage.textContent="";
-
-secretPassword.value="";
-
-secretPassword.focus();
-
-secretUnlock.scrollIntoView({
-
-behavior:"smooth",
-block:"center"
-
-});
-
-}
-
-function resetSecretSequence(){
-
-secretStep=1;
-
-}
-
-secretUnlockForm.addEventListener("submit",function(event){
-
-event.preventDefault();
-
-if(secretPassword.value==="sikconta"){
-
-secretUnlock.style.display="none";
-
-secretMessage.textContent="";
-
-document.getElementById("adminLogin").style.display="block";
-
-document.getElementById("adminPassword").value="";
-
-document.getElementById("loginMessage").textContent="";
-
-document.getElementById("adminLogin").scrollIntoView({
-
-behavior:"smooth",
-block:"center"
-
-});
-
-setTimeout(function(){
-
-document.getElementById("adminPassword").focus();
-
-},400);
-
-}else{
-
-secretMessage.textContent="Incorrect password.";
-
-}
-
-});
-
-/* ADMIN LOGIN */
-
-function loginAdmin(){
-
-const password=document.getElementById("adminPassword").value;
-
-const message=document.getElementById("loginMessage");
-
-if(password==="sikconta"){
-
-document.getElementById("adminLogin").style.display="none";
-
-document.getElementById("adminPanel").style.display="block";
-
-message.textContent="";
-
+const isCreator=await window.siteAuth.isCreator();
+
+if(isCreator){
+creatorAuthorized=true;
+panel.style.display="block";
+status.textContent="Creator access verified.";
 showAdminSection("uploadSection");
-
-document.getElementById("adminPanel").scrollIntoView({
-
-behavior:"smooth",
-block:"center"
-
-});
-
 }else{
-
-message.textContent="Incorrect password.";
-
+status.textContent="You are logged in, but this account does not have Creator permissions.";
+}
+}catch(error){
+console.error("Creator verification failed:",error);
+status.textContent="Could not verify Creator access. Please refresh and try again.";
+}
 }
 
-}
-
-document.getElementById("adminLoginForm").addEventListener("submit",function(event){
-
-event.preventDefault();
-
-loginAdmin();
-
+document.addEventListener("creator-auth-changed",refreshCreatorAccess);
+window.addEventListener("load",function(){
+setTimeout(refreshCreatorAccess,500);
 });
-
-/* LOGOUT */
-
-function logoutAdmin(){
-
-document.getElementById("adminPanel").style.display="none";
-document.getElementById("adminLogin").style.display="none";
-document.getElementById("secretUnlock").style.display="none";
-
-document.getElementById("adminPassword").value="";
-document.getElementById("secretPassword").value="";
-
-document.getElementById("loginMessage").textContent="";
-document.getElementById("secretMessage").textContent="";
-document.getElementById("uploadStatus").textContent="";
-
-resetSecretSequence();
-
-}
 
 /* ADMIN TABS */
-
 function showAdminSection(sectionId){
+if(!creatorAuthorized)return;
 
-document.querySelectorAll(".admin-section").forEach(function(section){
-
-section.classList.remove("active");
-
-});
-
-document.querySelectorAll(".admin-tab").forEach(function(tab){
-
-tab.classList.remove("active");
-
-});
+document.querySelectorAll(".admin-section").forEach(section=>section.classList.remove("active"));
+document.querySelectorAll(".admin-tab").forEach(tab=>tab.classList.remove("active"));
 
 document.getElementById(sectionId).classList.add("active");
 
 if(sectionId==="uploadSection"){
-
 document.getElementById("uploadTab").classList.add("active");
-
 }else{
-
 document.getElementById("deleteTab").classList.add("active");
-
 loadDeleteList();
-
 }
-
 }
 
 /* UPLOAD SOURCE */
-
 let uploadSource="device";
 
 function setUploadSource(source){
-
 uploadSource=source;
 
-document.getElementById("deviceSource").classList.remove("active");
-document.getElementById("urlSource").classList.remove("active");
-
-document.getElementById("deviceSourceButton").classList.remove("active");
-document.getElementById("urlSourceButton").classList.remove("active");
-
-if(source==="device"){
-
-document.getElementById("deviceSource").classList.add("active");
-document.getElementById("deviceSourceButton").classList.add("active");
-
-}else{
-
-document.getElementById("urlSource").classList.add("active");
-document.getElementById("urlSourceButton").classList.add("active");
-
-}
+document.getElementById("deviceSource").classList.toggle("active",source==="device");
+document.getElementById("urlSource").classList.toggle("active",source==="url");
+document.getElementById("deviceSourceButton").classList.toggle("active",source==="device");
+document.getElementById("urlSourceButton").classList.toggle("active",source==="url");
 
 updateMediaFields();
-
 }
 
 /* MEDIA FIELDS */
-
 function updateMediaFields(){
-
 const type=document.getElementById("mediaType").value;
-
-const thumbnailField=document.getElementById("thumbnailField");
-const urlThumbnailField=document.getElementById("urlThumbnailField");
-const videoFormatField=document.getElementById("videoFormatField");
-
 const isVideo=type==="video";
 
-thumbnailField.style.display=
-isVideo && uploadSource==="device"
-?"block":"none";
-
-urlThumbnailField.style.display=
-isVideo && uploadSource==="url"
-?"block":"none";
-
-videoFormatField.style.display=
-isVideo
-?"block":"none";
+document.getElementById("thumbnailField").style.display=isVideo&&uploadSource==="device"?"block":"none";
+document.getElementById("urlThumbnailField").style.display=isVideo&&uploadSource==="url"?"block":"none";
+document.getElementById("videoFormatField").style.display=isVideo?"block":"none";
 
 if(!isVideo){
-
-document.getElementById("formatStatus").textContent=
-"Photos are automatically classified as Photos.";
-
+document.getElementById("formatStatus").textContent="Photos are automatically classified as Photos.";
 }else{
-
 updateFormatStatus();
-
 }
-
 }
 
 document.getElementById("mediaType").addEventListener("change",function(){
-
 document.getElementById("mediaFile").value="";
 document.getElementById("mediaURL").value="";
-
+detectedVideoFormat="";
 updateMediaFields();
-
 });
 
-/* VIDEO FILE VALIDATION */
+/* VIDEO FORMAT DETECTION */
+let detectedVideoFormat="";
+let urlDetectionRequest=0;
 
 function isSupportedVideoFile(file){
-
-if(!file){
-return false;
+if(!file)return false;
+const extensions=["mkv","mp4","mov","avi","wmv","flv","webm","mpeg","mpg","3gp","3g2","m4v","ts","m2ts","mts","ogv","mxf"];
+const extension=file.name.includes(".")?file.name.toLowerCase().split(".").pop():"";
+return file.type.startsWith("video/")||extensions.includes(extension);
 }
-
-const extensions=[
-"mkv","mp4","mov","avi","wmv","flv","webm",
-"mpeg","mpg","3gp","3g2","m4v","ts","m2ts",
-"mts","ogv","mxf"
-];
-
-const fileName=file.name.toLowerCase();
-
-const extension=fileName.includes(".")
-?fileName.split(".").pop()
-:"";
-
-return(
-file.type.startsWith("video/") ||
-extensions.includes(extension)
-);
-
-}
-
-/* YOUTUBE */
 
 function getYouTubeId(url){
-
-if(!url){
-return "";
-}
-
+if(!url)return "";
 const patterns=[
 /youtube\.com\/watch\?v=([^&]+)/i,
 /youtu\.be\/([^?&]+)/i,
 /youtube\.com\/embed\/([^?&]+)/i,
 /youtube\.com\/shorts\/([^?&]+)/i
 ];
-
 for(const pattern of patterns){
-
 const match=url.match(pattern);
-
-if(match){
-return match[1];
+if(match)return match[1];
 }
-
-}
-
 return "";
-
 }
 
 function isYouTubeShort(url){
-
 return /youtube\.com\/shorts\//i.test(url);
-
 }
-
-/* VIDEO DIMENSION DETECTION */
-
-let detectedVideoFormat="";
 
 function detectVideoFormat(source){
-
-return new Promise(function(resolve){
-
-if(!source){
-
-resolve("");
-
-return;
-
-}
+return new Promise(resolve=>{
+if(!source){resolve("");return;}
 
 const video=document.createElement("video");
-
 video.preload="metadata";
-
 video.muted=true;
 
 video.onloadedmetadata=function(){
-
-const width=video.videoWidth;
-const height=video.videoHeight;
-
-let format="video";
-
-if(height>width){
-
-format="shorts";
-
-}
-
+const format=video.videoHeight>video.videoWidth?"shorts":"video";
 video.removeAttribute("src");
 video.load();
-
 resolve(format);
-
 };
 
-video.onerror=function(){
-
-resolve("");
-
-};
-
+video.onerror=function(){resolve("");};
 video.src=source;
-
 });
-
 }
 
-/* FILE SELECTION */
-
 async function handleSelectedFile(){
-
 const file=document.getElementById("mediaFile").files[0];
-
 const status=document.getElementById("formatStatus");
-
 detectedVideoFormat="";
 
 if(!file){
-
 status.textContent="Video format will be detected automatically.";
-
 return;
-
 }
 
-if(document.getElementById("mediaType").value!=="video"){
-
-return;
-
-}
+if(document.getElementById("mediaType").value!=="video")return;
 
 if(!isSupportedVideoFile(file)){
-
 status.textContent="Please select a supported video file.";
-
 return;
-
 }
 
 status.textContent="Detecting video dimensions...";
-
 const temporaryURL=URL.createObjectURL(file);
-
 detectedVideoFormat=await detectVideoFormat(temporaryURL);
-
 URL.revokeObjectURL(temporaryURL);
-
 updateFormatStatus();
-
 }
 
-/* URL FORMAT DETECTION */
-
-let urlDetectionRequest=0;
+document.getElementById("mediaFile").addEventListener("change",handleSelectedFile);
 
 async function handleURLChange(){
-
-if(document.getElementById("mediaType").value!=="video"){
-
-return;
-
-}
+if(document.getElementById("mediaType").value!=="video")return;
 
 const url=document.getElementById("mediaURL").value.trim();
-
 const status=document.getElementById("formatStatus");
-
 detectedVideoFormat="";
-
 const request=++urlDetectionRequest;
 
 if(!url){
-
 updateFormatStatus();
-
 return;
-
 }
 
 if(isYouTubeShort(url)){
-
 detectedVideoFormat="shorts";
-
 updateFormatStatus("YouTube Shorts URL detected.");
-
 return;
-
 }
 
 if(getYouTubeId(url)){
-
 detectedVideoFormat="video";
-
 updateFormatStatus("Standard YouTube video detected.");
-
 return;
-
 }
 
 status.textContent="Checking video dimensions...";
-
 const detected=await detectVideoFormat(url);
 
-if(request!==urlDetectionRequest){
-
-return;
-
-}
+if(request!==urlDetectionRequest)return;
 
 detectedVideoFormat=detected;
-
-updateFormatStatus(
-detected
-?"Video dimensions detected."
-:"Automatic detection was unavailable. Choose the format manually."
-);
-
+updateFormatStatus(detected?"Video dimensions detected.":"Automatic detection was unavailable. Choose the format manually.");
 }
 
+document.getElementById("mediaURL").addEventListener("input",handleURLChange);
+
 function updateFormatStatus(extraMessage){
-
 const selected=document.getElementById("videoFormat").value;
-
 const status=document.getElementById("formatStatus");
 
 if(selected==="shorts"){
-
 status.textContent="Manual selection: Shorts / Vertical Video.";
-
 return;
-
 }
-
 if(selected==="video"){
-
 status.textContent="Manual selection: Standard Video.";
-
 return;
-
 }
 
 if(detectedVideoFormat==="shorts"){
-
-status.textContent=
-(extraMessage ? extraMessage+" " : "")+
-"Detected format: Shorts / Vertical Video.";
-
+status.textContent=(extraMessage?extraMessage+" ":"")+"Detected format: Shorts / Vertical Video.";
 }else if(detectedVideoFormat==="video"){
-
-status.textContent=
-(extraMessage ? extraMessage+" " : "")+
-"Detected format: Standard Video.";
-
+status.textContent=(extraMessage?extraMessage+" ":"")+"Detected format: Standard Video.";
 }else{
-
-status.textContent=
-extraMessage ||
-"Automatic detection will classify portrait videos as Shorts and other videos as Videos.";
-
+status.textContent=extraMessage||"Automatic detection will classify portrait videos as Shorts and other videos as Videos.";
+}
 }
 
-}
-
-document.getElementById("mediaURL").addEventListener("change",handleURLChange);
-
-/* FINAL FORMAT */
+document.getElementById("videoFormat").addEventListener("change",updateFormatStatus);
 
 function getFinalVideoFormat(url){
-
 const selected=document.getElementById("videoFormat").value;
-
-if(selected==="shorts"){
-return "shorts";
-}
-
-if(selected==="video"){
-return "video";
-}
-
-if(isYouTubeShort(url)){
-return "shorts";
-}
-
-return detectedVideoFormat || "video";
-
+if(selected==="shorts")return "shorts";
+if(selected==="video")return "video";
+if(isYouTubeShort(url))return "shorts";
+return detectedVideoFormat||"video";
 }
 
 /* CLOUDINARY */
-
 async function uploadToCloudinary(file,resourceType){
-
 const cloudName="mnsjr7lc";
-
 const uploadPreset="Kush website upload";
 
-const uploadUrl=
-"https://api.cloudinary.com/v1_1/"+
-cloudName+
-"/"+
-resourceType+
-"/upload";
-
+const uploadUrl="https://api.cloudinary.com/v1_1/"+cloudName+"/"+resourceType+"/upload";
 const formData=new FormData();
 
 formData.append("file",file);
 formData.append("upload_preset",uploadPreset);
 
-const response=await fetch(uploadUrl,{
-
-method:"POST",
-body:formData
-
-});
+const response=await fetch(uploadUrl,{method:"POST",body:formData});
 
 if(!response.ok){
-
 const errorText=await response.text();
-
 throw new Error("Cloudinary upload failed: "+errorText);
-
 }
 
 const result=await response.json();
 
 if(!result.secure_url){
-
 throw new Error("Cloudinary did not return a file URL.");
-
 }
 
 return result.secure_url;
-
 }
-
-/* CLOUDINARY PLAYBACK URL */
 
 function getCloudinaryPlaybackUrl(url){
-
-if(!url){
-return "";
+if(!url)return "";
+if(!url.includes("res.cloudinary.com/"))return url;
+return url.replace("/upload/","/upload/f_mp4,vc_h264/");
 }
 
-if(!url.includes("res.cloudinary.com/")){
-return url;
+/* CHECK CREATOR PERMISSION AGAIN BEFORE EACH ACTION */
+async function verifyCreatorBeforeAction(){
+if(!window.siteAuth||!window.siteAuth.auth){
+throw new Error("Account system is unavailable.");
 }
 
-return url.replace(
-"/upload/",
-"/upload/f_mp4,vc_h264/"
-);
+const user=window.siteAuth.getCurrentUser
+?window.siteAuth.getCurrentUser()
+:window.siteAuth.auth.currentUser;
 
+if(!user){
+throw new Error("Please log in first.");
 }
 
-/* UPLOAD MEDIA */
+const allowed=await window.siteAuth.isCreator();
 
+if(!allowed){
+creatorAuthorized=false;
+document.getElementById("adminPanel").style.display="none";
+throw new Error("Creator permission is required.");
+}
+
+creatorAuthorized=true;
+db=getSiteDatabase();
+
+if(!db)throw new Error("Firestore is not available.");
+
+return user;
+}
+
+/* UPLOAD */
 async function uploadMedia(){
-
 const status=document.getElementById("uploadStatus");
-const postButton=document.getElementById("postButton");
+const button=document.getElementById("postButton");
 
-if(!db){
+if(button.disabled)return;
 
-status.textContent="Firebase Firestore is not configured.";
+button.disabled=true;
+button.textContent="Publishing...";
 
-return;
-
-}
+try{
+await verifyCreatorBeforeAction();
 
 const page=document.getElementById("postPage").value;
-
 const type=document.getElementById("mediaType").value;
-
 const category=document.getElementById("mediaCategory").value;
-
 const name=document.getElementById("mediaName").value.trim();
-
 const description=document.getElementById("mediaDescription").value.trim();
 
-if(!name){
-
-status.textContent="Please enter a name.";
-
-return;
-
-}
+if(!name)throw new Error("Please enter a name.");
 
 let url="";
 let playbackUrl="";
 let thumbnailUrl="";
 let youtubeId="";
 let format="";
-let source=uploadSource;
-
-postButton.disabled=true;
-postButton.textContent="Publishing...";
-
-try{
-
-/* DEVICE UPLOAD */
+const source=uploadSource;
 
 if(uploadSource==="device"){
-
 const mediaFile=document.getElementById("mediaFile").files[0];
-
 const thumbnailFile=document.getElementById("thumbnailFile").files[0];
 
-if(!mediaFile){
+if(!mediaFile)throw new Error("Please select a photo or video.");
 
-status.textContent="Please select a photo or video.";
-
-return;
-
+if(type==="photo"&&!mediaFile.type.startsWith("image/")){
+throw new Error("Please select an image file.");
 }
 
-if(type==="photo" && !mediaFile.type.startsWith("image/")){
-
-status.textContent="Please select an image file.";
-
-return;
-
+if(type==="video"&&!isSupportedVideoFile(mediaFile)){
+throw new Error("Please select a supported video file.");
 }
 
-if(type==="video" && !isSupportedVideoFile(mediaFile)){
-
-status.textContent="Please select a supported video file.";
-
-return;
-
-}
-
-if(type==="video"){
-
-format=getFinalVideoFormat("");
-
-}
+if(type==="video")format=getFinalVideoFormat("");
 
 status.textContent="Uploading media...";
 
-const resourceType=type==="video"?"video":"image";
+url=await uploadToCloudinary(mediaFile,type==="video"?"video":"image");
+playbackUrl=type==="video"?getCloudinaryPlaybackUrl(url):url;
 
-url=await uploadToCloudinary(mediaFile,resourceType);
-
-playbackUrl=type==="video"
-?getCloudinaryPlaybackUrl(url)
-:url;
-
-if(type==="video" && thumbnailFile){
-
+if(type==="video"&&thumbnailFile){
 if(!thumbnailFile.type.startsWith("image/")){
-
-status.textContent="The thumbnail must be an image.";
-
-return;
-
+throw new Error("The thumbnail must be an image.");
 }
-
 status.textContent="Uploading thumbnail...";
-
 thumbnailUrl=await uploadToCloudinary(thumbnailFile,"image");
-
 }
-
-}
-
-/* URL UPLOAD */
-
-else{
-
+}else{
 const mediaURL=document.getElementById("mediaURL").value.trim();
-
 const urlThumbnail=document.getElementById("urlThumbnail").value.trim();
 
-if(!mediaURL){
+if(!mediaURL)throw new Error("Please enter a media URL.");
 
-status.textContent="Please enter a media URL.";
+const parsedURL=new URL(mediaURL);
 
-return;
-
+if(!["https:","http:"].includes(parsedURL.protocol)){
+throw new Error("Please enter a valid HTTP or HTTPS URL.");
 }
 
 url=mediaURL;
-
 youtubeId=getYouTubeId(mediaURL);
 
-if(type==="video"){
+if(type==="video")format=getFinalVideoFormat(mediaURL);
 
-format=getFinalVideoFormat(mediaURL);
+playbackUrl=youtubeId?mediaURL:getCloudinaryPlaybackUrl(mediaURL);
 
+if(type==="video"&&urlThumbnail){
+const parsedThumbnail=new URL(urlThumbnail);
+if(!["https:","http:"].includes(parsedThumbnail.protocol)){
+throw new Error("Please enter a valid thumbnail URL.");
 }
-
-if(youtubeId){
-
-playbackUrl=mediaURL;
-
-}else{
-
-playbackUrl=getCloudinaryPlaybackUrl(mediaURL);
-
-}
-
-if(type==="video" && urlThumbnail){
-
 thumbnailUrl=urlThumbnail;
-
 }else if(youtubeId){
-
-thumbnailUrl=
-"https://img.youtube.com/vi/"+
-youtubeId+
-"/hqdefault.jpg";
-
+thumbnailUrl="https://img.youtube.com/vi/"+youtubeId+"/hqdefault.jpg";
 }
-
 }
-
-/* SAVE TO FIRESTORE */
 
 status.textContent="Saving post information...";
 
 const savedType=youtubeId?"youtube":type;
 
 await db.collection("media").add({
-
-page:page,
-
+page,
 type:savedType,
-
 mediaType:type,
-
-format:format,
-
-category:category,
-
-name:name,
-
-description:description,
-
-url:url,
-
+format,
+category,
+name,
+description,
+url,
 originalUrl:url,
-
-playbackUrl:playbackUrl,
-
-thumbnailUrl:thumbnailUrl,
-
-youtubeId:youtubeId,
-
-source:source,
-
+playbackUrl,
+thumbnailUrl,
+youtubeId,
+source,
 createdAt:firebase.firestore.FieldValue.serverTimestamp()
-
 });
 
-status.textContent=
-"Successfully published to "+
-(page==="projects"?"Projects":"Home")+
-" as "+
-(
-type==="photo"
-?"Photo"
-:format==="shorts"
-?"Shorts"
-:"Video"
-)+
-" in "+category+".";
-
-/* CLEAR FORM */
+status.textContent="Successfully published to "+(page==="projects"?"Projects":"Home")+" as "+(type==="photo"?"Photo":format==="shorts"?"Shorts":"Video")+" in "+category+".";
 
 document.getElementById("mediaName").value="";
 document.getElementById("mediaDescription").value="";
@@ -1895,204 +711,107 @@ document.getElementById("mediaFile").value="";
 document.getElementById("thumbnailFile").value="";
 document.getElementById("mediaURL").value="";
 document.getElementById("urlThumbnail").value="";
-
 detectedVideoFormat="";
-
-document.getElementById("formatStatus").textContent=
-"Video format will be detected automatically.";
+updateFormatStatus();
 
 }catch(error){
-
 console.error(error);
-
 status.textContent="Upload failed: "+error.message;
-
 }finally{
-
-postButton.disabled=false;
-postButton.textContent="Post";
-
+button.disabled=false;
+button.textContent="Post";
+}
 }
 
-}
-
-/* ESCAPE HTML */
-
+/* HTML ESCAPING */
 function escapeHTML(value){
-
-return String(value||"").replace(
-/[&<>"']/g,
-function(character){
-
-return{
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[character];
-
-}
-);
-
+return String(value||"").replace(/[&<>"']/g,function(character){
+return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[character];
+});
 }
 
 /* DELETE LIST */
-
 async function loadDeleteList(){
-
 const list=document.getElementById("deleteList");
-
 const status=document.getElementById("deleteStatus");
 
-if(!db){
-
-list.innerHTML=`
-<div class="delete-card">
-Firebase Firestore is not configured.
-</div>
-`;
-
-return;
-
-}
-
-status.textContent="Loading posts...";
-
 try{
+await verifyCreatorBeforeAction();
+status.textContent="Loading posts...";
 
 const snapshot=await db.collection("media").get();
 
-const documents=snapshot.docs.map(function(doc){
-
-return{
+const documents=snapshot.docs.map(doc=>({
 id:doc.id,
 ...doc.data()
-};
-
-}).sort(function(a,b){
-
-const aTime=a.createdAt&&a.createdAt.seconds
-?a.createdAt.seconds:0;
-
-const bTime=b.createdAt&&b.createdAt.seconds
-?b.createdAt.seconds:0;
-
+})).sort((a,b)=>{
+const aTime=a.createdAt&&a.createdAt.seconds?a.createdAt.seconds:0;
+const bTime=b.createdAt&&b.createdAt.seconds?b.createdAt.seconds:0;
 return bTime-aTime;
-
 });
 
 status.textContent="";
 
 if(!documents.length){
-
-list.innerHTML=`
-<div class="delete-card">
-No posts available.
-</div>
-`;
-
+list.innerHTML='<div class="delete-card">No posts available.</div>';
 return;
-
 }
 
-list.innerHTML=documents.map(function(data){
-
+list.innerHTML=documents.map(data=>{
 const name=escapeHTML(data.name||"Untitled");
-
 const description=escapeHTML(data.description||"");
-
 const page=escapeHTML(data.page||"");
-
 const category=escapeHTML(data.category||"Not specified");
+const type=escapeHTML(data.mediaType==="photo"||data.type==="photo"?"Photo":data.format==="shorts"?"Shorts":"Video");
 
-const format=escapeHTML(
-data.type==="photo"
-?"Photo"
-:data.format==="shorts"
-?"Shorts"
-:"Video"
-);
-
-return`
-
+return `
 <div class="delete-card">
-
 <h3>${name}</h3>
-
 <p>${description}</p>
-
 <p>Posted to: ${page}</p>
-
-<p>Type: ${format}</p>
-
+<p>Type: ${type}</p>
 <p>Category: ${category}</p>
-
-<button
-class="delete-button"
-onclick="deletePost('${data.id}')"
->
-Delete
-</button>
-
-</div>
-
-`;
-
+<button class="delete-button" data-id="${escapeHTML(data.id)}">Delete</button>
+</div>`;
 }).join("");
 
+list.querySelectorAll(".delete-button").forEach(button=>{
+button.addEventListener("click",function(){
+deletePost(this.dataset.id);
+});
+});
+
 }catch(error){
-
 console.error(error);
-
-status.textContent="Could not load posts.";
-
+status.textContent="Could not load posts: "+error.message;
 }
-
 }
 
 /* DELETE POST */
-
 async function deletePost(documentId){
+if(!documentId)return;
 
-if(!db){
-return;
-}
-
-const confirmed=confirm(
-"Are you sure you want to delete this post?"
-);
-
-if(!confirmed){
-return;
-}
+if(!confirm("Are you sure you want to delete this post?"))return;
 
 const status=document.getElementById("deleteStatus");
 
 try{
-
+await verifyCreatorBeforeAction();
 status.textContent="Deleting post...";
 
 await db.collection("media").doc(documentId).delete();
 
 status.textContent="Post deleted successfully.";
-
 await loadDeleteList();
 
 }catch(error){
-
 console.error(error);
-
 status.textContent="Delete failed: "+error.message;
-
+}
 }
 
 /* INITIAL SETTINGS */
-
-}
-
 updateMediaFields();
-
 </script>
 
 </body>
