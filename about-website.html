@@ -41,6 +41,16 @@ position:relative;
 z-index:1000
 }
 
+/* AUTH BUTTON POSITION
+   Keeps Login/Profile beside the hamburger.
+   Does not modify auth.js.
+*/
+
+body #siteAuthButton{
+top:14px;
+right:96px;
+}
+
 .menu-button{
 width:54px;
 height:54px;
@@ -343,6 +353,11 @@ margin-top:25px
 
 header{
 padding:0 15px
+}
+
+body #siteAuthButton{
+top:10px;
+right:81px;
 }
 
 .menu{
@@ -760,6 +775,15 @@ alert(
 }
 
 </script>
+
+
+<!-- FIREBASE AUTHENTICATION -->
+
+<!-- Load Firebase configuration FIRST -->
+<script src="firebase-config.js"></script>
+
+<!-- Load your EXISTING authentication system SECOND -->
+<script src="auth.js"></script>
 
 </body>
 </html>
