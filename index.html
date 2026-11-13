@@ -1,15 +1,23 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" type="image/png" href="kushneupane.png">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
 
 <title>Home | Kush Neupane</title>
 
 <style>
+
+/* =================================
+   GENERAL
+================================= */
+
 *{
     margin:0;
     padding:0;
@@ -17,7 +25,9 @@
     font-family:Arial,sans-serif;
 }
 
-html{scroll-behavior:smooth;}
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     min-height:100vh;
@@ -38,7 +48,224 @@ body::before{
     z-index:-1;
 }
 
-/* HEADER */
+/* =================================
+   WELCOME PAGE
+================================= */
+
+.welcome-screen{
+    width:min(1200px,calc(100% - 50px));
+    margin:20px auto 100px;
+    padding:35px 10px;
+}
+
+.welcome-layout{
+    width:100%;
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    align-items:center;
+    gap:30px;
+}
+
+.welcome-introduction{
+    min-width:0;
+}
+
+.welcome-tag{
+    display:inline-block;
+    padding:9px 17px;
+    margin-bottom:22px;
+    border:1px solid rgba(80,180,255,.55);
+    border-radius:30px;
+    background:rgba(25,80,170,.25);
+    color:#83caff;
+    font-size:13px;
+    letter-spacing:2px;
+}
+
+.welcome-introduction h1{
+    font-size:clamp(36px,5vw,58px);
+    line-height:1.15;
+    margin-bottom:23px;
+    background:linear-gradient(
+        100deg,
+        #ffffff,
+        #65caff,
+        #c68aff
+    );
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.welcome-introduction h2{
+    font-size:23px;
+    color:#83caff;
+    margin:27px 0 12px;
+}
+
+.welcome-introduction p{
+    color:rgba(255,255,255,.88);
+    font-size:16px;
+    line-height:1.9;
+    margin-bottom:15px;
+    text-align:justify;
+}
+
+/* LOGO */
+
+.welcome-logo-area{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-width:0;
+}
+
+.welcome-logo{
+    display:block;
+    width:100%;
+    max-width:590px;
+    height:auto;
+    object-fit:contain;
+
+    /* Blend black logo background with website background */
+
+    mix-blend-mode:screen;
+
+    filter:
+        drop-shadow(0 0 25px rgba(0,130,255,.3))
+        drop-shadow(0 0 25px rgba(175,40,255,.2));
+}
+
+/* =================================
+   INTRODUCTION VIDEO
+================================= */
+
+.intro-video-section{
+    width:min(1050px,100%);
+    margin:75px auto 20px;
+}
+
+.intro-video-section h2{
+    font-size:27px;
+    margin-bottom:12px;
+    color:#a8dfff;
+}
+
+.intro-video-section p{
+    color:rgba(255,255,255,.8);
+    line-height:1.7;
+    margin-bottom:22px;
+}
+
+.intro-video-container{
+    width:100%;
+    overflow:hidden;
+    border:1px solid rgba(100,155,255,.4);
+    border-radius:19px;
+    background:rgba(0,0,0,.35);
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.3),
+        0 0 20px rgba(80,100,255,.12);
+}
+
+.intro-video-container video{
+    display:block;
+    width:100%;
+    max-height:580px;
+    background:transparent;
+}
+
+/* =================================
+   GET STARTED BUTTON
+================================= */
+
+.get-started{
+    position:fixed;
+    bottom:27px;
+    left:27px;
+    z-index:2000;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+
+    min-height:57px;
+    padding:0 27px;
+
+    border:1px solid rgba(100,190,255,.7);
+    border-radius:12px;
+
+    background:linear-gradient(
+        110deg,
+        rgba(15,100,205,.95),
+        rgba(105,40,190,.95)
+    );
+
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    letter-spacing:.5px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 22px rgba(50,120,255,.25),
+        0 0 15px rgba(150,40,255,.15);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    transition:.25s;
+}
+
+.get-started:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 30px rgba(70,145,255,.4),
+        0 0 22px rgba(150,40,255,.25);
+}
+
+.get-started span{
+    font-size:21px;
+    transition:.25s;
+}
+
+.get-started:hover span{
+    transform:translateX(5px);
+}
+
+/* =================================
+   WEBSITE VISIBILITY
+================================= */
+
+.site-content{
+    display:none;
+}
+
+body.started .site-content{
+    display:block;
+}
+
+/* Restore original header flex layout */
+
+body.started header.site-content{
+    display:flex;
+}
+
+body.started .welcome-banner.site-content{
+    display:flex;
+}
+
+body.started .welcome-screen,
+body.started .get-started{
+    display:none;
+}
+
+/* =================================
+   HEADER
+================================= */
 
 header{
     width:100%;
@@ -85,13 +312,17 @@ header{
     transform:translateY(9px) rotate(45deg);
 }
 
-.menu-button.active span:nth-child(2){opacity:0;}
+.menu-button.active span:nth-child(2){
+    opacity:0;
+}
 
 .menu-button.active span:nth-child(3){
     transform:translateY(-9px) rotate(-45deg);
 }
 
-/* MENU */
+/* =================================
+   MENU
+================================= */
 
 .menu{
     position:absolute;
@@ -99,15 +330,23 @@ header{
     right:30px;
     width:245px;
     padding:10px;
+
     background:rgba(10,10,10,.88);
+
     border:1px solid rgba(255,255,255,.16);
+
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
+
     border-radius:18px;
+
     box-shadow:0 15px 45px rgba(0,0,0,.55);
+
     opacity:0;
     visibility:hidden;
+
     transform:translateY(-10px) scale(.98);
+
     transition:.25s;
 }
 
@@ -141,25 +380,32 @@ header{
     margin:8px 5px;
 }
 
-/* WELCOME BANNER */
+/* =================================
+   ORIGINAL WELCOME BANNER
+================================= */
 
 .welcome-banner{
     width:min(1100px,calc(100% - 40px));
     margin:0 auto 10px;
     min-height:78px;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     position:relative;
     overflow:hidden;
+
     border:1px solid rgba(190,80,255,.65);
     border-radius:18px;
+
     background:linear-gradient(
         90deg,
         rgba(45,0,80,.72),
         rgba(115,0,180,.42),
         rgba(45,0,80,.72)
     );
+
     box-shadow:
         0 0 18px rgba(160,40,255,.35),
         inset 0 0 25px rgba(160,40,255,.12);
@@ -171,17 +417,24 @@ header{
     position:absolute;
     width:90px;
     height:1px;
+
     background:linear-gradient(
         90deg,
         transparent,
         #c45cff,
         transparent
     );
+
     box-shadow:0 0 10px #c45cff;
 }
 
-.welcome-banner::before{left:7%;}
-.welcome-banner::after{right:7%;}
+.welcome-banner::before{
+    left:7%;
+}
+
+.welcome-banner::after{
+    right:7%;
+}
 
 .welcome-banner-content{
     text-align:center;
@@ -203,7 +456,9 @@ header{
     color:rgba(255,255,255,.8);
 }
 
-/* MAIN */
+/* =================================
+   ORIGINAL MAIN
+================================= */
 
 main{
     min-height:calc(100vh - 80px);
@@ -328,7 +583,9 @@ main{
     background:rgba(145,35,210,.5);
 }
 
-/* MEDIA FILTERS */
+/* =================================
+   MEDIA FILTERS
+================================= */
 
 .gallery-section{
     width:min(1100px,100%);
@@ -376,7 +633,7 @@ main{
     box-shadow:0 0 13px rgba(160,40,255,.2);
 }
 
-/* EDITORIAL MEDIA GRID */
+/* MEDIA GRID */
 
 #mediaGrid{
     display:grid;
@@ -491,7 +748,9 @@ main{
     color:rgba(255,255,255,.8);
 }
 
-/* FULLSCREEN VIEWER */
+/* =================================
+   FULLSCREEN VIEWER
+================================= */
 
 #mediaViewer{
     display:none;
@@ -504,7 +763,9 @@ main{
     padding:65px 25px 25px;
 }
 
-#mediaViewer.active{display:flex;}
+#mediaViewer.active{
+    display:flex;
+}
 
 #viewerClose{
     position:absolute;
@@ -631,9 +892,12 @@ main{
     color:#d8b0ff;
 }
 
-/* RESPONSIVE */
+/* =================================
+   RESPONSIVE
+================================= */
 
 @media(max-width:850px){
+
     #mediaGrid{
         grid-template-columns:repeat(2,minmax(0,1fr));
     }
@@ -649,11 +913,62 @@ main{
     #viewerLayout{
         grid-template-columns:minmax(0,1fr) 250px;
     }
+
+}
+
+@media(max-width:750px){
+
+    .welcome-screen{
+        width:calc(100% - 30px);
+        margin:10px auto 100px;
+        padding:20px 5px;
+    }
+
+    .welcome-layout{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .welcome-logo{
+        max-width:390px;
+    }
+
+    .welcome-introduction h1{
+        font-size:38px;
+    }
+
+    .welcome-introduction h2{
+        font-size:21px;
+    }
+
+    .welcome-introduction p{
+        font-size:15px;
+        text-align:left;
+    }
+
+    .intro-video-section{
+        margin-top:45px;
+    }
+
+    .intro-video-section h2{
+        font-size:23px;
+    }
+
+    .get-started{
+        left:15px;
+        bottom:18px;
+        min-height:53px;
+        padding:0 22px;
+        font-size:15px;
+    }
+
 }
 
 @media(max-width:600px){
 
-    header{padding:0 15px;}
+    header{
+        padding:0 15px;
+    }
 
     .menu{
         right:15px;
@@ -677,11 +992,17 @@ main{
     }
 
     .welcome-banner::before,
-    .welcome-banner::after{width:35px;}
+    .welcome-banner::after{
+        width:35px;
+    }
 
-    main{padding:30px 15px 50px;}
+    main{
+        padding:30px 15px 50px;
+    }
 
-    .page-title p{font-size:16px;}
+    .page-title p{
+        font-size:16px;
+    }
 
     #mediaGrid{
         grid-template-columns:1fr;
@@ -697,7 +1018,9 @@ main{
         font-size:13px;
     }
 
-    .featured-info{padding:20px;}
+    .featured-info{
+        padding:20px;
+    }
 
     #mediaViewer{
         padding:65px 12px 12px;
@@ -734,86 +1057,306 @@ main{
         width:100%;
         max-height:none;
     }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
-<header>
+<!-- =================================
+     WELCOME PAGE
+================================= -->
+
+<section class="welcome-screen">
+
+    <div class="welcome-layout">
+
+        <!-- INTRODUCTION LEFT SIDE -->
+
+        <div class="welcome-introduction">
+
+            <span class="welcome-tag">
+                YOUR DIGITAL SPACE
+            </span>
+
+            <h1>Welcome to My Website</h1>
+
+            <p>
+                Welcome to my personal website, a digital platform
+                created to bring together my projects, creations,
+                media, and interesting content in one place.
+                This website provides visitors with an opportunity
+                to explore different sections, discover useful
+                features, and learn more about the work presented
+                here.
+            </p>
+
+            <h2>Home</h2>
+
+            <p>
+                The Home page is the main destination for exploring
+                the latest content. You can find recently uploaded
+                photos, videos, and short videos. Content is
+                organized into categories, making it easier to
+                discover what interests you. You can browse all
+                uploads or select a particular category. You can
+                also open individual uploads in fullscreen, read
+                their descriptions, share content, and download
+                supported media.
+            </p>
+
+            <h2>Projects</h2>
+
+            <p>
+                The Projects page showcases projects, creations,
+                and other work developed and presented on this
+                website. Visitors can explore different projects
+                and discover the ideas, creativity, and technology
+                behind them. This section provides a dedicated
+                place to view the work and creations featured
+                on the platform.
+            </p>
+
+            <h2>Search</h2>
+
+            <p>
+                The Search page helps you find content more easily.
+                You can search for available content instead of
+                manually browsing through different sections.
+                It makes discovering specific information and
+                uploads more convenient.
+            </p>
+
+            <h2>Contact</h2>
+
+            <p>
+                The Contact page provides information about how
+                visitors can get in touch with the creator.
+                Whether you have a question, suggestion, or
+                feedback, this section helps you find the
+                available contact options.
+            </p>
+
+            <h2>About Website</h2>
+
+            <p>
+                The About Website page provides more information
+                about this platform, including its purpose,
+                features, available sections, and the technology
+                and functionality behind the website.
+            </p>
+
+            <h2>About Creator</h2>
+
+            <p>
+                The About Creator page introduces the person
+                behind this website. You can learn more about
+                the creator, their background, and other
+                introductory information.
+            </p>
+
+            <h2>Explore Something New</h2>
+
+            <p>
+                Every section has something different to offer.
+                Explore the available projects, discover new
+                uploads, search for content, and learn more
+                about this digital platform. Use the Get Started
+                button whenever you are ready to explore.
+            </p>
+
+        </div>
+
+        <!-- LARGE LOGO RIGHT SIDE -->
+
+        <div class="welcome-logo-area">
+
+            <img
+                src="logo.png"
+                alt="Website Logo"
+                class="welcome-logo"
+            >
+
+        </div>
+
+    </div>
+
+    <!-- INTRODUCTION VIDEO -->
+
+    <section class="intro-video-section">
+
+        <h2>Watch the Website Introduction</h2>
+
+        <p>
+            Watch this video to understand how to navigate
+            the website and explore its different features.
+        </p>
+
+        <div class="intro-video-container">
+
+            <video controls playsinline preload="metadata">
+
+                <source src="intro.mp4" type="video/mp4">
+
+                Your browser does not support video playback.
+
+            </video>
+
+        </div>
+
+    </section>
+
+</section>
+
+<!-- FIXED GET STARTED BUTTON -->
 
 <button
-    class="menu-button"
-    id="menuButton"
-    onclick="toggleMenu()"
-    aria-label="Open menu"
+    class="get-started"
+    id="getStartedButton"
+    onclick="startWebsite()"
 >
-    <span></span>
-    <span></span>
-    <span></span>
+    Get Started
+    <span>→</span>
 </button>
 
-<nav class="menu" id="menu">
 
-<a href="index.html" onclick="closeMenu()">Home</a>
-<div class="divider"></div>
-<a href="search.html" onclick="closeMenu()">Search</a>
-<a href="projects.html" onclick="closeMenu()">Projects</a>
-<a href="contact.html" onclick="closeMenu()">Contact</a>
-<div class="divider"></div>
-<a href="about-website.html" onclick="closeMenu()">About Website</a>
-<a href="about-creator.html" onclick="closeMenu()">About Creator</a>
+<!-- =================================
+     ORIGINAL WEBSITE HEADER
+================================= -->
 
-</nav>
+<header class="site-content">
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        onclick="toggleMenu()"
+        aria-label="Open menu"
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+    <nav class="menu" id="menu">
+
+        <a href="index.html" onclick="closeMenu()">Home</a>
+
+        <div class="divider"></div>
+
+        <a href="search.html" onclick="closeMenu()">Search</a>
+
+        <a href="projects.html" onclick="closeMenu()">Projects</a>
+
+        <a href="contact.html" onclick="closeMenu()">Contact</a>
+
+        <div class="divider"></div>
+
+        <a href="about-website.html" onclick="closeMenu()">About Website</a>
+
+        <a href="about-creator.html" onclick="closeMenu()">About Creator</a>
+
+    </nav>
+
 </header>
 
-<section class="welcome-banner">
+
+<!-- ORIGINAL WELCOME BANNER -->
+
+<section class="welcome-banner site-content">
+
     <div class="welcome-banner-content">
+
         <h2>Welcome To My Website</h2>
+
         <p>EXPLORE • CREATE • BEYOND</p>
-    </div>
-</section>
 
-<main>
-
-<div class="page-title">
-    <h1>Home</h1>
-    <p>Explore the latest uploads and content.</p>
-</div>
-
-<section class="featured-section" id="featuredSection" hidden>
-    <h2 class="section-heading">Latest Upload</h2>
-    <div id="featuredContainer"></div>
-</section>
-
-<section class="gallery-section">
-
-    <div class="gallery-heading">
-        <h2>Explore Media</h2>
-    </div>
-
-    <div class="filter-bar" id="filterBar">
-
-        <button class="filter-button active" data-filter="all">All</button>
-        <button class="filter-button" data-filter="shorts">Shorts</button>
-        <button class="filter-button" data-filter="videos">Videos</button>
-        <button class="filter-button" data-filter="photos">Photos</button>
-
-    </div>
-
-    <div id="mediaGrid">
-        <div class="empty-state">Loading uploads...</div>
     </div>
 
 </section>
+
+
+<!-- =================================
+     ORIGINAL HOMEPAGE
+================================= -->
+
+<main class="site-content">
+
+    <div class="page-title">
+
+        <h1>Home</h1>
+
+        <p>Explore the latest uploads and content.</p>
+
+    </div>
+
+    <!-- FEATURED LATEST UPLOAD -->
+
+    <section class="featured-section" id="featuredSection" hidden>
+
+        <h2 class="section-heading">Latest Upload</h2>
+
+        <div id="featuredContainer"></div>
+
+    </section>
+
+
+    <!-- MEDIA GALLERY -->
+
+    <section class="gallery-section">
+
+        <div class="gallery-heading">
+
+            <h2>Explore Media</h2>
+
+        </div>
+
+        <div class="filter-bar" id="filterBar">
+
+            <button class="filter-button active" data-filter="all">
+                All
+            </button>
+
+            <button class="filter-button" data-filter="shorts">
+                Shorts
+            </button>
+
+            <button class="filter-button" data-filter="videos">
+                Videos
+            </button>
+
+            <button class="filter-button" data-filter="photos">
+                Photos
+            </button>
+
+        </div>
+
+        <div id="mediaGrid">
+
+            <div class="empty-state">
+                Loading uploads...
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
-<!-- FULLSCREEN VIEWER -->
+
+<!-- =================================
+     FULLSCREEN VIEWER
+================================= -->
 
 <div id="mediaViewer">
 
-    <button id="viewerClose" aria-label="Close viewer">×</button>
+    <button id="viewerClose" aria-label="Close viewer">
+        ×
+    </button>
 
     <div id="viewerLayout">
 
@@ -843,8 +1386,13 @@ main{
 
             <div class="viewer-navigation">
 
-                <button id="previousButton">Previous</button>
-                <button id="nextButton">Next</button>
+                <button id="previousButton">
+                    Previous
+                </button>
+
+                <button id="nextButton">
+                    Next
+                </button>
 
             </div>
 
@@ -854,17 +1402,40 @@ main{
 
 </div>
 
+
+<!-- =================================
+     FIREBASE
+================================= -->
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
 <script src="firebase-config.js"></script>
 
+
 <script>
+
+/* =================================
+   GLOBAL VARIABLES
+================================= */
+
 let db = null;
+
 let allMedia = [];
+
 let visibleMedia = [];
+
 let activeFilter = "all";
+
 let currentViewerIndex = 0;
+
 let currentViewerMedia = null;
+
+
+/* =================================
+   FIREBASE INITIALIZATION
+================================= */
 
 const firebaseReady =
     window.firebaseConfig &&
@@ -872,84 +1443,156 @@ const firebaseReady =
     !String(window.firebaseConfig.apiKey).startsWith("PASTE_");
 
 if(firebaseReady){
+
     try{
+
         if(!firebase.apps.length){
+
             firebase.initializeApp(window.firebaseConfig);
+
         }
+
         db = firebase.firestore();
+
     }catch(error){
+
         console.error("Firebase initialization error:",error);
+
     }
+
 }
 
-/* MENU */
+
+/* =================================
+   WELCOME PAGE
+================================= */
+
+function startWebsite(){
+
+    document.body.classList.add("started");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =================================
+   MENU
+================================= */
 
 const menuButton = document.getElementById("menuButton");
+
 const menu = document.getElementById("menu");
 
 function toggleMenu(){
+
     menu.classList.toggle("active");
+
     menuButton.classList.toggle("active");
+
 }
 
 function closeMenu(){
+
     menu.classList.remove("active");
+
     menuButton.classList.remove("active");
+
 }
 
 document.addEventListener("click",function(event){
-    if(!menu.contains(event.target) && !menuButton.contains(event.target)){
+
+    if(
+        !menu.contains(event.target) &&
+        !menuButton.contains(event.target)
+    ){
+
         closeMenu();
+
     }
+
 });
 
-/* SAFE HTML */
+
+/* =================================
+   SAFE HTML
+================================= */
 
 function escapeHTML(value){
+
     return String(value || "").replace(/[&<>"']/g,function(character){
+
         return {
+
             "&":"&amp;",
             "<":"&lt;",
             ">":"&gt;",
             '"':"&quot;",
             "'":"&#039;"
+
         }[character];
+
     });
+
 }
 
-/* YOUTUBE */
+
+/* =================================
+   YOUTUBE
+================================= */
 
 function getYouTubeId(url){
+
     if(!url) return "";
 
     const patterns = [
+
         /youtube\.com\/watch\?v=([^&]+)/i,
+
         /youtu\.be\/([^?&]+)/i,
+
         /youtube\.com\/embed\/([^?&]+)/i,
+
         /youtube\.com\/shorts\/([^?&]+)/i
+
     ];
 
     for(const pattern of patterns){
+
         const match = String(url).match(pattern);
+
         if(match) return match[1];
+
     }
 
     return "";
+
 }
 
 function isYouTubeShort(url){
+
     return /youtube\.com\/shorts\//i.test(String(url || ""));
+
 }
 
-/* DATE */
+
+/* =================================
+   DATE
+================================= */
 
 function getDateValue(value){
+
     if(!value) return 0;
 
     if(value.seconds) return value.seconds * 1000;
 
     if(typeof value.toDate === "function"){
+
         return value.toDate().getTime();
+
     }
 
     if(typeof value === "number") return value;
@@ -957,51 +1600,82 @@ function getDateValue(value){
     const parsed = new Date(value).getTime();
 
     return Number.isNaN(parsed) ? 0 : parsed;
+
 }
 
 function formatDate(value){
+
     const time = getDateValue(value);
 
     if(!time) return "";
 
     return new Date(time).toLocaleDateString(undefined,{
+
         year:"numeric",
+
         month:"short",
+
         day:"numeric"
+
     });
+
 }
 
-/* MEDIA TYPE DETECTION */
+
+/* =================================
+   MEDIA TYPE DETECTION
+================================= */
 
 function getMediaKind(data){
+
     const type = String(
+
         data.type ||
+
         data.mediaType ||
+
         data.format ||
+
         ""
+
     ).toLowerCase();
 
     const url = String(data.url || "");
 
     if(
+
         type === "photo" ||
+
         type === "photos" ||
+
         type === "image"
+
     ){
+
         return "photos";
+
     }
 
     if(
+
         type === "short" ||
+
         type === "shorts"
+
     ){
+
         return "shorts";
+
     }
 
     if(
+
         type === "video" ||
+
         type === "videos"
+
     ){
+
         if(isYouTubeShort(url)) return "shorts";
 
         const ratio = getAspectRatio(data);
@@ -1009,6 +1683,7 @@ function getMediaKind(data){
         if(ratio && ratio < 0.85) return "shorts";
 
         return "videos";
+
     }
 
     if(isYouTubeShort(url)) return "shorts";
@@ -1018,27 +1693,40 @@ function getMediaKind(data){
     if(ratio && ratio < 0.85) return "shorts";
 
     return "videos";
+
 }
 
 function getAspectRatio(data){
+
     if(data.aspectRatio){
+
         const ratio = Number(data.aspectRatio);
+
         if(ratio > 0) return ratio;
+
     }
 
     const width = Number(data.width || data.videoWidth || 0);
+
     const height = Number(data.height || data.videoHeight || 0);
 
     if(width > 0 && height > 0){
+
         return width / height;
+
     }
 
     return data._detectedRatio || 0;
+
 }
 
-/* DETECT VIDEO DIMENSIONS */
+
+/* =================================
+   DETECT VIDEO DIMENSIONS
+================================= */
 
 function detectVideoDimensions(item){
+
     if(!item.url || getYouTubeId(item.url)) return;
 
     if(item.type === "photo") return;
@@ -1048,60 +1736,94 @@ function detectVideoDimensions(item){
     video.preload = "metadata";
 
     video.onloadedmetadata = function(){
+
         if(video.videoWidth && video.videoHeight){
+
             item._detectedRatio =
                 video.videoWidth / video.videoHeight;
 
             renderMedia();
+
         }
 
         video.removeAttribute("src");
+
         video.load();
+
     };
 
     video.onerror = function(){
+
         video.removeAttribute("src");
+
         video.load();
+
     };
 
     video.src = item.playbackUrl || item.url;
+
 }
 
-/* MEDIA TYPE LABEL */
+
+/* =================================
+   MEDIA TYPE LABEL
+================================= */
 
 function getTypeLabel(item){
+
     const kind = getMediaKind(item);
 
     if(kind === "photos") return "Photo";
+
     if(kind === "shorts") return "Short";
+
     return "Video";
+
 }
 
-/* FEATURED MEDIA */
+
+/* =================================
+   FEATURED MEDIA
+================================= */
 
 function getThumbnail(item){
+
     if(item.thumbnailUrl) return item.thumbnailUrl;
 
     if(getYouTubeId(item.url)){
+
         return "https://img.youtube.com/vi/" +
+
             getYouTubeId(item.url) +
+
             "/hqdefault.jpg";
+
     }
 
     if(getMediaKind(item) === "photos"){
+
         return item.url || "";
+
     }
 
     return "";
+
 }
 
 function renderFeatured(item){
-    const section = document.getElementById("featuredSection");
-    const container = document.getElementById("featuredContainer");
+
+    const section =
+        document.getElementById("featuredSection");
+
+    const container =
+        document.getElementById("featuredContainer");
 
     if(!item){
+
         section.hidden = true;
+
         return;
+
     }
 
     section.hidden = false;
@@ -1109,6 +1831,7 @@ function renderFeatured(item){
     const thumbnail = getThumbnail(item);
 
     container.innerHTML = `
+
         <article class="featured-card">
 
             <div
@@ -1118,25 +1841,40 @@ function renderFeatured(item){
                 tabindex="0"
                 aria-label="Open latest upload"
             >
+
                 ${
                     thumbnail
+
                     ? `<img src="${escapeHTML(thumbnail)}" alt="${escapeHTML(item.name)}">`
+
                     : `<div class="featured-placeholder">Video preview<br>Open to play</div>`
+
                 }
+
             </div>
 
             <div class="featured-info">
 
-                <span class="featured-label">LATEST UPLOAD</span>
+                <span class="featured-label">
+                    LATEST UPLOAD
+                </span>
 
-                <h2>${escapeHTML(item.name || "Untitled")}</h2>
+                <h2>
+                    ${escapeHTML(item.name || "Untitled")}
+                </h2>
 
-                <p>${escapeHTML(item.description || "No description available.")}</p>
+                <p>
+                    ${escapeHTML(item.description || "No description available.")}
+                </p>
 
                 <div class="featured-meta">
+
                     ${escapeHTML(getTypeLabel(item))}
+
                     ${item.category ? " · " + escapeHTML(item.category) : ""}
+
                     ${formatDate(item.createdAt) ? " · " + escapeHTML(formatDate(item.createdAt)) : ""}
+
                 </div>
 
                 <button
@@ -1149,103 +1887,170 @@ function renderFeatured(item){
             </div>
 
         </article>
+
     `;
+
 }
 
-/* MEDIA CARDS */
+
+/* =================================
+   MEDIA CARDS
+================================= */
 
 function mediaCard(item){
+
     const kind = getMediaKind(item);
+
     const thumbnail = getThumbnail(item);
 
     let preview = "";
 
     if(kind === "photos"){
+
         preview = `
+
             <img
+
                 class="media-preview"
+
                 src="${escapeHTML(item.url)}"
+
                 alt="${escapeHTML(item.name)}"
+
                 loading="lazy"
+
             >
+
         `;
+
     }else if(thumbnail){
+
         preview = `
+
             <div class="media-placeholder">
+
                 <img
+
                     class="media-preview"
+
                     src="${escapeHTML(thumbnail)}"
+
                     alt="${escapeHTML(item.name)}"
+
                     loading="lazy"
+
                 >
+
                 <div class="play-symbol">▶</div>
+
             </div>
+
         `;
+
     }else{
+
         preview = `
+
             <div class="media-placeholder">
+
                 <div class="play-symbol">▶</div>
+
                 <span>Open video</span>
+
             </div>
+
         `;
+
     }
 
     return `
+
         <article
+
             class="media-card"
+
             data-open-id="${escapeHTML(item.id)}"
+
         >
 
             ${preview}
 
             <div class="media-info">
 
-                <h3>${escapeHTML(item.name || "Untitled")}</h3>
+                <h3>
+                    ${escapeHTML(item.name || "Untitled")}
+                </h3>
 
-                <p>${escapeHTML(item.description || "")}</p>
+                <p>
+                    ${escapeHTML(item.description || "")}
+                </p>
 
                 ${
                     item.category
+
                     ? `<div class="media-category">${escapeHTML(item.category)}</div>`
+
                     : ""
+
                 }
 
                 <div class="media-details">
 
                     <span class="media-type-label">
+
                         ${escapeHTML(getTypeLabel(item))}
+
                     </span>
 
-                    <span>${escapeHTML(formatDate(item.createdAt))}</span>
+                    <span>
+                        ${escapeHTML(formatDate(item.createdAt))}
+                    </span>
 
                 </div>
 
             </div>
 
         </article>
+
     `;
+
 }
 
-/* FILTERING */
+
+/* =================================
+   FILTERING
+================================= */
 
 function getFilteredMedia(){
+
     if(activeFilter === "all") return allMedia;
 
     return allMedia.filter(function(item){
+
         return getMediaKind(item) === activeFilter;
+
     });
+
 }
 
 function updateFilterButtons(){
+
     document.querySelectorAll(".filter-button").forEach(function(button){
+
         button.classList.toggle(
+
             "active",
+
             button.dataset.filter === activeFilter
+
         );
+
     });
+
 }
 
 function renderMedia(){
+
     const box = document.getElementById("mediaGrid");
 
     const featured = allMedia.length ? allMedia[0] : null;
@@ -1255,18 +2060,27 @@ function renderMedia(){
     visibleMedia = getFilteredMedia();
 
     if(!visibleMedia.length){
+
         box.innerHTML = `
+
             <div class="empty-state">
+
                 No ${activeFilter === "all" ? "uploads" : activeFilter} found.
+
             </div>
+
         `;
+
         return;
+
     }
 
     box.innerHTML = visibleMedia.map(mediaCard).join("");
+
 }
 
 document.getElementById("filterBar").addEventListener("click",function(event){
+
     const button = event.target.closest(".filter-button");
 
     if(!button) return;
@@ -1274,16 +2088,24 @@ document.getElementById("filterBar").addEventListener("click",function(event){
     activeFilter = button.dataset.filter;
 
     updateFilterButtons();
+
     renderMedia();
+
 });
 
-/* VIEWER */
+
+/* =================================
+   VIEWER
+================================= */
 
 function openViewer(itemId){
+
     const list = getFilteredMedia();
 
     const index = list.findIndex(function(item){
+
         return item.id === itemId;
+
     });
 
     if(index < 0) return;
@@ -1291,9 +2113,11 @@ function openViewer(itemId){
     currentViewerIndex = index;
 
     showViewerItem();
+
 }
 
 function showViewerItem(){
+
     const list = getFilteredMedia();
 
     if(!list.length) return;
@@ -1301,7 +2125,9 @@ function showViewerItem(){
     if(currentViewerIndex < 0) currentViewerIndex = 0;
 
     if(currentViewerIndex >= list.length){
+
         currentViewerIndex = list.length - 1;
+
     }
 
     currentViewerMedia = list[currentViewerIndex];
@@ -1319,11 +2145,15 @@ function showViewerItem(){
         const iframe = document.createElement("iframe");
 
         iframe.src =
+
             "https://www.youtube.com/embed/" +
+
             encodeURIComponent(youtubeId) +
+
             "?autoplay=1";
 
         iframe.allow =
+
             "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
 
         iframe.allowFullscreen = true;
@@ -1345,7 +2175,9 @@ function showViewerItem(){
         const video = document.createElement("video");
 
         video.src =
+
             currentViewerMedia.playbackUrl ||
+
             currentViewerMedia.url;
 
         video.controls = true;
@@ -1359,36 +2191,48 @@ function showViewerItem(){
     }
 
     document.getElementById("viewerTitle").textContent =
+
         currentViewerMedia.name || "Untitled";
 
     document.getElementById("viewerDescription").textContent =
+
         currentViewerMedia.description || "No description available.";
 
     document.getElementById("viewerDate").textContent =
+
         [
+
             getTypeLabel(currentViewerMedia),
+
             currentViewerMedia.category || "",
+
             formatDate(currentViewerMedia.createdAt)
+
         ].filter(Boolean).join(" · ");
 
     document.getElementById("previousButton").disabled =
+
         currentViewerIndex === 0;
 
     document.getElementById("nextButton").disabled =
+
         currentViewerIndex === list.length - 1;
 
     document.getElementById("shareStatus").textContent = "";
 
-    const downloadButton = document.getElementById("downloadButton");
+    const downloadButton =
+        document.getElementById("downloadButton");
 
     downloadButton.style.display = youtubeId ? "none" : "";
 
     viewer.classList.add("active");
 
     document.body.style.overflow = "hidden";
+
 }
 
 function closeViewer(){
+
     const viewer = document.getElementById("mediaViewer");
 
     const content = document.getElementById("viewerContent");
@@ -1400,33 +2244,52 @@ function closeViewer(){
     currentViewerMedia = null;
 
     document.body.style.overflow = "";
+
 }
 
 document.getElementById("viewerClose").addEventListener("click",closeViewer);
 
 document.getElementById("mediaViewer").addEventListener("click",function(event){
+
     if(event.target === this){
+
         closeViewer();
+
     }
+
 });
 
 document.getElementById("previousButton").addEventListener("click",function(){
+
     if(currentViewerIndex > 0){
+
         currentViewerIndex--;
+
         showViewerItem();
+
     }
+
 });
 
 document.getElementById("nextButton").addEventListener("click",function(){
+
     if(currentViewerIndex < getFilteredMedia().length - 1){
+
         currentViewerIndex++;
+
         showViewerItem();
+
     }
+
 });
 
-/* OPEN MEDIA FROM CARDS AND FEATURE */
+
+/* =================================
+   OPEN MEDIA FROM CARDS
+================================= */
 
 document.addEventListener("click",function(event){
+
     const target = event.target.closest("[data-open-id]");
 
     if(!target) return;
@@ -1434,82 +2297,129 @@ document.addEventListener("click",function(event){
     const id = target.dataset.openId;
 
     openViewer(id);
+
 });
 
 document.addEventListener("keydown",function(event){
+
     if(event.key === "Escape"){
+
         closeViewer();
+
     }
 
     if(!document.getElementById("mediaViewer").classList.contains("active")){
+
         return;
+
     }
 
     if(event.key === "ArrowLeft"){
+
         document.getElementById("previousButton").click();
+
     }
 
     if(event.key === "ArrowRight"){
+
         document.getElementById("nextButton").click();
+
     }
+
 });
 
-/* SHARE */
+
+/* =================================
+   SHARE
+================================= */
 
 function getShareURL(item){
+
     const url = new URL(window.location.href);
 
     url.searchParams.set("post",item.id);
 
     return url.toString();
+
 }
 
 document.getElementById("shareButton").addEventListener("click",async function(){
+
     if(!currentViewerMedia) return;
 
     const shareURL = getShareURL(currentViewerMedia);
 
     const shareData = {
+
         title:currentViewerMedia.name || "Media",
+
         text:currentViewerMedia.description || "",
+
         url:shareURL
+
     };
 
     try{
+
         if(navigator.share){
+
             await navigator.share(shareData);
+
         }else{
+
             await navigator.clipboard.writeText(shareURL);
 
             document.getElementById("shareStatus").textContent =
+
                 "Link copied.";
+
         }
+
     }catch(error){
+
         if(error.name !== "AbortError"){
+
             try{
+
                 await navigator.clipboard.writeText(shareURL);
 
                 document.getElementById("shareStatus").textContent =
+
                     "Link copied.";
+
             }catch(copyError){
+
                 document.getElementById("shareStatus").textContent =
+
                     "Unable to share. Please copy the page link.";
+
             }
+
         }
+
     }
+
 });
 
-/* DOWNLOAD */
+
+/* =================================
+   DOWNLOAD
+================================= */
 
 document.getElementById("downloadButton").addEventListener("click",function(){
+
     if(!currentViewerMedia) return;
 
     if(getYouTubeId(currentViewerMedia.url)){
+
         return;
+
     }
 
     const url =
+
         currentViewerMedia.url ||
+
         currentViewerMedia.playbackUrl;
 
     if(!url) return;
@@ -1519,8 +2429,11 @@ document.getElementById("downloadButton").addEventListener("click",function(){
     link.href = url;
 
     link.download =
+
         (currentViewerMedia.name || "media")
+
         .replace(/[^\w\- ]/g,"")
+
         .trim() || "media";
 
     link.target = "_blank";
@@ -1532,68 +2445,106 @@ document.getElementById("downloadButton").addEventListener("click",function(){
     link.click();
 
     link.remove();
+
 });
 
-/* LOAD HOME MEDIA */
+
+/* =================================
+   LOAD HOME MEDIA
+================================= */
 
 async function loadMedia(page){
+
     const box = document.getElementById("mediaGrid");
 
     if(!db){
+
         box.innerHTML = `
+
             <div class="empty-state">
+
                 Firebase is not configured.
+
             </div>
+
         `;
+
         return;
+
     }
 
     try{
+
         const snapshot = await db.collection("media")
+
             .where("page","==",page)
+
             .get();
 
         allMedia = snapshot.docs.map(function(doc){
+
             return {
+
                 id:doc.id,
+
                 ...doc.data()
+
             };
+
         });
 
         allMedia.sort(function(a,b){
+
             return getDateValue(b.createdAt) -
+
                    getDateValue(a.createdAt);
+
         });
 
         renderMedia();
 
         allMedia.forEach(detectVideoDimensions);
 
-        /* Open a post directly when a valid post ID is in the URL. */
+        /* Open a post directly when a valid post ID is in the URL */
 
         const requestedPost =
+
             new URLSearchParams(window.location.search).get("post");
 
         if(requestedPost){
+
             const requested = allMedia.find(function(item){
+
                 return item.id === requestedPost;
+
             });
 
             if(requested){
+
                 openViewer(requestedPost);
+
             }
+
         }
 
     }catch(error){
+
         console.error("Media loading error:",error);
 
         box.innerHTML = `
+
             <div class="empty-state">
+
                 Could not load uploads.
+
                 Check your Firebase setup.
+
             </div>
+
         `;
+
     }
+
 }
 
 loadMedia("home");
