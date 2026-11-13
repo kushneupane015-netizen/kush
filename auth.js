@@ -2,43 +2,97 @@
 /* ==========================================
    KUSH NEUPANE WEBSITE - AUTHENTICATION
    Firebase Compatibility SDK
+   Final Authentication Version
 ========================================== */
 
 (function () {
     "use strict";
 
     const FIREBASE_VERSION = "10.12.2";
+    const SCRIPT_TIMEOUT = 15000;
 
-    // Load Firebase SDK if it is not already loaded.
-    function loadScript(src) {
+    let suppressAuthRender = false;
+    let authInitialized = false;
+
+    // ==========================================
+    // FIREBASE SDK LOADER
+    // ==========================================
+
+    function loadScript(src, isReady) {
+        if (isReady()) {
+            return Promise.resolve();
+        }
+
         return new Promise((resolve, reject) => {
-            const existing = document.querySelector(
+            let script = document.querySelector(
                 `script[src="${src}"]`
             );
 
-            if (existing) {
-                if (existing.dataset.loaded === "true") {
+            const timeout = setTimeout(() => {
+                cleanup();
+                reject(new Error(
+                    "Firebase SDK loading timed out: " + src
+                ));
+            }, SCRIPT_TIMEOUT);
+
+            function cleanup() {
+                clearTimeout(timeout);
+                script.removeEventListener("load", onLoad);
+                script.removeEventListener("error", onError);
+            }
+
+            function onLoad() {
+                if (isReady()) {
+                    script.dataset.loaded = "true";
+                    cleanup();
                     resolve();
+                } else {
+                    cleanup();
+                    reject(new Error(
+                        "Firebase SDK failed to initialize: " + src
+                    ));
+                }
+            }
+
+            function onError() {
+                cleanup();
+                reject(new Error(
+                    "Could not load Firebase SDK: " + src
+                ));
+            }
+
+            if (script) {
+                if (script.dataset.loaded === "true" || script.readyState === "complete") {
+                    cleanup();
+                    reject(new Error(
+                        "Firebase SDK script exists but its service is unavailable: " + src
+                    ));
                     return;
                 }
 
-                existing.addEventListener("load", resolve, { once: true });
-                existing.addEventListener("error", reject, { once: true });
+                script.addEventListener("load", onLoad, { once: true });
+                script.addEventListener("error", onError, { once: true });
                 return;
             }
 
-            const script = document.createElement("script");
+            script = document.createElement("script");
             script.src = src;
-            script.onload = () => {
-                script.dataset.loaded = "true";
-                resolve();
-            };
-            script.onerror = reject;
+            script.async = true;
+
+            script.addEventListener("load", onLoad, { once: true });
+            script.addEventListener("error", onError, { once: true });
+
             document.head.appendChild(script);
         });
     }
 
+    // ==========================================
+    // INITIALIZE FIREBASE
+    // ==========================================
+
     async function initializeAuthentication() {
+        if (authInitialized) return;
+
         try {
             if (!window.firebaseConfig) {
                 throw new Error(
@@ -49,9 +103,20 @@
             const base =
                 `https://www.gstatic.com/firebasejs/${FIREBASE_VERSION}`;
 
-            await loadScript(`${base}/firebase-app-compat.js`);
-            await loadScript(`${base}/firebase-auth-compat.js`);
-            await loadScript(`${base}/firebase-firestore-compat.js`);
+            await loadScript(
+                `${base}/firebase-app-compat.js`,
+                () => !!window.firebase?.initializeApp
+            );
+
+            await loadScript(
+                `${base}/firebase-auth-compat.js`,
+                () => !!window.firebase?.auth
+            );
+
+            await loadScript(
+                `${base}/firebase-firestore-compat.js`,
+                () => !!window.firebase?.firestore
+            );
 
             const firebase = window.firebase;
 
@@ -66,7 +131,12 @@
                 firebase.auth.Auth.Persistence.LOCAL
             );
 
-            // Make authentication services available to other page scripts.
+            authInitialized = true;
+
+            // ==========================================
+            // GLOBAL AUTHENTICATION SERVICES
+            // ==========================================
+
             window.siteAuth = {
                 auth,
                 db,
@@ -79,21 +149,68 @@
                     if (!user) return false;
 
                     const token = await user.getIdTokenResult(true);
+
                     return token.claims.creator === true;
+                },
+
+                async isEmailVerified() {
+                    const user = auth.currentUser;
+
+                    if (!user) return false;
+
+                    await user.reload();
+
+                    return user.emailVerified;
                 }
             };
 
             createAuthenticationInterface(auth, db);
 
         } catch (error) {
-            console.error("Authentication initialization failed:", error);
+            console.error(
+                "Authentication initialization failed:",
+                error
+            );
         }
     }
 
+    // ==========================================
+    // USER PROFILE CREATION
+    // ==========================================
+
+    async function ensureUserProfile(db, user) {
+        const userRef = db.collection("users").doc(user.uid);
+        const doc = await userRef.get();
+
+        if (!doc.exists) {
+            const name = user.displayName || "";
+            const parts = name.trim().split(/\s+/);
+
+            await userRef.set({
+                firstName: parts[0] || "",
+                lastName: parts.slice(1).join(" "),
+                displayName: name,
+                email: user.email || "",
+                provider: user.providerData.map(
+                    item => item.providerId
+                ),
+                createdAt:
+                    window.firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+
+        return userRef;
+    }
+
+    // ==========================================
+    // AUTHENTICATION INTERFACE
+    // ==========================================
+
     function createAuthenticationInterface(auth, db) {
 
-        // Do not create duplicate interfaces.
-        if (document.getElementById("siteAuthButton")) return;
+        if (document.getElementById("siteAuthButton")) {
+            return;
+        }
 
         const style = document.createElement("style");
 
@@ -240,34 +357,63 @@
 
         document.head.appendChild(style);
 
+        // ==========================================
+        // LOGIN BUTTON
+        // ==========================================
+
         const button = document.createElement("button");
+
         button.id = "siteAuthButton";
         button.textContent = "Login / Profile";
+
         document.body.appendChild(button);
 
+        // ==========================================
+        // LOGIN MODAL
+        // ==========================================
+
         const overlay = document.createElement("div");
+
         overlay.id = "siteAuthOverlay";
 
         overlay.innerHTML = `
             <div id="siteAuthModal">
-                <button class="auth-close" id="siteAuthClose"
+
+                <button class="auth-close"
+                    id="siteAuthClose"
                     aria-label="Close">&times;</button>
 
                 <div id="siteAuthContent"></div>
 
-                <div id="siteAuthMessage" role="status"></div>
+                <div id="siteAuthMessage"
+                    role="status"></div>
+
             </div>
         `;
 
         document.body.appendChild(overlay);
 
-        const content = document.getElementById("siteAuthContent");
-        const message = document.getElementById("siteAuthMessage");
+        const content =
+            document.getElementById("siteAuthContent");
+
+        const message =
+            document.getElementById("siteAuthMessage");
+
+        // ==========================================
+        // MESSAGE HANDLER
+        // ==========================================
 
         function showMessage(text, success = false) {
             message.textContent = text;
-            message.style.color = success ? "#9be5b0" : "#ffb7b7";
+
+            message.style.color = success
+                ? "#9be5b0"
+                : "#ffb7b7";
         }
+
+        // ==========================================
+        // OPEN AND CLOSE MODAL
+        // ==========================================
 
         function openModal() {
             overlay.style.display = "flex";
@@ -290,185 +436,399 @@
             .addEventListener("click", closeModal);
 
         overlay.addEventListener("click", event => {
-            if (event.target === overlay) closeModal();
+            if (event.target === overlay) {
+                closeModal();
+            }
         });
 
+        document.addEventListener("keydown", event => {
+            if (
+                event.key === "Escape" &&
+                overlay.style.display === "flex"
+            ) {
+                closeModal();
+            }
+        });
+
+        // ==========================================
+        // LOGIN PAGE
+        // ==========================================
+
         function showLogin() {
+
             content.innerHTML = `
                 <h2>Welcome Back</h2>
 
                 <form id="authLoginForm">
-                    <input id="authLoginEmail" type="email"
-                        placeholder="Email address" required>
 
-                    <input id="authLoginPassword" type="password"
-                        placeholder="Password" required>
+                    <input id="authLoginEmail"
+                        type="email"
+                        placeholder="Email address"
+                        autocomplete="email"
+                        required>
+
+                    <input id="authLoginPassword"
+                        type="password"
+                        placeholder="Password"
+                        autocomplete="current-password"
+                        required>
 
                     <button type="submit">Login</button>
+
                 </form>
 
-                <button class="auth-secondary" id="authGoogle">
+                <button class="auth-secondary"
+                    id="authGoogle">
                     Continue with Google
                 </button>
 
-                <div class="auth-switch" id="authForgot">
+                <div class="auth-switch"
+                    id="authForgot">
                     Forgot password?
                 </div>
 
-                <div class="auth-switch" id="authShowSignup">
+                <div class="auth-switch"
+                    id="authShowSignup">
                     Don't have an account? Create one
                 </div>
             `;
 
+            // EMAIL LOGIN
+
             document.getElementById("authLoginForm")
                 .addEventListener("submit", async event => {
+
                     event.preventDefault();
 
-                    const submit = event.submitter;
+                    const submit =
+                        event.submitter ||
+                        event.currentTarget.querySelector(
+                            'button[type="submit"]'
+                        );
+
                     submit.disabled = true;
+
                     showMessage("Signing in...");
 
                     try {
-                        await auth.signInWithEmailAndPassword(
-                            document.getElementById("authLoginEmail").value.trim(),
-                            document.getElementById("authLoginPassword").value
+
+                        const email =
+                            document.getElementById(
+                                "authLoginEmail"
+                            ).value.trim();
+
+                        const password =
+                            document.getElementById(
+                                "authLoginPassword"
+                            ).value;
+
+                        const result =
+                            await auth.signInWithEmailAndPassword(
+                                email,
+                                password
+                            );
+
+                        const user = result.user;
+
+                        await user.reload();
+
+                        if (!user.emailVerified) {
+
+                            try {
+                                await user.sendEmailVerification();
+                            } catch (verificationError) {
+                                console.error(
+                                    "Verification email error:",
+                                    verificationError
+                                );
+                            }
+
+                            await auth.signOut();
+
+                            showLogin();
+
+                            showMessage(
+                                "Please verify your email before logging in. Check your inbox and spam folder."
+                            );
+
+                            return;
+                        }
+
+                        await ensureUserProfile(db, user);
+
+                        showMessage(
+                            "Login successful.",
+                            true
                         );
 
-                        showMessage("Login successful.", true);
-                        showProfile();
+                        await showProfile();
+
                     } catch (error) {
+
                         showMessage(error.message);
+
                     } finally {
+
                         submit.disabled = false;
+
                     }
                 });
+
+            // GOOGLE LOGIN
 
             document.getElementById("authGoogle")
                 .addEventListener("click", async event => {
+
                     const btn = event.currentTarget;
+
                     btn.disabled = true;
 
+                    showMessage("Connecting to Google...");
+
                     try {
+
                         const provider =
-                            new firebase.auth.GoogleAuthProvider();
+                            new window.firebase.auth.GoogleAuthProvider();
 
-                        await auth.signInWithPopup(provider);
+                        provider.setCustomParameters({
+                            prompt: "select_account"
+                        });
 
-                        showMessage("Google sign-in successful.", true);
-                        showProfile();
+                        const result =
+                            await auth.signInWithPopup(provider);
+
+                        await ensureUserProfile(
+                            db,
+                            result.user
+                        );
+
+                        showMessage(
+                            "Google sign-in successful.",
+                            true
+                        );
+
+                        await showProfile();
+
                     } catch (error) {
+
                         showMessage(error.message);
+
                     } finally {
+
                         btn.disabled = false;
+
                     }
                 });
 
+            // FORGOT PASSWORD
+
             document.getElementById("authForgot")
                 .addEventListener("click", async () => {
+
                     const email =
-                        document.getElementById("authLoginEmail").value.trim();
+                        document.getElementById(
+                            "authLoginEmail"
+                        ).value.trim();
 
                     if (!email) {
-                        showMessage("Enter your email address first.");
+
+                        showMessage(
+                            "Enter your email address first."
+                        );
+
                         return;
                     }
 
                     try {
+
                         await auth.sendPasswordResetEmail(email);
-                        showMessage("Password reset email sent.", true);
+
+                        showMessage(
+                            "Password reset email sent.",
+                            true
+                        );
+
                     } catch (error) {
+
                         showMessage(error.message);
+
                     }
                 });
+
+            // OPEN SIGNUP
 
             document.getElementById("authShowSignup")
                 .addEventListener("click", showSignup);
         }
 
+        // ==========================================
+        // SIGNUP PAGE
+        // ==========================================
+
         function showSignup() {
+
             content.innerHTML = `
                 <h2>Create Account</h2>
 
                 <form id="authSignupForm">
-                    <input id="authFirstName" type="text"
-                        placeholder="First name" maxlength="50" required>
 
-                    <input id="authLastName" type="text"
-                        placeholder="Last name" maxlength="50" required>
+                    <input id="authFirstName"
+                        type="text"
+                        placeholder="First name"
+                        maxlength="50"
+                        autocomplete="given-name"
+                        required>
 
-                    <input id="authAge" type="number"
-                        placeholder="Age" min="1" max="120" required>
+                    <input id="authLastName"
+                        type="text"
+                        placeholder="Last name"
+                        maxlength="50"
+                        autocomplete="family-name"
+                        required>
+
+                    <input id="authAge"
+                        type="number"
+                        placeholder="Age"
+                        min="1"
+                        max="120"
+                        required>
 
                     <select id="authGender" required>
+
                         <option value="">Select gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
-                        <option value="Prefer not to say">Prefer not to say</option>
+                        <option value="Prefer not to say">
+                            Prefer not to say
+                        </option>
+
                     </select>
 
-                    <input id="authSignupEmail" type="email"
-                        placeholder="Email address" required>
+                    <input id="authSignupEmail"
+                        type="email"
+                        placeholder="Email address"
+                        autocomplete="email"
+                        required>
 
-                    <input id="authSignupPassword" type="password"
+                    <input id="authSignupPassword"
+                        type="password"
                         placeholder="Password (minimum 6 characters)"
-                        minlength="6" required>
+                        minlength="6"
+                        autocomplete="new-password"
+                        required>
 
-                    <input id="authConfirmPassword" type="password"
-                        placeholder="Confirm password" minlength="6" required>
+                    <input id="authConfirmPassword"
+                        type="password"
+                        placeholder="Confirm password"
+                        minlength="6"
+                        autocomplete="new-password"
+                        required>
 
-                    <button type="submit">Create Account</button>
+                    <button type="submit">
+                        Create Account
+                    </button>
+
                 </form>
 
-                <div class="auth-switch" id="authShowLogin">
+                <div class="auth-switch"
+                    id="authShowLogin">
                     Already have an account? Login
                 </div>
             `;
 
             document.getElementById("authSignupForm")
                 .addEventListener("submit", async event => {
+
                     event.preventDefault();
 
-                    const submit = event.submitter;
+                    const submit =
+                        event.submitter ||
+                        event.currentTarget.querySelector(
+                            'button[type="submit"]'
+                        );
+
                     submit.disabled = true;
 
                     const firstName =
-                        document.getElementById("authFirstName").value.trim();
+                        document.getElementById(
+                            "authFirstName"
+                        ).value.trim();
 
                     const lastName =
-                        document.getElementById("authLastName").value.trim();
+                        document.getElementById(
+                            "authLastName"
+                        ).value.trim();
 
                     const age = Number(
-                        document.getElementById("authAge").value
+                        document.getElementById(
+                            "authAge"
+                        ).value
                     );
 
                     const gender =
-                        document.getElementById("authGender").value;
+                        document.getElementById(
+                            "authGender"
+                        ).value;
 
                     const email =
-                        document.getElementById("authSignupEmail").value.trim();
+                        document.getElementById(
+                            "authSignupEmail"
+                        ).value.trim();
 
                     const password =
-                        document.getElementById("authSignupPassword").value;
+                        document.getElementById(
+                            "authSignupPassword"
+                        ).value;
 
                     const confirmPassword =
-                        document.getElementById("authConfirmPassword").value;
+                        document.getElementById(
+                            "authConfirmPassword"
+                        ).value;
 
                     if (password !== confirmPassword) {
-                        showMessage("Passwords do not match.");
+
+                        showMessage(
+                            "Passwords do not match."
+                        );
+
                         submit.disabled = false;
+
                         return;
                     }
 
-                    if (!Number.isInteger(age) || age < 1 || age > 120) {
-                        showMessage("Please enter a valid age.");
+                    if (
+                        !Number.isInteger(age) ||
+                        age < 1 ||
+                        age > 120
+                    ) {
+
+                        showMessage(
+                            "Please enter a valid age."
+                        );
+
                         submit.disabled = false;
+
+                        return;
+                    }
+
+                    if (!firstName || !lastName) {
+
+                        showMessage(
+                            "Please enter your first and last name."
+                        );
+
+                        submit.disabled = false;
+
                         return;
                     }
 
                     showMessage("Creating your account...");
 
+                    suppressAuthRender = true;
+
                     try {
+
                         const result =
                             await auth.createUserWithEmailAndPassword(
                                 email,
@@ -476,7 +836,9 @@
                             );
 
                         const user = result.user;
-                        const fullName = `${firstName} ${lastName}`;
+
+                        const fullName =
+                            `${firstName} ${lastName}`;
 
                         await user.updateProfile({
                             displayName: fullName
@@ -485,29 +847,42 @@
                         await db.collection("users")
                             .doc(user.uid)
                             .set({
+
                                 firstName,
                                 lastName,
                                 displayName: fullName,
                                 email: user.email,
                                 age,
                                 gender,
+
+                                provider: ["password"],
+
                                 createdAt:
-                                    firebase.firestore.FieldValue.serverTimestamp()
+                                    window.firebase.firestore.FieldValue.serverTimestamp()
+
                             });
 
                         await user.sendEmailVerification();
 
+                        await auth.signOut();
+
+                        showLogin();
+
                         showMessage(
-                            "Account created. Please verify your email. A verification link has been sent.",
+                            "Account created successfully. Please verify your email using the link sent to your inbox before logging in.",
                             true
                         );
 
-                        showProfile();
-
                     } catch (error) {
+
                         showMessage(error.message);
+
                     } finally {
+
+                        suppressAuthRender = false;
+
                         submit.disabled = false;
+
                     }
                 });
 
@@ -515,7 +890,12 @@
                 .addEventListener("click", showLogin);
         }
 
+        // ==========================================
+        // USER PROFILE
+        // ==========================================
+
         async function showProfile() {
+
             const user = auth.currentUser;
 
             if (!user) {
@@ -525,63 +905,132 @@
 
             content.innerHTML = `
                 <h2>Your Profile</h2>
-                <div class="auth-profile" id="authProfileDetails">
+
+                <div class="auth-profile"
+                    id="authProfileDetails">
                     Loading profile...
                 </div>
-                <button id="authLogout">Logout</button>
+
+                <button id="authLogout">
+                    Logout
+                </button>
             `;
 
             try {
-                const token = await user.getIdTokenResult(true);
-                const creator = token.claims.creator === true;
 
-                const doc = await db.collection("users")
-                    .doc(user.uid).get();
+                await user.reload();
 
-                const profile = doc.exists ? doc.data() : {};
+                if (!auth.currentUser ||
+                    auth.currentUser.uid !== user.uid) {
+                    return;
+                }
+
+                const token =
+                    await user.getIdTokenResult(true);
+
+                const creator =
+                    token.claims.creator === true;
+
+                const doc =
+                    await db.collection("users")
+                        .doc(user.uid)
+                        .get();
+
+                const profile =
+                    doc.exists ? doc.data() : {};
+
+                if (!auth.currentUser ||
+                    auth.currentUser.uid !== user.uid) {
+                    return;
+                }
 
                 const details =
-                    document.getElementById("authProfileDetails");
+                    document.getElementById(
+                        "authProfileDetails"
+                    );
+
+                if (!details) return;
 
                 details.textContent =
+
                     `Name: ${profile.displayName || user.displayName || "Not provided"}\n` +
+
                     `Email: ${user.email || "Not available"}\n` +
+
                     `Age: ${profile.age ?? "Not provided"}\n` +
+
                     `Gender: ${profile.gender || "Not provided"}\n` +
+
                     `Account: ${creator ? "Creator" : "Normal User"}\n` +
+
                     `Email verified: ${user.emailVerified ? "Yes" : "No"}`;
 
                 details.style.whiteSpace = "pre-line";
 
                 if (creator) {
-                    const creatorText = document.createElement("p");
-                    creatorText.textContent = "Creator access is enabled.";
-                    creatorText.style.color = "#bca6ff";
+
+                    const creatorText =
+                        document.createElement("p");
+
+                    creatorText.textContent =
+                        "Creator access is enabled.";
+
+                    creatorText.style.color =
+                        "#bca6ff";
+
                     details.appendChild(creatorText);
                 }
 
             } catch (error) {
-                showMessage("Could not load profile: " + error.message);
+
+                showMessage(
+                    "Could not load profile: " + error.message
+                );
+
             }
 
-            document.getElementById("authLogout")
-                .addEventListener("click", async () => {
+            const logoutButton =
+                document.getElementById("authLogout");
+
+            if (!logoutButton) return;
+
+            logoutButton.addEventListener(
+                "click",
+                async () => {
+
+                    logoutButton.disabled = true;
+
                     try {
+
                         await auth.signOut();
-                        showMessage("You have logged out.", true);
+
                         showLogin();
+
+                        showMessage(
+                            "You have logged out.",
+                            true
+                        );
+
                     } catch (error) {
+
                         showMessage(error.message);
+
+                        logoutButton.disabled = false;
+
                     }
-                });
+                }
+            );
         }
 
+        // ==========================================
+        // AUTHENTICATION STATE LISTENER
+        // ==========================================
+
         auth.onAuthStateChanged(async user => {
-            if (user) {
-                button.textContent = "Profile";
-            } else {
-                button.textContent = "Login / Profile";
-            }
+
+            button.textContent = user
+                ? "Profile"
+                : "Login / Profile";
 
             window.dispatchEvent(
                 new CustomEvent("creator-auth-changed", {
@@ -589,9 +1038,43 @@
                 })
             );
 
+            if (suppressAuthRender) return;
+
+            if (user) {
+
+                const isPasswordUser =
+                    user.providerData.some(
+                        item => item.providerId === "password"
+                    );
+
+                if (isPasswordUser && !user.emailVerified) {
+
+                    try {
+                        await auth.signOut();
+                    } catch (error) {
+                        console.error(
+                            "Could not sign out unverified user:",
+                            error
+                        );
+                    }
+
+                    if (overlay.style.display === "flex") {
+
+                        showLogin();
+
+                        showMessage(
+                            "Please verify your email before accessing your account."
+                        );
+                    }
+
+                    return;
+                }
+            }
+
             if (overlay.style.display === "flex") {
+
                 if (user) {
-                    showProfile();
+                    await showProfile();
                 } else {
                     showLogin();
                 }
@@ -599,15 +1082,22 @@
         });
     }
 
-    // Wait until the page is ready before creating the interface.
+    // ==========================================
+    // PAGE READY
+    // ==========================================
+
     if (document.readyState === "loading") {
+
         document.addEventListener(
             "DOMContentLoaded",
             initializeAuthentication,
             { once: true }
         );
+
     } else {
+
         initializeAuthentication();
+
     }
 
 })();
